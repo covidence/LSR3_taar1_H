@@ -1,0 +1,1419 @@
+---
+title: "Trace amine-associated receptor 1 (TAAR1) agonists for psychosis - Results from the human studies <span style='font-size:25px'></style>"
+author: "Spyridon Siafis <span style='font-size: 15px'></style>"
+date: "`r format(Sys.Date(), '%e %b %Y')`"
+output:
+  html_document:
+    df_print: paged
+mainfont: Arial
+---
+
+```{r setup,message=F,echo=F,include=F}
+### libraries
+library(meta)
+library(tidyverse)
+library(tibble)
+library(stringr)
+library(readxl)
+library(grid)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(meta)
+library(devtools)
+library(metafor)
+library(robvis)
+devtools::install_github("haozhu233/kableExtra")
+
+
+#Empty the enviroment 
+rm(list=ls())
+
+#Functions needed to run this script
+source("util/util.R") #Spiros: I had problems to run this function as a separate file in util.R so i included it within the analysis.R below, theni could run the markdown. 
+
+#Data cleaning routines
+source("data/clean_data.R")
+
+#Data analysis routines
+source("util/analysis.R")
+
+# Loading 
+studies<-read_xlsx('data/studies_2023-11-24_LSR3_H.xlsx', na = "NA") #Descriptive data set with all included studies (RCT and not)
+data <- read_xlsx('data/data_2023-11-24_LSR3_H.xlsx') #Clean data with the RCTs with available data
+data_doses<-read_xlsx("data/data_doses_2023-11-24_LSR3_H.xlsx") #Effect sizes for the individual doses of TAAR1 (for descriptive figure)
+ae_categories<-read_xlsx("data/ae_categories.xlsx") #Supporting file with the names of adverse events for the summary plot for the side-effects
+
+#Round off results to two digits
+options(scipen=1, digits=2)
+
+```
+
+# Results
+
+## Flow of study selection and descriptives
+
+The flow of study selection is shown in Figure 1 (*to be updated and included*). 
+
+The table of included studies is presented in Table 1. 
+
+```{r echo=FALSE}
+knitr::kable(studies[, 1:14])
+```
+**Table 1** Table of included studies.
+
+**Acute psychosis**: 
+There were *five trials* that provived data for the timepoint of 3-13 weeks: 
+1) One study on ralmitaront, i.e., NCT04512066 examining the comparisons of ralmitaront vs. placebo or risperidone in adults with schizophrenia or schizoaffective disorder.
+2) Four studies on ulotaront, i.e., Isaacson 2023 in adults with Parkinson disease psychosis, and Koblan 2020, NCT04072354 and NCT04092686 in adults with schizophrenia. 
+*Unavailable trials*: 
+1) The study NCT04072354 (ulotaront vs. placebo) consisted of adolescent and adult parts, but data for the former were not found and the status is unclear.
+2) One study (NCT04825860) examining ulotaront vs. placebo in adults with schizophrenia is currently ongoing.
+
+**Clinically stable patients with psychosis**: 
+There were data from *one trial* that provided data for the timepoint 1 day - 2 weeks: Tsukada 2023 that was a single dose crossover trial examining mainly the effects of ulotaront vs. placebo or moxifloxacin (not relevant for this analysis) on QTc interval prolongation in stable patients with schizophrenia.
+*Unavailable trials*: 1) NCT04115319 examining the long-term efficacy and safety of ulotaront vs. quetiapine in clinically stable patients with schizophrenia (recently completed), 2) Seven trials examining single or multiple doses of ulotaront focusing on pharmacokinetics or safety (e.g., physical dependence or metabolic side-effects) (completed and unpublished: NCT01940159, Koblan 2016, NCT04325737, NCT04865835; ongoing NCT05848700, NCT05542264, NCT05402111). No study examining ralmitaront was found for clinically stable psychosis. 
+
+**Other patient subgroups**:
+No study with available data was found for other patient subgroup such as first-episode and predominant negative symptoms. *Unavailable trials*: One study examined ralmitaront vs. placebo (as monotherapy or add-on to current antipsychotic treatment) in patients with schizophrenia or schizoaffective disroder and predominant negative symptoms (NCT03669640), which was reported to be failed but no data were available to be synthesized.
+
+**Other mental health conditions**:
+There was *one crossover study* examining ulotaront vs. placebo in patients with narcolepsy-cataplexy that provided safety data for the timepoint of 1 day - 2 weeks (Szabo 2023). *Unavailable trials*: Two trials are currently ongoing and examine the efficacy of ulotaront compared to placebo in patients with generalized anxiety disorder (NCT05729373) and major depression (NCT05593029). None of the trials examined ralmitaront in patients with other mental health conditions. 
+
+**Healthy volunteers**:
+There were *four trials* examining  ulotaront in healthy volunteers that provided safety data for the timepoint of 1 day - 2 weeks: 1) One trial examining the effects of a single dose of ulotaront on fMRI compared to placebo or amisulpride in participants with low or high levels of schizotypy (Perini 2023; safety data were used, fMRI data deeemed not relevant for the first iteration of the review), 2) Two crossover trials examining the pharmacokinetics of single doses of ulotaront vs. placebo in healthy volunteers (SEP361-111 and SEP361-117 as reported in Chen 2023), and 3) One crossover trial examining the effects of single administration of two doses of ulotaront vs. placebo on sleep parameters in healthy volunteers (Hopkin 2021, only safety data were used in the first iteration, and data from the low dose were not used due to the crossover design of the study). *Unavailable trials*: 1) Three studies examining the pharmacokinetcis and safety of ralmitaront in healthy volunteers (Fowler 2015, JapicCTI-194581, NCT02699372), 2) Two studies examining the pharmacokinetics of ulotaront in healthy volunteers (SEP361-101 , DA801002). 
+
+## Risk of bias assessment
+
+Risk of bias was evaluated using the RoB2 tool for the primary outcome, i.e., overall symptoms. There were available data only for the primary timepoint (3 weeks - 13 weeks) in acutely ill patients with Parkinson disease psychosis (Isaacson 2023) and schizophrenia spectrum disorder (Koblan 2020, NCT04092686, NCT04072354, NCT04512066).
+
+The risk of bias assessment per domain and study is reported in Figure 1. 
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=12}
+rob_traffic_light(data=master[!is.na(master$D1), c(2, 26:31)], tool = "ROB2",  psize = 12)
+```
+**Figure 1** Risk of bias for overall symptoms
+
+Three of the studies had an overall high risk of bias due to high risk of bias in missing outcome data (either due to high dropout rates Issacson 2023 or due to the non-reporting of dropouts in the two unpublished studies NCT04072354 and NCT04092686). The other two studies (Koblan 2020 and NCT03669640) had some concerns overall due to some concerns in the domain of missing outcome data (high dropout rates with unclear impact on the findings). 
+
+## Comparison 1: *TAAR1 agonist* vs *placebo*
+
+## Primary outcome: Overall symptoms
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* (primary timepoint)
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`, 
+                 rightcols = c("effect", "ci", "rob"), 
+                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  xlim=c(-0.8,0.8),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`$data$treat1_new), label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE,
+                 label.left = "Placebo better", label.right="TAAR1 better")
+```
+
+Meta-analysis of variance was not conducted because 1) SDs were not reported in two studies (NCT04072354 and NCT04092686) and thus they were imputed, 2) SD of change was reported in one of the studies on schizophrenia (Koblan 2020), while SD of endpoint scores in another studt (NCT04512066). 
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Positive symptoms
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`, "efficacy")
+```
+No data were available from the two unpublished acute studies on ulotaront (i.e., NCT04072354, NCT04092686). 
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Negative symptoms
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_negative`, "efficacy")
+```
+No data were available from the two unpublished acute studies on ulotaront (i.e., NCT04072354, NCT04092686). 
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Depressive symptoms
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_depression`, "efficacy")
+```
+No data were available from the two unpublished acute studies on ulotaront (i.e., NCT04072354, NCT04092686). 
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Cognitive symptoms
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_cognition`, "efficacy")
+
+```
+Data were available only from the study on Parkinson disease psychosis (i.e., Isaachson 2023). No data from RCT on schizophrenia.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Quality of life
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Functioning
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Response to treatment 
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_response`, "efficacy")
+
+```
+Imputations of responders were required in the unpublished ulotaront studies (i.e., NCT04072354, NCT04092686); cutoff of 50% change from baseline was used. 
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Relapse
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT. 
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+No data available from RCT. 
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Dropouts due to any reason 
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+ forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_any`, "safety")
+
+```
+Correlation was assumed 0 for the crossover study (Hopkins 2021)
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+ forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_any`, "safety")
+
+```
+No data were available from the unpublished ulotaront studies (i.e., NCT04072354, NCT04092686). 
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Dropouts due to adverse event 
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_ae`, "safety")
+
+```
+Correlation was assumed 0 for the crossover studies (Hopkins 2021, Tsukada 2023)
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_ae`, "safety")
+
+```
+No data were available from the unpublished ulotaront studies (i.e., NCT04072354, NCT04092686). 
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Serious adverse event
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_serious`, "safety")
+
+```
+This outcome was considered rare event, and it was analyzed with a fixed-effects MH method. A correlation of 0 was assumed for crossover studies.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_serious`, "safety")
+```
+This outcome was considered rare event, and it was analyzed with a fixed-effects MH method. No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686). 
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Death
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_death`, "safety")
+
+```
+This outcome was considered rare event, and it was analyzed with a fixed-effects MH method. A correlation of 0 was used for crossover studies.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_death`, "safety")
+```
+This outcome was considered rare event, and it was analyzed with a fixed-effects MH method.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Any adverse event
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_adverse_event`, "safety")
+```
+A correlation of 0 was assumed for crossover studies.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_adverse_event`, "safety")
+```
+No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686).
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Anticholinergic symptoms
+
+Terms that were considered as reported in the trials: dry mouth (no other relevant anticholinergic side-effects were reported such as urinary retention, constipation, mydriasis or blurred vision)
+
+### Timepoint 1: *1 day - 2 weeks*
+
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anticholinertgic_symptom`, "safety")
+```
+Only data from one study on healthy volunteers were available (Perini 2023)
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Hypotension
+
+Terms that were considered as reported in the trials: hypotension or orthostatic hypotension
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_hypotension`, "safety")
+```
+No data were available from the four trials on acute schizophrenia.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Dizziness
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dizziness`, "safety")
+```
+A correlation of 0 was assumed for crossover studies.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_dizziness`, "safety")
+```
+No data were available from the four trials on acute schizophrenia.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Nausea or vomiting
+
+Terms that were considered as reported in the trials: nausea, vomiting, emesis
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_nausea_vomitting`, "safety")
+```
+A correlation of 0 was assumed for crossover studies.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_nausea_vomitting`, "safety")
+```
+No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686). The study NCT04512066 examined ralmitaront while the other trials ulotaront (which is also a 5-HT1A receptor partial agonist).
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: QTc prolongation
+
+Terms that were considered as reported in the trials: QTc prolongation above ≥450 msec or an increase of ≥60 msec (any threshold was eligible)
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_qtc_prolongation`, "safety")
+```
+A correlation of 0 was assumed for the two crossover studies with reported QTc prolongation.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_qtc_prolongation`, "safety")
+```
+No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686). The study NCT04512066 examined ralmitaront while the other trials ulotaront (which is also a 5-HT1A receptor partial agonist).
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: QTc interval in msec
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest(metagen(data=master[master$study_name=="Tsukada (2023)" & master$drug_name=="ulotaront",],
+         TE=qtc_md_point, seTE=qtc_md_se, sm="MD", studlab = study_name),
+       prediction = FALSE,
+                 label.e = unique(meta_comp$data$treat1_new), label.c=unique(meta_comp$data$treat2_new),
+                 label.left = "TAAR1 better",
+                 label.right="TAAR1 worse")
+```
+One crossover study reported data for this outcome (Tsukada 2023). The analysis was adjusted for crossover and was reported for several timepoints within a day. The AUC was calculated and the divided by 24 hours for presentation. 
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Weight increased
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_weight_increased`, "safety")
+```
+No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686) and the study on Parkinson disease psychosis (Isaacson 2023).
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Weight in kg
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_weight`, "safety")
+```
+No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023), and the unpublisshed study on ralmitaront (NCT04512066)
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Hyperprolactinemia 
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_hyperprolactinemia`, "safety")
+```
+Only one data from cossover RCT with assumed correlation of 0 (Hopkins 2021)
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Prolactin levels 
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_prolactin`, "safety")
+```
+SD was imputed from Huhn et al 2021. No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023), and the unpublisshed study on ralmitaront (NCT04512066)
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Akathisia
+Terms considered included: restlessness (when was used to describe akathisia)
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_akathisia`, "safety")
+```
+ No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023), and the unpublisshed study on ralmitaront (NCT04512066)
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Extrapyramidal symptoms
+Terms considered included: any extrapyramidal symptom, no finding in the movement disorder scales, use of anticholinergic medications (when used to treat extrapyramidal symptosm)
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_eps_symptoms`, "safety")
+```
+ No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023), and the unpublisshed study on ralmitaront (NCT04512066)
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Anxiety
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anxiety`, "safety")
+```
+Data were available only from one RCT on healthy volunteers.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_anxiety`, "safety")
+```
+No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023).
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Agitation
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_agitation`, "safety")
+```
+No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023).
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Headache
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_headache`, "safety")
+```
+Data were available only from one RCT on healthy volunteers.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_headache`, "safety")
+```
+No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023).
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Sedation
+
+Terms that were considered as reported in the trials: fatigue, sedation, somnolence
+
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_sedation`, "safety")
+```
+Data were available only from two RCT on healthy volunteers. Correlation was assumed 0 for the crossover study (Hopkins 2021)
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_headache`, "safety")
+```
+No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023).
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Insomnia
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_insomnia`, "safety")
+```
+No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023).
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Summary plot for the side-effects
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, warning=FALSE}
+
+ae_categories<-ae_categories %>% select(event_text, MedDRA_an, MedDRA_group) %>%  
+  rename(outcome=MedDRA_an) 
+
+safety_primary<-meta_outcome %>% left_join(ae_categories) %>% 
+  mutate(event_text=ifelse(outcome=="death", "Mortality", 
+                           ifelse(outcome=="serious", "Serious event", 
+                                  ifelse(outcome=="dropout_any", "Dropouts any reason",
+                                         ifelse(outcome=="dropout_ae", "Dropouts adverse event", event_text)))),
+         MedDRA_group=ifelse(outcome=="death" | outcome=="serious", "serious",
+                             ifelse(outcome=="dropout_any" | outcome=="dropout_ae", "dropouts", MedDRA_group))) %>% 
+  filter(!is.na(TE)) %>% filter(!is.na(event_text)) %>%
+  mutate(point=TE,
+         lb=TE-1.96*seTE,
+         ub=TE+1.96*seTE) %>% unique() %>%
+  filter(comparison=="taar1_vs_placebo")
+
+safety_primary_timepoint<-safety_primary %>% filter(timepoint=="3-13 weeks") 
+
+
+safety_primary_plot <-safety_primary %>% filter(event_text %in% safety_primary_timepoint$event_text) 
+
+safety_primary_plot$event_text <- factor(safety_primary_plot$event_tex, levels=unique(safety_primary_plot$event_tex))
+level_order<- sort(unique(safety_primary_plot$event_text))
+lever_order_meddra<-c("dropouts", "any", "serious", "autonomic", "endocrinic", "neuromuscular", "neuropsychiatric")
+
+safety_primary_plot$event_text <- factor(safety_primary_plot$event_tex, levels=unique(safety_primary_plot$event_tex))
+level_order<- sort(unique(safety_primary_plot$event_text))
+lever_order_meddra<-c("dropouts", "any", "serious", "autonomic", "endocrinic", "neuromuscular", "neuropsychiatric")
+
+ggplot(data=safety_primary_plot, 
+       aes(y=factor(event_text, level=rev(level_order)), x=exp(point), colour=timepoint))+
+  geom_point(position=position_dodge(width = 0.5))+
+  geom_errorbar(aes(x=exp(point), xmin=exp(TE-1.96*seTE), 
+                    xmax=exp(TE+1.96*seTE), colour=timepoint),
+                width=0, position=position_dodge(width = 0.5))+
+  geom_vline(xintercept=1, linetype='dashed')+
+  facet_grid(factor(MedDRA_group, levels=lever_order_meddra)~., scales = "free", space = "free")+
+  scale_x_log10() +
+  ylab("")+
+  xlab("OR 95%CI")+
+  theme_bw()
+
+
+```
+
+
+## Secondary outcome: Neurobiological measures relevant relevant to psychosis such as dopaminergic, glutamatergic and serotonergic signalling
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Comparison 2: *TAAR1 agonist* vs *antipsychotic*
+
+
+## Primary outcome: Overall symptoms
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* (primary timepoint)
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`, 
+                 rightcols = c("effect", "ci", "rob"), 
+                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  xlim=c(-0.8,0.8),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`$data$treat1_new), label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
+```
+
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Positive symptoms
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_positive`, "efficacy")
+```
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Negative symptoms
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_negative`, "efficacy")
+```
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Depressive symptoms
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_depression`, "efficacy")
+```
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Cognitive symptoms
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Quality of life
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Functioning
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Response to treatment 
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_response`, "efficacy")
+
+```
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Relapse
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT. 
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+No data available from RCT. 
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Dropouts due to any reason 
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+ forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_any`, "safety")
+
+```
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+ forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`, "safety")
+
+```
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Dropouts due to adverse event 
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_ae`, "safety")
+
+```
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_ae`, "safety")
+
+```
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Serious adverse event
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_serious`, "safety")
+
+```
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_serious`, "safety")
+```
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Death
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_death`, "safety")
+
+```
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_death`, "safety")
+```
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Any adverse event
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_adverse_event`, "safety")
+```
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_adverse_event`, "safety")
+```
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Anticholinergic symptoms
+
+Terms that were considered as reported in the trials: dry mouth (no other relevant anticholinergic side-effects were reported such as urinary retention, constipation, mydriasis or blurred vision)
+
+### Timepoint 1: *1 day - 2 weeks*
+
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anticholinertgic_symptom`, "safety")
+```
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Hypotension
+
+Terms that were considered as reported in the trials: hypotension or orthostatic hypotension
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Dizziness
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dizziness`, "safety")
+```
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Nausea or vomiting
+
+Terms that were considered as reported in the trials: nausea, vomiting, emesis
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_nausea_vomitting`, "safety")
+```
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_nausea_vomitting`, "safety")
+```
+It should be noted that the study NCT04512066 examined ralmitaront (which compared to ulotaront is not a partial agonist of the 5-HT1A receptor)
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: QTc prolongation
+
+Terms that were considered as reported in the trials: QTc prolongation above ≥450 msec or an increase of ≥60 msec (any threshold was eligible)
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: QTc interval in msec
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Weight increased
+Terms considered included: any weight increase, weight increase >7%
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_weight_increased`, "safety")
+```
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Weight in kg
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Hyperprolactinemia 
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+## Secondary outcome: Prolactin levels 
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Akathisia
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Exrapyramidal symptoms
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Anxiety
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anxiety`, "safety")
+```
+
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_anxiety`, "safety")
+```
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Agitation
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_agitation`, "safety")
+```
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+
+## Secondary outcome: Headache
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_headache`, "safety")
+```
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_headache`, "safety")
+```
+
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Sedation
+
+Terms that were considered as reported in the trials: fatigue, sedation, somnolence
+
+
+### Timepoint 1: *1 day - 2 weeks*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_sedation`, "safety")
+```
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_headache`, "safety")
+```
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Secondary outcome: Insomnia
+
+### Timepoint 1: *1 day - 2 weeks*
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_insomnia`, "safety")
+```
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Summary plot for the side-effects
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, warning=FALSE}
+safety_primary<-meta_outcome %>% left_join(ae_categories) %>% 
+  mutate(event_text=ifelse(outcome=="death", "Mortality", 
+                           ifelse(outcome=="serious", "Serious event", 
+                                  ifelse(outcome=="dropout_any", "Dropouts any reason",
+                                         ifelse(outcome=="dropout_ae", "Dropouts adverse event", event_text)))),
+         MedDRA_group=ifelse(outcome=="death" | outcome=="serious", "serious",
+                             ifelse(outcome=="dropout_any" | outcome=="dropout_ae", "dropouts", MedDRA_group))) %>% 
+  filter(!is.na(TE)) %>% filter(!is.na(event_text)) %>%
+  mutate(point=TE,
+         lb=TE-1.96*seTE,
+         ub=TE+1.96*seTE) %>% unique() %>%
+  filter(comparison=="taar1_vs_antipsychotic")
+
+safety_primary_timepoint<-safety_primary %>% filter(timepoint=="3-13 weeks") 
+
+
+safety_primary_plot <-safety_primary %>% filter(event_text %in% safety_primary_timepoint$event_text) 
+
+safety_primary_plot$event_text <- factor(safety_primary_plot$event_tex, levels=unique(safety_primary_plot$event_tex))
+level_order<- sort(unique(safety_primary_plot$event_text))
+lever_order_meddra<-c("dropouts", "any", "serious", "autonomic", "endocrinic", "neuromuscular", "neuropsychiatric")
+
+safety_primary_plot$event_text <- factor(safety_primary_plot$event_tex, levels=unique(safety_primary_plot$event_tex))
+level_order<- sort(unique(safety_primary_plot$event_text))
+lever_order_meddra<-c("dropouts", "any", "serious", "autonomic", "endocrinic", "neuromuscular", "neuropsychiatric")
+
+ggplot(data=safety_primary_plot, 
+       aes(y=factor(event_text, level=rev(level_order)), x=exp(point), colour=timepoint))+
+  geom_point(position=position_dodge(width = 0.5))+
+  geom_errorbar(aes(x=exp(point), xmin=exp(TE-1.96*seTE), 
+                    xmax=exp(TE+1.96*seTE), colour=timepoint),
+                width=0, position=position_dodge(width = 0.5))+
+  geom_vline(xintercept=1, linetype='dashed')+
+  facet_grid(factor(MedDRA_group, levels=lever_order_meddra)~., scales = "free", space = "free")+
+  scale_x_log10() +
+  ylab("")+
+  xlab("OR 95%CI")+
+  theme_bw()
+
+
+```
+
+
+## Secondary outcome: Neurobiological measures relevant relevant to psychosis such as dopaminergic, glutamatergic and serotonergic signalling
+
+### Timepoint 1: *1 day - 2 weeks*
+
+No data available from RCT.
+
+### Timepoint 2: *3 weeks - 13 weeks* 
+No data available from RCT.
+
+### Timepoint 3: *> 13 weeks*
+
+No data available from RCT.
+
+
+## Subgroup analyses and meta-regressions
+
+We did not conduct subgroup analyses and meta-regressions for the primary outcome due to the small number of included studies (i.e., 5) that precluded the exploration of potential reasons of heterogeneity. 
+
+
+### Descriptive exploration of potential dose-effects
+
+We wanted to further explore the potential dose-effects of ulotaront or ralmitaront on improving overall symptoms in acute patients with schizophrenia, given that their doses were pooled in the analyses mentioned above. For this reason, we caclulated the effect sizes of each of the doses of these drugs compared to placebo (correcting the smaple of placebo as a shared control in a trial), and we plotted them in the figure below. *No clear dose-effects can be observed.*
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, warning=FALSE}
+ggplot(data=data_doses, aes(x=dose,
+                                 y=-yi,
+                                 ymin=-yi+1.96*sqrt(vi), ymax=-yi-1.96*sqrt(vi), 
+                                 group=study_name, colour=study_name))+
+  geom_pointrange(position=position_dodge(width = 1.2), aes(shape=schedule), size=1)+
+  xlim(c(0,150))+
+  coord_cartesian(ylim=c(-0.5,0.5), expand=TRUE)+
+  xlab("dose (mg//d)")+
+  ylab("SMD 95%CI")+
+  scale_shape_manual(values = c(15,0), guide=FALSE)+
+  geom_hline(yintercept = 0, linetype="dashed")+
+  facet_wrap(~drug_name,  scales = "free", nrow=2)+
+  theme_bw()
+```
+*It should be noted that Koblan 2020 was a two-arm flexible dose study, and its effect size is placed in the middle of the range of the administered dose (50mg/d to 75mg/d), yet the median or mean dose in the trial could be different and was not reported.
+**The study of Isaacson 2023 was not presented here, as it was included participants with Parkinson disease psychosis.
+
+
+## Sensitivity analyses
+
+We did not conduct the following pre-planned sensitivity analyses for the primary outcome due to the small number of included studies (i.e., 5), i.e., 1) restricting the analysis to studies with an overall low risk of bias (no study had an overall low risk of bias) and 2) excluding estimates with imputed values (the N and SD of the ulotaront unpublished studies was imputed.
+
+## Reporting bias
+
+We evaluated the potential reporting bias for the primary outcome (overall symptoms in acute psychosis) using the ROB-ME tool.
+
+### Results matrix for the primary outcome
+```{r echo=FALSE}
+studies_primary<-studies %>% filter(Name=="NCT04512066 (2020)"  | Name=="Isaacson (2023)" | Name=="NCT04072354 (2019)" |
+                                      Name=="Koblan (2020)" |Name== "NCT04092686 (2019)" | Name== "NCT04825860 (2021)") %>%  mutate(Diagnosis=ifelse(Name=="Isaacson (2023)", "Parksinon disease psychosis", "Schizophrenia spectrum"), `Data availability`=ifelse(Name== "NCT04825860 (2021)", "~", 
+                                                                                                                                                                                                                                                                   ifelse(Name=="NCT04072354 (2019)","✓ (adult) / ?(adolescent) " , "✓"))) %>%
+  select(Name, Diagnosis, `Sample size`, `Data availability`) 
+
+knitr::kable(studies_primary[order(studies_primary$Diagnosis, studies_primary$Name),])
+```
+✓: A study result is available for inclusion in the meta-analysis.; ~:No study result is available for inclusion in the meta-analysis, for a reason unrelated to the P value, magnitude or direction of the result.; ?: Unclear whether an eligible study result was generated. 
+*NCT04072354 included two parts, i.e., adults (sample size 435) and adolescents (sample size unclear but probably 28; planned 90). It should be noted that all of the other studies included adult populations.
+**NCT04825860 is an ongoing trial. 
+
+### Funnel plots and examination of small-study effects
+There were no sufficient data (i.e., 5 studies < 10) to examine small-study effects with funnel plots. 
+
+### Coverage of the search strategy
+We conducted a comprehensive search of published and unpublished studies. Although we have not contacted the pharmaceutical companies (Hoffman-Roche for ralmitaront, and Sunovion/Sumitomo for ulotaront), it is not expected that any study was not identified in the search, as all of the trials were very recently published, and they should all have been registered.
+
+### ROB-ME evaluation
+There were no missing results in the studies identified (except for one small trial in adolescnets which data should not have an impact on the findings).There wre also no circumstances indicating potential for missing studies, and no clear patter of the results indicate potential missing studies (although funnel plots could not have been conducted due to the small number of studies). The same evaluation is relevant for both the comparisons of TAAR1 agonists vs. placebo and TAAR1 agonsits vs. antipsychotics. Therefore, there was assigned a low risk of bias in reporting bias.
+
+## Summary of the evidence on the primary outcome from the human studies
+
+### Summary of the evidence tables
+The primary outcome was efficacy in reducing overall symptoms in acutely ill patients with psychosis, i.e., available data for adults with Parkinson disease psychosis and schizophrenia spectrum (analyzed separately). There were available data for two comparisons, i.e., TAAR1 agonists (ulotaront or ralmitaront) vs. placebo, and TAAR1 agonist (ralmitaront) vs. antipsychotics (risperidone). The summary of the evidence on the primary outcome for the above mentioned populations and comparisons are reported below.
+
+
+|                                 |                                  |                                   |                                |                                  |                               |
+|------------|------------|------------|------------|------------|------------|
+| **Source of evidence**          | **Summary of the association**   | **Bias due to study limitations** | **Bias due to reporting bias** | **Bias due to indirectedness**   | **Bias due to other reasons** |
+| TAAR1 agonist. vs placebo in adults with Parkinson disease psychosis |  n=1, k=37, SMD= -0.28, 95%CI: -0.95, 0.38 |  100% of the studies had an overall high risk of bias (due to missing outcome data, unclear direction and impact on the findings) | Low risk of reporting bias  | No clear indication of indirectness  in terms of population, interventions and outcomes | No clear indication of other biases                         |
+| TAAR1 agonist. vs placebo in adults with schizophrenia spectrum disorder | n=4, k=1296, SMD=0.14, 95%CI: -0.17, 0.46, tau2=0.024  |   50% of the studies had high risk of bias, 50% of the studies had some concerns (mainly due to missing outcome data, unclear direction and impact on the findings) |  Low risk of reporting bias  |  50% of the studies had potential concern of indirectness due to being conducting during the COVID-19 pandemic (potentially associated with factors that could have diluted effect sizes) | No clear dose-effects. No clear indication of other biases  | 
+|TAAR1 agonist. vs other antipsychotics in adults with schizophrenia spectrum disorder | n=1, k=156, SMD=-0.53, 95%CI: -0.86, -0.20 |   100% of the studies had some concerns (due to missing outcome data, unclear direction and impact on the findings) |  Low risk of reporting bias  | Data available only for ralmitaront (no data for ulotaront) and risperidone (no data for other antipsychotics). No other clear indication of indirectness in terms of population and outcomes  | No clear indication of other biases | 
+
+k: number of studies, n: number of participants, I2: I-squared, SMD>0 indicates a favourable effect for the TAAR1 agonist. It should be noted that there is low confidence evidence that studies with high risk of bias in misisng outocme data may underestimate the effects (PMID: 37939743).
+
+### GRADE approach in evaluating the confidence in the evidence
+
+#### What are the effects of TAAR1 agonists versus placebo on overall symptoms in adults with acute schizophrenia spectrm disorder?
+
+TAAR1 agonists  may have little to no effect compared to placebo on overall symptoms in acutely ill adults with schizophrenia spectrum disorder (SMD=0.14, 95%CI: -0.17, 0.46) but the evidence is very uncertain. Specifically, the confidence in the evidence was *very low* due to major concerns in imprecision (95%CI crossed beyond SMD -0.1 and 0.1), some concerns in the risk of bias (studies with some concerns or high risk of bias), some concerns in heterogeneity (although could not be well estimated due to the small number of studies) and some concerns in indirectness (50% of the studies were conduced during COVID-19 pandemic).
+
+#### What are the effects of TAAR1 agonists versus antipsychotics on overall symptoms in adults with acute schizophrenia spectrm disorder?
+
+TAAR1 agonists may be less efficacious with a medium effect size compared to other antipsychotics in improving overall symptoms in acutely ill adults with schizophrenia spectrum disorder (SMD=-0.53, 95%CI: -0.86, -0.20). The confidence in the evidence was *low* due to some concerns in imprecision (although 95%CI did not cross the range of equivalence, the sample size was small <800 participants) and some concerns in indirectness (no data ulotaront and other antipsychotics).
+
+#### What are the effects of TAAR1 agonists versus placebo on overall symptoms in adults with Parkinson disease psychosis?
+
+TAAR1 agonists  may have little to no effect compared to placebo on overall symptoms in acutely ill adults with Parkinson disease psychosis (SMD=-0.28, 95%CI: -0.95, 0.38) and the evidence is very uncertain. Specifically, the confidence in the evidence was *very low* due to major concerns in imprecision (95%CI crossed beyond SMD -0.1 and 0.1, and the sample size was very small <800 participants) and some concerns in the risk of bias (study with a high risk of bias).
