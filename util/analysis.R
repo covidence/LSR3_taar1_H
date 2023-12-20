@@ -3,8 +3,7 @@ library(readxl)
 library(writexl)
 library(meta)
 library(netmeta)
-library(ggthemr)
-library(RColorBrewer)
+
 
 rm(list=ls())
 

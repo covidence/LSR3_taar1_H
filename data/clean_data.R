@@ -5,9 +5,7 @@ library(meta)
 library(metafor)
 library(netmeta)
 library(metafor)
-library(ggthemr)
-library(RColorBrewer)
-library(PK)
+
 
 #Manually cleaned dataset from EPPI-reviewer (future iterations will allowed automated cleaning procedures)
 data<-read_xlsx("data/LSR3_H_2023-11-24.xlsx")
