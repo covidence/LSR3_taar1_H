@@ -155,7 +155,7 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
               unique()
           }
           
-          meta_comp<-metacont(data=pairwise_i,  method.random.ci = "HK",  adhoc.hakn.ci="se", #reml default for tau, HK correction applied
+          meta_comp<-metacont(data=pairwise_i,  #method.random.ci = "HK",  adhoc.hakn.ci="se", #reml default for tau, Do not use HK correction due to <5 studies
                              mean.e = mean1_new, sd.e=sd1_new, n.e=n1_new, mean.c = mean2_new, sd.c=sd2_new, n.c=n2_new,
                              sm=sm_used, random=random_true, fixed=fixed_true,    
                              studlab = study_name, prediction = prediction_true, subgroup = population, 
@@ -198,7 +198,7 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
             select(study_name, comp, population, treat1_new, treat2_new, event1_new, n1_new, event2_new, n2_new) %>% 
            unique()
           
-         meta_comp<-metabin(data=pairwise_i, method.random.ci = "HK",  adhoc.hakn.ci="se",#reml default for tau, HK correction applied. Ad hoc correction if too smal;
+         meta_comp<-metabin(data=pairwise_i, #method.random.ci = "HK",  adhoc.hakn.ci="se",#reml default for tau, Do not use HK correction <5 studies
                             event.e = event1_new, n.e=n1_new, event.c = event2_new, n.c=n2_new,
                             sm=sm_used, random=random_true, fixed=fixed_true,  
                             studlab = study_name, prediction = prediction_true, subgroup=population)
