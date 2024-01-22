@@ -1,6 +1,6 @@
 ---
 title: "Trace amine-associated receptor 1 (TAAR1) agonists for psychosis - Results from the human studies <span style='font-size:25px'></style>"
-author: "Spyridon Siafis <span style='font-size: 15px'></style>"
+author: "Spyridon Siafis, Virginia Chiocchia, Georgia Salanti <span style='font-size: 15px'></style>"
 date: "`r format(Sys.Date(), '%e %b %Y')`"
 output:
   html_document:
@@ -23,7 +23,7 @@ library(meta)
 library(devtools)
 library(metafor)
 library(robvis)
-#devtools::install_github("haozhu233/kableExtra")
+#devtools::install_github("haozhu233/kableExtra") I need to remove this, otherwise the R markdown didnt work
 
 
 #Empty the enviroment 
@@ -33,7 +33,7 @@ rm(list=ls())
 knitr::opts_chunk$set(echo = T, warning = F, message = F)
 
 #Functions needed to run this script
-source("util/util.R") #Spiros: I had problems to run this function as a separate file in util.R so i included it within the analysis.R below, theni could run the markdown. 
+source("util/util.R") 
 
 #Data cleaning routines
 source("data/clean_data.R")
@@ -42,9 +42,9 @@ source("data/clean_data.R")
 source("util/analysis.R")
 
 # Loading 
-studies<-read_xlsx('data/studies_2024-01-22_LSR3_H.xlsx', na = "NA") #Descriptive data set with all included studies (RCT and not)
+studies<-read_xlsx('data/studies_2024-01-22_LSR3_H.xlsx', na = "NA") #Descriptive data set with included studies
 data <- read_xlsx('data/data_2024-01-22_LSR3_H.xlsx') #Clean data with the RCTs with available data
-data_doses<-read_xlsx("data/data_doses_2024-01-22_LSR3_H.xlsx") #Effect sizes for the individual doses of TAAR1 (for descriptive figure)
+data_doses<-read_xlsx("data/data_doses_2024-01-22_LSR3_H.xlsx") #Effect sizes for the individual doses of TAAR1 (for a descriptive figure)
 ae_categories<-read_xlsx("data/ae_categories.xlsx") #Supporting file with the names of adverse events for the summary plot for the side-effects
 
 #Round off results to two digits
@@ -107,7 +107,7 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`,
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`$data$treat1_new), label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
-                 subgroup = TRUE,
+                 subgroup = TRUE, fixed=TRUE,
                  label.left = "Placebo better", label.right="TAAR1 better")
 ```
 
@@ -126,7 +126,15 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`, "efficacy")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("SMD", "95%-CI"),  xlim=c(-0.8,0.8),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Placebo better", label.right="TAAR1 better")
+#forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`, "efficacy")
 ```
 
 No data were available from the two unpublished acute studies on ulotaront (i.e., NCT04072354, NCT04092686).
