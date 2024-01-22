@@ -31,11 +31,11 @@ AUC <- function (conc, time)
   auc
 }
 
-#Calculate the mean AUC of QTc interval, and the divide by 24 hours in order to have the overall daily assessment 
+#Calculate the mean AUC of QTc interval, and the divide by 24 hours to have the assessment in msec 
 qtc_auc_mean<-AUC(data_qtc$TE, data_qtc$timepoint)/24
-#Calculate the lower boundary of the AUC of QTc interval, and the divide by 24 hours in order to have the overall daily assessment 
+#Calculate the lower boundary of the AUC of QTc interval, and the divide by 24 hours to have the assessment in msec 
 qtc_aub_lb<-AUC(data_qtc$lb, data_qtc$timepoint)/24
-#Calculate the upper boundary of the AUC of QTc interval, and the divide by 24 hours in order to have the overall daily assessment 
+#Calculate the upper boundary of the AUC of QTc interval, and the divide by 24 hours o have the assessment in msec  
 qtc_aub_ub<-AUC(data_qtc$ub, data_qtc$timepoint)/24
 
 qtc_aub_se<-(qtc_aub_ub-qtc_aub_lb)/3.92
