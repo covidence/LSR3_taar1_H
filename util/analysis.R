@@ -7,7 +7,7 @@ library(netmeta)
 
 rm(list=ls())
 
-master<-read_xlsx("data/data_2023-11-24_LSR3_H.xlsx")
+master<-read_xlsx("data/data_2024-01-22_LSR3_H.xlsx")
 
 rob <- master %>% select(study_name, Overall) %>% rename(rob=Overall)
 

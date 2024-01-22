@@ -8,7 +8,7 @@ library(metafor)
 
 
 #Manually cleaned dataset from EPPI-reviewer (future iterations will allowed automated cleaning procedures)
-data<-read_xlsx("data/LSR3_H_2023-11-24.xlsx")
+data<-read_xlsx("data/LSR3_H_2024-01-22.xlsx")
 
 #Tsukada et al 2023: cleaning of the QTc continuous data reported for multiple assessments within a day and the AUC was calculated; then divided by 24 hours)
 data_cont<-read_xlsx("data/LSR3_H_qtc_2023-11-24.xlsx") #Manually cleaned data from EPPI reviewer, only QTc continues data to be used here
@@ -45,12 +45,12 @@ data<-data %>% mutate(qtc_md_point=ifelse(study_name=="Tsukada (2023)", qtc_auc_
                       qtc_md_se=ifelse(study_name=="Tsukada (2023)",qtc_aub_se, NA))
 
 #save the dataset
-write_xlsx(data, "data/data_2023-11-24_LSR3_H.xlsx")
+write_xlsx(data, "data/data_2024-01-22_LSR3_H.xlsx")
 
 #data_unique_studies<-data %>% select(study_name, study_design, population, state, sample_n, age_mean) %>% unique() #only for descriptives
 
 #Cleaning of the included studies (RCT or not, completed or ongoing)
-studies<-(read_xlsx('data/included_studies_2023-11-24_LSR3_H.xlsx', na = "NA")) 
+studies<-(read_xlsx('data/included_studies_2024-01-22_LSR3_H.xlsx', na = "NA")) 
 studies<-studies %>% mutate(rct=ifelse(grepl("RCT", Design), 1,0),
                             conditions=ifelse(grepl("schizophrenia", Population),"Schizophrenia",
                                               ifelse(grepl("Parkinson", Population),"Parkinson's disease psychosis",
@@ -64,7 +64,7 @@ studies<-studies %>% mutate(rct=ifelse(grepl("RCT", Design), 1,0),
 
 studies<-studies[order(studies$Status, studies$Sponsor, studies$rct, studies$Population, studies$state),] #Ordering for a better presentation
 
-write_xlsx(studies, 'data/studies_2023-11-24_LSR3_H.xlsx')
+write_xlsx(studies, 'data/studies_2024-01-22_LSR3_H.xlsx')
 
 
 #Dataset with effect sizes for the different doses in order to plot them separately
@@ -93,4 +93,4 @@ master_sch_drug<-master_sch_drug %>% mutate(dose=ifelse(dose=="50-75", 62.5, as.
   mutate(drug_name=ifelse(drug_name=="ulotaront", "1. ulotaront", "2. ralmitaront"),
          schedule=ifelse(study_name=="Koblan (2020)", "flexible", "fixed"))
 
-write_xlsx(master_sch_drug, "data/data_doses_2023-11-24_LSR3_H.xlsx")
+write_xlsx(master_sch_drug, "data/data_doses_2024-01-22_LSR3_H.xlsx")

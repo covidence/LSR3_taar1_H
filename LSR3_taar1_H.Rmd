@@ -23,7 +23,7 @@ library(meta)
 library(devtools)
 library(metafor)
 library(robvis)
-devtools::install_github("haozhu233/kableExtra")
+#devtools::install_github("haozhu233/kableExtra")
 
 
 #Empty the enviroment 
@@ -42,9 +42,9 @@ source("data/clean_data.R")
 source("util/analysis.R")
 
 # Loading 
-studies<-read_xlsx('data/studies_2023-11-24_LSR3_H.xlsx', na = "NA") #Descriptive data set with all included studies (RCT and not)
-data <- read_xlsx('data/data_2023-11-24_LSR3_H.xlsx') #Clean data with the RCTs with available data
-data_doses<-read_xlsx("data/data_doses_2023-11-24_LSR3_H.xlsx") #Effect sizes for the individual doses of TAAR1 (for descriptive figure)
+studies<-read_xlsx('data/studies_2024-01-22_LSR3_H.xlsx', na = "NA") #Descriptive data set with all included studies (RCT and not)
+data <- read_xlsx('data/data_2024-01-22_LSR3_H.xlsx') #Clean data with the RCTs with available data
+data_doses<-read_xlsx("data/data_doses_2024-01-22_LSR3_H.xlsx") #Effect sizes for the individual doses of TAAR1 (for descriptive figure)
 ae_categories<-read_xlsx("data/ae_categories.xlsx") #Supporting file with the names of adverse events for the summary plot for the side-effects
 
 #Round off results to two digits
