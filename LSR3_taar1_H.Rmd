@@ -100,12 +100,14 @@ No data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks* (primary timepoint)
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`, 
-                 rightcols = c("effect", "ci", "rob"), 
-                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  xlim=c(-0.8,0.8),
-                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`$data$treat1_new), label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`$data$treat2_new),
-                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,
+                 rightcols = c("effect", "ci","rob"), 
+                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  
+       xlim=c(-0.8,0.8),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`$data$treat1_new), 
+      # label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
                  label.left = "Placebo better", label.right="TAAR1 better")
@@ -130,11 +132,10 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`,
                  rightcols = c("effect", "ci"), 
                  rightlabs = c("SMD", "95%-CI"),  xlim=c(-0.8,0.8),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
-                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
                  label.left = "Placebo better", label.right="TAAR1 better")
-#forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`, "efficacy")
 ```
 
 No data were available from the two unpublished acute studies on ulotaront (i.e., NCT04072354, NCT04092686).
@@ -153,7 +154,15 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_negative`, "efficacy")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_negative`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("SMD", "95%-CI"),  xlim=c(-0.8,0.8),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_negative`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Placebo better", label.right="TAAR1 better")
+
 ```
 
 No data were available from the two unpublished acute studies on ulotaront (i.e., NCT04072354, NCT04092686).
@@ -172,7 +181,15 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_depression`, "efficacy")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_depression`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("SMD", "95%-CI"),  xlim=c(-0.5,0.5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_depression`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Placebo better", label.right="TAAR1 better")
+#forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_depression`, "efficacy")
 ```
 
 No data were available from the two unpublished acute studies on ulotaront (i.e., NCT04072354, NCT04092686).
@@ -191,7 +208,16 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_cognition`, "efficacy")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_cognition`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("SMD", "95%-CI"),  xlim=c(-0.8,0.8),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_cognition`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Placebo better", label.right="TAAR1 better")
+
+#forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_cognition`, "efficacy")
 
 ```
 
@@ -238,8 +264,15 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_response`, "efficacy")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_response`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_response`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Placebo better", label.right="TAAR1 better")
+#forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_response`, "efficacy")
 
 ```
 
@@ -268,8 +301,16 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-
- forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_any`, "safety")
+forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_any`, 
+         leftcols = c("studlab",  "effect", "ci"),           
+       rightcols = FALSE,
+                 xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_any`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+# forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_any`, "safety")
 
 ```
 
@@ -277,9 +318,16 @@ Correlation was assumed 0 for the crossover study (Hopkins 2021)
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-
- forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_any`, "safety")
+```{r echo=F, fig.fullwidth=T, fig.width=10, fig.height=5}
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_any`, 
+      # leftcols = c("studlab", "TE", "seTE", "effect", "ci"),           
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                   xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_any`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
 
 ```
 
@@ -294,8 +342,16 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_ae`, 
+       leftcols = c("studlab",  "effect", "ci"),           
+       rightcols = FALSE,
+                #  xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_ae`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
 
-forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_ae`, "safety")
 
 ```
 
@@ -304,8 +360,15 @@ Correlation was assumed 0 for the crossover studies (Hopkins 2021, Tsukada 2023)
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_ae`, "safety")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_ae`, 
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                   xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_ae`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+#forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_ae`, "safety")
 
 ```
 
@@ -320,7 +383,17 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_serious`, "safety")
+forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_serious`, 
+       leftcols = c("studlab",  "effect", "ci"),           
+       rightcols = FALSE,
+                  xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_serious`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
+#forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_serious`, "safety")
 
 ```
 
@@ -329,7 +402,19 @@ This outcome was considered rare event, and it was analyzed with a fixed-effects
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_serious`, "safety")
+
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_serious`, 
+      # leftcols = c("studlab", "TE", "seTE", "effect", "ci"),           
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       #layout="Revman",
+                   xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_serious`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
+#forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_serious`, "safety")
 ```
 
 This outcome was considered rare event, and it was analyzed with a fixed-effects MH method. No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686).
@@ -343,7 +428,18 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_death`, "safety")
+
+forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_death`, 
+       leftcols = c("studlab",  "effect", "ci"),           
+       rightcols = FALSE,
+                  xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_death`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
+
 
 ```
 
@@ -352,7 +448,16 @@ This outcome was considered rare event, and it was analyzed with a fixed-effects
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_death`, "safety")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_death`, 
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_death`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
+
+#forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_death`, "safety")
 ```
 
 This outcome was considered rare event, and it was analyzed with a fixed-effects MH method.
@@ -365,8 +470,17 @@ No data available from RCT.
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_adverse_event`, "safety")
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=5}
+forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_adverse_event`, 
+       leftcols = c("studlab",  "effect", "ci"),           
+       rightcols = FALSE,
+            #      xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_adverse_event`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction=FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 A correlation of 0 was assumed for crossover studies.
@@ -374,7 +488,14 @@ A correlation of 0 was assumed for crossover studies.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_adverse_event`, "safety")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_adverse_event`, 
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_adverse_event`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686).
@@ -390,7 +511,16 @@ Terms that were considered as reported in the trials: dry mouth (no other releva
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anticholinertgic_symptom`, "safety")
+forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anticholinertgic_symptom`, 
+       leftcols = c("studlab",  "effect", "ci"),           
+       rightcols = FALSE,
+            #      xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anticholinertgic_symptom`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 Only data from one study on healthy volunteers were available (Perini 2023)
@@ -414,7 +544,14 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_hypotension`, "safety")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_hypotension`, 
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_hypotension`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 No data were available from the four trials on acute schizophrenia.
@@ -428,7 +565,17 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dizziness`, "safety")
+
+forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dizziness`, 
+       leftcols = c("studlab",  "effect", "ci"),           
+       rightcols = FALSE,
+            #      xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dizziness`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction=FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 A correlation of 0 was assumed for crossover studies.
@@ -436,7 +583,14 @@ A correlation of 0 was assumed for crossover studies.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_dizziness`, "safety")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dizziness`, 
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_dizziness`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 No data were available from the four trials on acute schizophrenia.
@@ -452,7 +606,18 @@ Terms that were considered as reported in the trials: nausea, vomiting, emesis
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_nausea_vomitting`, "safety")
+
+
+forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_nausea_vomitting`, 
+       leftcols = c("studlab",  "effect", "ci"),           
+       rightcols = FALSE,
+            #      xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_nausea_vomitting`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction=FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 A correlation of 0 was assumed for crossover studies.
@@ -460,7 +625,15 @@ A correlation of 0 was assumed for crossover studies.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_nausea_vomitting`, "safety")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_nausea_vomitting`, 
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_nausea_vomitting`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
+
 ```
 
 No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686). The study NCT04512066 examined ralmitaront while the other trials ulotaront (which is also a 5-HT1A receptor partial agonist).
@@ -476,7 +649,16 @@ Terms that were considered as reported in the trials: QTc prolongation above ≥
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_qtc_prolongation`, "safety")
+forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_qtc_prolongation`, 
+       leftcols = c("studlab",  "effect", "ci"),           
+       rightcols = FALSE,
+            #      xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_qtc_prolongation`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 A correlation of 0 was assumed for the two crossover studies with reported QTc prolongation.
@@ -484,7 +666,15 @@ A correlation of 0 was assumed for the two crossover studies with reported QTc p
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_qtc_prolongation`, "safety")
+
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_qtc_prolongation`, 
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_qtc_prolongation`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686). The study NCT04512066 examined ralmitaront while the other trials ulotaront (which is also a 5-HT1A receptor partial agonist).
@@ -499,8 +689,10 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(metagen(data=master[master$study_name=="Tsukada (2023)" & master$drug_name=="ulotaront",],
-         TE=qtc_md_point, seTE=qtc_md_se, sm="MD", studlab = study_name),
+         TE=qtc_md_point, seTE=qtc_md_se, sm="MD", studlab = study_name_drug),
        prediction = FALSE,
+        leftcols = c("studlab",  "effect", "ci"),           
+       rightcols = FALSE,
                  label.e = unique(meta_comp$data$treat1_new), label.c=unique(meta_comp$data$treat2_new),
                  label.left = "TAAR1 better",
                  label.right="TAAR1 worse")
@@ -525,7 +717,14 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_weight_increased`, "safety")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_weight_increased`, 
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_weight_increased`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = FALSE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686) and the study on Parkinson disease psychosis (Isaacson 2023).
@@ -543,7 +742,16 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_weight`, "safety")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_weight`, 
+       rightcols = c("effect", "ci"),rightlabs = c("MD", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_weight`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = FALSE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
+
+
 ```
 
 No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023), and the unpublisshed study on ralmitaront (NCT04512066)
@@ -557,7 +765,16 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_hyperprolactinemia`, "safety")
+forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_hyperprolactinemia`, 
+       leftcols = c("studlab",  "effect", "ci"),           
+       rightcols = FALSE,
+            #      xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_hyperprolactinemia`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 Only one data from cossover RCT with assumed correlation of 0 (Hopkins 2021)
@@ -579,7 +796,15 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_prolactin`, "safety")
+
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_prolactin`, 
+       rightcols = c("effect", "ci"),rightlabs = c("MD", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_prolactin`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = FALSE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 SD was imputed from Huhn et al 2021. No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023), and the unpublisshed study on ralmitaront (NCT04512066)
@@ -599,7 +824,16 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_akathisia`, "safety")
+
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_akathisia`, 
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_akathisia`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = FALSE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
+
 ```
 
 No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023), and the unpublisshed study on ralmitaront (NCT04512066)
@@ -619,7 +853,16 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_eps_symptoms`, "safety")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_eps_symptoms`, 
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_eps_symptoms`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = FALSE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
+
+
 ```
 
 No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023), and the unpublisshed study on ralmitaront (NCT04512066)
@@ -633,7 +876,18 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anxiety`, "safety")
+
+forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anxiety`, 
+       leftcols = c("studlab",  "effect", "ci"),           
+       rightcols = FALSE,
+            #      xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anxiety`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
+
 ```
 
 Data were available only from one RCT on healthy volunteers.
@@ -641,7 +895,14 @@ Data were available only from one RCT on healthy volunteers.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_anxiety`, "safety")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_anxiety`, 
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_anxiety`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = FALSE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023).
@@ -659,7 +920,15 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_agitation`, "safety")
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_agitation`, 
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_agitation`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = FALSE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
+
 ```
 
 No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023).
@@ -673,7 +942,16 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_headache`, "safety")
+
+forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_headache`, 
+       leftcols = c("studlab",  "effect", "ci"),           
+       rightcols = FALSE,
+            #      xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_headache`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
 ```
 
 Data were available only from one RCT on healthy volunteers.
@@ -681,7 +959,15 @@ Data were available only from one RCT on healthy volunteers.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_headache`, "safety")
+
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_headache`, 
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_headache`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = FALSE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023).
@@ -697,7 +983,16 @@ Terms that were considered as reported in the trials: fatigue, sedation, somnole
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_sedation`, "safety")
+forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_sedation`, 
+       leftcols = c("studlab",  "effect", "ci"),           
+       rightcols = FALSE,
+            #      xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_sedation`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
+                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 Data were available only from two RCT on healthy volunteers. Correlation was assumed 0 for the crossover study (Hopkins 2021)
@@ -705,7 +1000,15 @@ Data were available only from two RCT on healthy volunteers. Correlation was ass
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_headache`, "safety")
+
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_sedation`, 
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_sedation`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = FALSE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023).
@@ -723,7 +1026,15 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_insomnia`, "safety")
+
+forest(`meta_comp_taar1_vs_placebo_3-13 weeks_insomnia`, 
+       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_insomnia`$data$treat1_new), 
+                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = FALSE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
+
 ```
 
 No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023).
@@ -734,22 +1045,23 @@ No data available from RCT.
 
 ## Summary plot for the side-effects
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, warning=FALSE}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=8, warning=FALSE}
 
-ae_categories<-ae_categories %>% select(event_text, MedDRA_an, MedDRA_group) %>%  
+ae_categories<-ae_categories %>% 
+  select(event_text, MedDRA_an, MedDRA_group) %>%  
   rename(outcome=MedDRA_an) 
 
-safety_primary<-meta_outcome %>% left_join(ae_categories) %>% 
+safety_primary<-meta_outcome %>% left_join(ae_categories) %>%  #I need to change a bit 
   mutate(event_text=ifelse(outcome=="death", "Mortality", 
                            ifelse(outcome=="serious", "Serious event", 
                                   ifelse(outcome=="dropout_any", "Dropouts any reason",
                                          ifelse(outcome=="dropout_ae", "Dropouts adverse event", event_text)))),
          MedDRA_group=ifelse(outcome=="death" | outcome=="serious", "serious",
                              ifelse(outcome=="dropout_any" | outcome=="dropout_ae", "dropouts", MedDRA_group))) %>% 
-  filter(!is.na(TE)) %>% filter(!is.na(event_text)) %>%
-  mutate(point=TE,
-         lb=TE-1.96*seTE,
-         ub=TE+1.96*seTE) %>% unique() %>%
+  filter(!is.na(TE.random)) %>% filter(!is.na(event_text)) %>%
+  mutate(point=TE.random,
+         lb=TE.random-1.96*seTE.random,
+         ub=TE.random+1.96*seTE.random) %>% unique() %>%
   filter(comparison=="taar1_vs_placebo")
 
 safety_primary_timepoint<-safety_primary %>% filter(timepoint=="3-13 weeks") 
@@ -768,8 +1080,8 @@ lever_order_meddra<-c("dropouts", "any", "serious", "autonomic", "endocrinic", "
 ggplot(data=safety_primary_plot, 
        aes(y=factor(event_text, level=rev(level_order)), x=exp(point), colour=timepoint))+
   geom_point(position=position_dodge(width = 0.5))+
-  geom_errorbar(aes(x=exp(point), xmin=exp(TE-1.96*seTE), 
-                    xmax=exp(TE+1.96*seTE), colour=timepoint),
+  geom_errorbar(aes(x=exp(point), xmin=exp(TE.random-1.96*seTE.random), 
+                    xmax=exp(TE.random+1.96*seTE.random), colour=timepoint),
                 width=0, position=position_dodge(width = 0.5))+
   geom_vline(xintercept=1, linetype='dashed')+
   facet_grid(factor(MedDRA_group, levels=lever_order_meddra)~., scales = "free", space = "free")+
@@ -805,15 +1117,16 @@ No data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks* (primary timepoint)
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-
+```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`, 
-                 rightcols = c("effect", "ci", "rob"), 
-                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  xlim=c(-0.8,0.8),
-                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`$data$treat1_new), label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`$data$treat2_new),
-                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,
+                 rightcols = c("effect", "ci","rob"), 
+                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  
+       xlim=c(-0.8,0.8),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
-                 subgroup = TRUE,
+                 subgroup = TRUE, fixed=TRUE,
                  label.left = "Antipsychotic better", label.right="TAAR1 better")
 
 ```
@@ -831,7 +1144,16 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_positive`, "efficacy")
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_positive`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("SMD", "95%-CI"),  
+       xlim=c(-0.8,0.8),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_positive`$data$treat1_new), 
+   #    label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_positive`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
 ```
 
 ### Timepoint 3: *\> 13 weeks*
@@ -847,8 +1169,16 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_negative`, "efficacy")
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_negative`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("SMD", "95%-CI"),  
+       xlim=c(-0.8,0.8),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_negative`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_negative`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
 ```
 
 ### Timepoint 3: *\> 13 weeks*
@@ -864,8 +1194,17 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_depression`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("SMD", "95%-CI"),  
+       xlim=c(-0.8,0.8),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_depression`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_depression`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
 
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_depression`, "efficacy")
 ```
 
 ### Timepoint 3: *\> 13 weeks*
@@ -924,7 +1263,17 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_response`, "efficacy")
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_response`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+       xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_response`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_response`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
 
 ```
 
@@ -951,16 +1300,34 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_any`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_any`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
 
- forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_any`, "safety")
+
 
 ```
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-
- forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`, "safety")
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
 
 ```
 
@@ -973,8 +1340,17 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_ae`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_ae`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
 
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_ae`, "safety")
 
 ```
 
@@ -982,7 +1358,17 @@ forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_ae`,
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_ae`, "safety")
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
 
 ```
 
@@ -995,14 +1381,36 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_serious`, "safety")
+forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_serious`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_serious`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
 
 ```
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_serious`, "safety")
+
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_serious`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_serious`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
+
 ```
 
 ### Timepoint 3: *\> 13 weeks*
@@ -1014,14 +1422,33 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_death`, "safety")
+forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_death`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_death`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
 
 ```
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_death`, "safety")
+
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_death`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_death`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
 ```
 
 ### Timepoint 3: *\> 13 weeks*
@@ -1033,13 +1460,34 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_adverse_event`, "safety")
+forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_adverse_event`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_adverse_event`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
 ```
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_adverse_event`, "safety")
+
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_adverse_event`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_adverse_event`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
 ```
 
 ### Timepoint 3: *\> 13 weeks*
@@ -1053,7 +1501,17 @@ Terms that were considered as reported in the trials: dry mouth (no other releva
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anticholinertgic_symptom`, "safety")
+forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anticholinertgic_symptom`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anticholinertgic_symptom`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
 ```
 
 ### Timepoint 2: *3 weeks - 13 weeks*
@@ -1085,7 +1543,18 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dizziness`, "safety")
+forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dizziness`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dizziness`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
+
 ```
 
 ### Timepoint 2: *3 weeks - 13 weeks*
@@ -1103,13 +1572,34 @@ Terms that were considered as reported in the trials: nausea, vomiting, emesis
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_nausea_vomitting`, "safety")
+forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_nausea_vomitting`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_nausea_vomitting`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
 ```
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_nausea_vomitting`, "safety")
+
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_nausea_vomitting`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_nausea_vomitting`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
 ```
 
 It should be noted that the study NCT04512066 examined ralmitaront (which compared to ulotaront is not a partial agonist of the 5-HT1A receptor)
@@ -1150,7 +1640,7 @@ No data available from RCT.
 
 ## Secondary outcome: Weight increased
 
-Terms considered included: any weight increase, weight increase \>7%
+Terms considered included: any weight increase, weight increase >7%
 
 ### Timepoint 1: *1 day - 2 weeks*
 
@@ -1159,7 +1649,17 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_weight_increased`, "safety")
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_weight_increased`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_weight_increased`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
 ```
 
 ### Timepoint 3: *\> 13 weeks*
@@ -1241,13 +1741,34 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anxiety`, "safety")
+forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anxiety`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anxiety`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
 ```
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_anxiety`, "safety")
+
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_anxiety`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_anxiety`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
 ```
 
 ### Timepoint 3: *\> 13 weeks*
@@ -1263,7 +1784,18 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_agitation`, "safety")
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_agitation`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_agitation`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
+
 ```
 
 ### Timepoint 3: *\> 13 weeks*
@@ -1275,13 +1807,33 @@ No data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_headache`, "safety")
+forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_headache`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_headache`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
 ```
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_headache`, "safety")
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_headache`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_headache`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+
 ```
 
 ### Timepoint 3: *\> 13 weeks*
@@ -1295,14 +1847,21 @@ Terms that were considered as reported in the trials: fatigue, sedation, somnole
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_sedation`, "safety")
+forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_sedation`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_sedation`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
 ```
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_headache`, "safety")
-```
+No data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1317,7 +1876,16 @@ No data available from RCT.
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest_presentation(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_insomnia`, "safety")
+forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_insomnia`, 
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("OR", "95%-CI"),  
+      # xlim=c(0.2,5),
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_insomnia`$data$treat1_new), 
+     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Antipsychotic better", label.right="TAAR1 better")
 ```
 
 ### Timepoint 3: *\> 13 weeks*
@@ -1326,7 +1894,7 @@ No data available from RCT.
 
 ## Summary plot for the side-effects
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, warning=FALSE}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=8, warning=FALSE}
 safety_primary<-meta_outcome %>% left_join(ae_categories) %>% 
   mutate(event_text=ifelse(outcome=="death", "Mortality", 
                            ifelse(outcome=="serious", "Serious event", 
@@ -1334,10 +1902,10 @@ safety_primary<-meta_outcome %>% left_join(ae_categories) %>%
                                          ifelse(outcome=="dropout_ae", "Dropouts adverse event", event_text)))),
          MedDRA_group=ifelse(outcome=="death" | outcome=="serious", "serious",
                              ifelse(outcome=="dropout_any" | outcome=="dropout_ae", "dropouts", MedDRA_group))) %>% 
-  filter(!is.na(TE)) %>% filter(!is.na(event_text)) %>%
-  mutate(point=TE,
-         lb=TE-1.96*seTE,
-         ub=TE+1.96*seTE) %>% unique() %>%
+  filter(!is.na(TE.random)) %>% filter(!is.na(event_text)) %>%  #May need to be revised a bit 
+  mutate(point=TE.random,
+         lb=TE.random-1.96*seTE.random,
+         ub=TE.random+1.96*seTE.random) %>% unique() %>%
   filter(comparison=="taar1_vs_antipsychotic")
 
 safety_primary_timepoint<-safety_primary %>% filter(timepoint=="3-13 weeks") 
@@ -1356,8 +1924,8 @@ lever_order_meddra<-c("dropouts", "any", "serious", "autonomic", "endocrinic", "
 ggplot(data=safety_primary_plot, 
        aes(y=factor(event_text, level=rev(level_order)), x=exp(point), colour=timepoint))+
   geom_point(position=position_dodge(width = 0.5))+
-  geom_errorbar(aes(x=exp(point), xmin=exp(TE-1.96*seTE), 
-                    xmax=exp(TE+1.96*seTE), colour=timepoint),
+  geom_errorbar(aes(x=exp(point), xmin=exp(TE.random-1.96*seTE.random), 
+                    xmax=exp(TE.random+1.96*seTE.random), colour=timepoint),
                 width=0, position=position_dodge(width = 0.5))+
   geom_vline(xintercept=1, linetype='dashed')+
   facet_grid(factor(MedDRA_group, levels=lever_order_meddra)~., scales = "free", space = "free")+
