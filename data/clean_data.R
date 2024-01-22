@@ -42,7 +42,11 @@ qtc_aub_se<-(qtc_aub_ub-qtc_aub_lb)/3.92
 
 #Add the above-calculated MD differennce for QTc interval between ulotaront and placebo in Tsukada et al 2023
 data<-data %>% mutate(qtc_md_point=ifelse(study_name=="Tsukada (2023)", qtc_auc_mean, NA),
-                      qtc_md_se=ifelse(study_name=="Tsukada (2023)",qtc_aub_se, NA))
+                      qtc_md_se=ifelse(study_name=="Tsukada (2023)",qtc_aub_se, NA)) %>% 
+  mutate(study_name_drug=ifelse(study_name=="NCT04512066 (2020)", "NCT04512066 (2020) - ralmitaront",
+                                paste0(study_name," - ulotaront")), #new study name variable to include also the name of the TAAR1 agonist used
+         crossover_periods=ifelse(study_name=="Szabo (2023)", 3, #Variable to be used to divide the sample when calculating summary data
+                                 ifelse(study_name=="Tsukada (2023)" | study_name=="Hopkins (2021)", 2, 1))) #Tsukada 3 arms but only 2 used here
 
 #save the dataset
 write_xlsx(data, "data/data_2024-01-22_LSR3_H.xlsx")
