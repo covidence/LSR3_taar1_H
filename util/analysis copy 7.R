@@ -27,7 +27,7 @@ effic_outcomes<-c("overall", "positive", "negative", "functioning", "cognition",
 primary_outcome<-"overall"
 
 meta_outcome<-data.frame(outcome=NA,  comparison=NA, timepoint=NA, k=NA, n=NA,population=NA, duration=NA,
-                         sm=NA,  low_bias=NA, moderate_bias=NA, high_bias=NA, k_schiz=NA, n_schiz=NA,
+                         sm=NA,  low_bias=NA, moderate_bias=NA, high_bias=NA,
                          TE.placebo.random=NA, seTE.placebo.random=NA, 
                          TE.placebo.fixed=NA, seTE.placebo.fixed=NA, 
                          tau2=NA,  i2=NA,
@@ -254,11 +254,8 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
             
             for(p in length(meta_comp$subgroup.levels)){
             
-              pairwise_i[pairwise_i$population=="Schizophrenia spectrum",]
               
               meta_outcome_i<-data.frame(outcome=o, comparison=comparison,timepoint=time,
-                                         k_schiz=as.integer(nrow(pairwise_i[pairwise_i$population=="Schizophrenia spectrum",])),
-                                         n_schiz=as.integer(sum(pairwise_i[pairwise_i$population=="Schizophrenia spectrum",]$n_total)),
                                          k=as.integer(meta_comp$k.all.w[p]), 
                                          n=sum(pairwise_i[pairwise_i$population==meta_comp$subgroup.levels[p],]$n_total),
                                          population=meta_comp$subgroup.levels[p],
@@ -281,8 +278,6 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
             
             
             meta_outcome_i<-data.frame(outcome=o, comparison=comparison,timepoint=time,
-                                       k_schiz=as.integer(nrow(pairwise_i[pairwise_i$population=="Schizophrenia spectrum",])),
-                                       n_schiz=as.integer(sum(pairwise_i[pairwise_i$population=="Schizophrenia spectrum",]$n_total)),
                                        k=as.integer(meta_comp$k.all.w[p]), 
                                        n=sum(pairwise_i[pairwise_i$population==meta_comp$subgroup.levels[p],]$n_total),
                                        population=meta_comp$subgroup.levels[p],
@@ -306,8 +301,6 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
           
         if(o %in% c(continuous_outcomes_md, continuous_outcomes_smd)){
            meta_outcome_i<-data.frame(outcome=o, comparison=comparison,timepoint=time, 
-                                      k_schiz=as.integer(nrow(pairwise_i[pairwise_i$population=="Schizophrenia spectrum",])),
-                                      n_schiz=as.integer(sum(pairwise_i[pairwise_i$population=="Schizophrenia spectrum",]$n_total)),
                                      k=meta_comp$k.all, 
                                      n=sum(pairwise_i$n_total),
                                      population=paste0(meta_comp$subgroup.levels),
@@ -325,8 +318,6 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
           }
            else{
           meta_outcome_i<-data.frame(outcome=o, comparison=comparison,timepoint=time, 
-                                     k_schiz=as.integer(nrow(pairwise_i[pairwise_i$population=="Schizophrenia spectrum",])),
-                                     n_schiz=as.integer(sum(pairwise_i[pairwise_i$population=="Schizophrenia spectrum",]$n_total)),
                                      k=meta_comp$k.all,
                                      n=sum(pairwise_i$n_total), 
                                      low_bias=sum(pairwise_i$Overall=="Low", na.rm=TRUE), 
@@ -367,8 +358,6 @@ master_qtc<-master_qtc %>% left_join(rob_qtc)
 meta_outcome_qtc<-data.frame(outcome="qtc_interval", comparison="taar1_vs_placebo",timepoint=unique(master_qtc$timepoint), 
                            k=`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc_interval`$k.all,
                            n=sum(master_qtc$qtc_prolongation_n),
-                           k_schiz=`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc_interval`$k.all,
-                           n_schiz=sum(master_qtc$qtc_prolongation_n),
                            population=master_qtc$population,
                            low_bias=sum(master_qtc$Overall=="Low", na.rm=TRUE), 
                            moderate_bias=sum(master_qtc$Overall=="Some concerns", na.rm=TRUE), 
@@ -401,15 +390,14 @@ meta_outcome2<-meta_outcome %>%
                            ifelse(timepoint=="1 day-2 weeks" & comparison=="taar1_vs_placebo", 626,
                                   ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_placebo" & outcome_type=="efficacy" & population=="Schizophrenia spectrum", 1383,
                                          ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_placebo" & outcome_type=="efficacy" & population=="Parkinson Disease Psychosis", 39,
-                                                ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_antipsychotic" & outcome_type=="efficacy" & population=="Schizophrenia spectrum", 128,1550)))))) %>% #Added the negative symptom study too
+                                                ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_antipsychotic" & outcome_type=="efficacy" & population=="Schizophrenia spectrum", 128,1422)))))) %>%
   mutate(k_possible=ifelse(timepoint=="1 day-2 weeks" & comparison=="taar1_vs_antipsychotic", 2,
                            ifelse(timepoint=="1 day-2 weeks" & comparison=="taar1_vs_placebo", 12,
                                   ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_placebo" & outcome_type=="efficacy" & population=="Schizophrenia spectrum", 4,
                                          ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_placebo" & outcome_type=="efficacy" & population=="Parkinson Disease Psychosis", 1,
-                                                ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_antipsychotic" & outcome_type=="efficacy" & population=="Schizophrenia spectrum", 1,6)))))) %>%
+                                                ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_antipsychotic" & outcome_type=="efficacy" & population=="Schizophrenia spectrum", 1,5)))))) %>%
   mutate(k_prop=k/k_possible, 
          n_prop=ifelse(k_prop==1, 1, n/n_possible),
-         k_schiz_prop=k_schiz/k, n_schiz_prop=n_schiz/n,
          moderate_to_high_bias_prop=(moderate_bias+high_bias)/k) %>%
   mutate(TE_lb=TE-1.96*seTE, 
          TE_ub=TE+1.96*seTE) %>%
@@ -421,9 +409,9 @@ meta_outcome2<-meta_outcome %>%
          CER=ifelse(!is.na(point), round(100*cer_point, 1), NA),
          t2=round(tau2,4)) %>% 
   mutate(association=ifelse(!is.na(point), 
-                            ifelse(k>1 & !is.na(t2), ifelse(sm=="OR", paste0("N=", k, " n=", n, "; ", ACR,"% vs. ", CER,"%, ", sm,"=",point,", 95%CI: ", lb, ", ", ub,"; tau2=", t2),
+                            ifelse(k>1 & !is.na(t2), ifelse(sm=="OR", paste0("N=", k, " n=", n, "; ", ACR,"% vs.", CER,"%, ", sm,"=",point,", 95%CI: ", lb, ", ", ub,"; tau2=", t2),
                                    paste0("N=", k, " n=", n, "; ", sm,"=",point,", 95%CI: ", lb, ", ", ub,"; tau2=", t2)), 
-                                   ifelse(sm=="OR", paste0("N=", k, " n=", n, "; ", ACR,"% vs. ", CER,"%, ", sm,"=",point,", 95%CI: ", lb, ", ", ub),
+                                   ifelse(sm=="OR", paste0("N=", k, " n=", n, "; ", ACR,"% vs.", CER,"%, ", sm,"=",point,", 95%CI: ", lb, ", ", ub),
                                           paste0("N=", k, " n=", n, "; ", sm,"=",point,", 95%CI: ", lb, ", ", ub))),
                                    paste0("N=", k, " n=", n, "; not estimable effect size 0 events in both arms")),
          study_limitations=ifelse(moderate_to_high_bias_prop==0 & k==1, "1 study with an overall low risk of bias",
@@ -432,11 +420,8 @@ meta_outcome2<-meta_outcome %>%
                                                 paste0(round(100*(1-moderate_to_high_bias_prop),1),"% had overall low risk of bias")))),
          reporting_bias=ifelse(k_prop==1 & k_possible==1, "The single study eligible had usable data",
                                ifelse(k_prop==1 & k_possible>1, paste0("All eligible studies had usuable data"),
-                                      ifelse(k_prop<1, paste0(round(100*k_prop,1), "% of eligible studies and ", round(100*n_prop,1),"% of participants had usable data"), NA))),
-         indirectness=ifelse(outcome_type=="efficacy", "No clear indication of indirectness",
-                             ifelse(k_schiz_prop==1, "No clear indication of indirectness",
-                                    paste0(round(100*k_schiz_prop,1), "% of eligible studies and ", round(100*n_schiz_prop,1), "% of participants in schizophrenia spectrum")))) %>% 
-  select(outcome, comparison, timepoint, duration, association, study_limitations, reporting_bias, indirectness)
+                                      ifelse(k_prop<1, paste0(round(100*k_prop,1), "% of eligible studies and ", round(100*n_prop,1),"% of participants had usable data"), NA)))) %>% 
+  select(outcome, comparison, timepoint, duration, association, study_limitations, reporting_bias)
 
 
 

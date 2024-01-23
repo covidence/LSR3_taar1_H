@@ -69,7 +69,7 @@ PRISMA_flowdiagram(prisma, previous = FALSE, other=FALSE)
 
 The table of included studies is presented in Table 1.
 
-```{r echo=FALSE}
+```{r echo=FALSE, fig.width=12, fig.height=8}
 knitr::kable(studies[, 1:14])
 ```
 
@@ -92,7 +92,7 @@ Risk of bias was evaluated using the RoB2 tool for the primary outcome, i.e., ov
 The risk of bias assessment per domain and study is reported in Figure 1.
 
 ```{r echo =F, fig.fullwidth=T, fig.width=8, fig.height=8}
-rob_plot(rob, "overall", "3-13 weeks")
+rob_plot(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`)
 ```
 
 **Figure 1** Risk of bias for overall symptoms
@@ -521,11 +521,11 @@ Terms that were considered as reported in the trials: dry mouth (no other releva
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anticholinertgic_symptom`, 
+forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anticholinergic_symptom`, 
        leftcols = c("studlab",  "effect", "ci"),           
        rightcols = FALSE,
             #      xlim=c(0.2,5),
-                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anticholinertgic_symptom`$data$treat1_new), 
+                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anticholinergic_symptom`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
                  subgroup = TRUE, fixed=TRUE, random=TRUE,
@@ -1129,8 +1129,8 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`, 
-                 rightcols = c("effect", "ci","rob"), 
-                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  
+                 rightcols = c("effect", "ci"), 
+                 rightlabs = c("SMD", "95%-CI"),  
        xlim=c(-0.8,0.8),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`$data$treat1_new), 
      #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`$data$treat2_new),
@@ -1511,11 +1511,11 @@ Terms that were considered as reported in the trials: dry mouth (no other releva
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anticholinertgic_symptom`, 
+forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anticholinergic_symptom`, 
                  rightcols = c("effect", "ci"), 
                  rightlabs = c("OR", "95%-CI"),  
       # xlim=c(0.2,5),
-                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anticholinertgic_symptom`$data$treat1_new), 
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anticholinergic_symptom`$data$treat1_new), 
      #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
@@ -2048,3 +2048,10 @@ TAAR1 agonists may be less efficacious with a medium effect size compared to oth
 #### What are the effects of TAAR1 agonists versus placebo on overall symptoms in adults with Parkinson disease psychosis?
 
 TAAR1 agonists may have little to no effect compared to placebo on overall symptoms in acutely ill adults with Parkinson disease psychosis (SMD=-0.28, 95%CI: -0.95, 0.38) and the evidence is very uncertain. Specifically, the confidence in the evidence was *very low* due to major concerns in imprecision (95%CI crossed beyond SMD -0.1 and 0.1, and the sample size was very small \<800 participants), and some concerns in the risk of bias (study with a high risk of bias).
+
+## Summary of the evidence tables for all outcomes
+
+```{r echo=FALSE}
+knitr::kable(meta_outcome2)
+```
+
