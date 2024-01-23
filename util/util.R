@@ -1,5 +1,5 @@
 library(meta)
-
+library(robvis)
 
 forest_presentation<-function(meta_comp, outcome){
   
@@ -22,4 +22,10 @@ forest_presentation<-function(meta_comp, outcome){
     
   }
   
+}
+
+
+rob_plot<-function(data){ #RoB function 
+  plot(rob_traffic_light(data=data$data[, 
+                                  c("study_name","D1", "D2", "D3", "D4", "D5", "Overall")], tool = "ROB2",  psize = 12))
 }

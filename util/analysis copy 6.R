@@ -18,7 +18,7 @@ rob<-read_xlsx("data/rob_secondary_2024.01.23.xlsx")
 continuous_outcomes_smd<-c("overall", "positive", "negative", "functioning", "cognition", "depression")
 continuous_outcomes_md<-c("weight","prolactin") #qtc interval not used here as data only from a single study that were caclulated using AUC
 dichotomous_outcomes_common<-c("dropout_any", 'dropout_ae', "adverse_event", "response", "relapse",
-                               "anticholinergic_symptom", "anxiety","agitation", "headache", "hypotension", "dizziness",
+                               "anticholinertgic_symptom", "anxiety","agitation", "headache", "hypotension", "dizziness",
                                "nausea_vomitting", "sedation", "hyperprolactinemia", "qtc_prolongation",
                                "insomnia", "akathisia", "eps_symptoms", "weight_increased")
 dichotomous_outcomes_rare<-c("death", "serious")
@@ -26,14 +26,14 @@ dichotomous_outcomes_rare<-c("death", "serious")
 effic_outcomes<-c("overall", "positive", "negative", "functioning", "cognition", "depression", "response", "relapse")
 primary_outcome<-"overall"
 
-meta_outcome<-data.frame(outcome=NA,  comparison=NA, timepoint=NA, k=NA, n=NA,population=NA, duration=NA,
-                         sm=NA,  low_bias=NA, moderate_bias=NA, high_bias=NA,
+meta_outcome<-data.frame(outcome=NA,  comparison=NA, timepoint=NA, k=NA, n=NA,
+                         sm=NA,  
                          TE.placebo.random=NA, seTE.placebo.random=NA, 
                          TE.placebo.fixed=NA, seTE.placebo.fixed=NA, 
-                         tau2=NA,  i2=NA,
+                         tau2=NA, tau2_lb=NA, tau2_ub=NA, i2=NA,
                          TE.random=NA, seTE.random=NA, TE.fixed=NA, seTE.fixed=NA)
 
-o<-"overall"
+o<-"dropout_ae"
 time<-"1 day-2 weeks"
 comparison="taar1_vs_placebo"
 
@@ -116,20 +116,20 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
           master_i<-master_i %>% 
             filter(timepoint==time) %>%  #keep the timepoint
             filter(!is.na(mean)) %>% #keep only arms with data
-            select(study_name, study_name_drug, crossover_periods, population, duration_weeks, drug_new, mean, sd, n) %>%  #select only the relevant data for the analysis 
+            select(study_name, study_name_drug, crossover_periods, population, drug_new, mean, sd, n) %>%  #select only the relevant data for the analysis 
             filter(drug_new=="TAAR1 agonist" | drug_new=="placebo")  #keep the arms relevant for the comparison 
         } else if(comparison=="taar1_vs_antipsychotic"){
           master_i<-master_i %>%  
              filter(timepoint==time) %>%  #keep the timepoint
               filter(!is.na(mean)) %>% #keep only arms with data
-             dplyr::select(study_name, study_name_drug, crossover_periods, population, duration_weeks, drug_new, mean, sd, n) %>% 
+             dplyr::select(study_name, study_name_drug, crossover_periods, population, drug_new, mean, sd, n) %>% 
               filter(drug_new=="TAAR1 agonist" | drug_new=="D2 antipsychotic") 
         }
-
+       
         if(o %in% c(continuous_outcomes_md, continuous_outcomes_smd)){
           
           master_pooled_i<-master_i %>%  #pooling the different doses or drugs of the same category (not relevant here)
-            group_by(study_name, study_name_drug, drug_new, population, duration_weeks)%>%
+            group_by(study_name, study_name_drug, drug_new, population)%>%
             summarise(n_an=sum(n),
                       mean_an=weighted.mean(mean,n), 
                       sd_an=sqrt(((sum((n - 1) * sd^2 + n * mean^2)) - sum(n) * mean_an^2)/(sum(n) -  1)))
@@ -154,15 +154,14 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
                    n1_new=ifelse(treat1=="TAAR1 agonist" ,n1, n2),
                    n2_new=ifelse(treat1=="TAAR1 agonist" , n2, n1)) %>%
             mutate(comp=paste0(treat1_new," vs. ", treat2_new)) %>%
-            select(study_name, study_name_drug, duration_weeks,
+            select(study_name, study_name_drug, 
                    comp, population, treat1_new, treat2_new, mean1_new, sd1_new, n1_new, mean2_new,  sd2_new, n2_new) %>% 
             mutate(n_total=n1_new + n2_new) %>%
             unique()
           
           
           rob_i<-rob %>% filter(outcome==o & timepoint==time)
-          
-          pairwise_i<- pairwise_i %>% left_join(rob_i) %>% 
+            pairwise_i<- pairwise_i %>% left_join(rob_i) %>% 
               unique()
           
           meta_comp<-metacont(data=pairwise_i,  #method.random.ci = "HK",  adhoc.hakn.ci="se", #reml default for tau, Do not use HK correction due to <5 studies
@@ -183,7 +182,7 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
         } else if(o %in% c(dichotomous_outcomes_common, dichotomous_outcomes_rare)){
           
           master_pooled_i<-master_i %>%  #pooling the different doses or drugs of the same category (not relevant here)
-            group_by(study_name, study_name_drug, crossover_periods, drug_new, population, duration_weeks)%>%
+            group_by(study_name, study_name_drug, crossover_periods, drug_new, population)%>%
             summarise(n_an=sum(n),
                       e_an=sum(as.numeric(mean))) %>% 
             unique()
@@ -205,7 +204,7 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
                    n1_new=ifelse(treat1=="TAAR1 agonist" ,n1, n2),
                    n2_new=ifelse(treat1=="TAAR1 agonist" , n2, n1)) %>%
             mutate(comp=paste0(treat1_new," vs. ", treat2_new)) %>%
-            select(study_name, study_name_drug, comp, duration_weeks,
+            select(study_name, study_name_drug, comp, 
                    population, crossover_periods, treat1_new, treat2_new, event1_new, n1_new, event2_new, n2_new, TE, seTE) %>%
            mutate(event1_new_corrected=ifelse(event1_new==0, 0.5, event1_new), #To correct for crosssover, i need to add 0.5 when 0.
                   event2_new_corrected=ifelse(event2_new==0, 0.5, event2_new),
@@ -247,161 +246,51 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
            }
         }
         
-        if(nrow(master_pooled_i)>1){        
-      if((o %in% effic_outcomes) & length(meta_comp$subgroup.levels)>1){
-        
         if(o %in% c(continuous_outcomes_md, continuous_outcomes_smd)){
-            
-            for(p in length(meta_comp$subgroup.levels)){
-            
-              
-              meta_outcome_i<-data.frame(outcome=o, comparison=comparison,timepoint=time,
-                                         k=as.integer(meta_comp$k.all.w[p]), 
-                                         n=sum(pairwise_i[pairwise_i$population==meta_comp$subgroup.levels[p],]$n_total),
-                                         population=meta_comp$subgroup.levels[p],
-                                         duration=paste0(min(pairwise_i[pairwise_i$population==meta_comp$subgroup.levels[p],]$duration_weeks),"-", 
-                                                         max(pairwise_i[pairwise_i$population==meta_comp$subgroup.levels[p],]$duration_weeks)),
-                                         low_bias=sum(pairwise_i[pairwise_i$population==meta_comp$subgroup.levels[p],]$Overall=="Low", na.rm=TRUE), 
-                                         moderate_bias=sum(pairwise_i[pairwise_i$population==meta_comp$subgroup.levels[p],]$Overall=="Some concerns", na.rm=TRUE), 
-                                         high_bias=sum(pairwise_i[pairwise_i$population==meta_comp$subgroup.levels[p],]$Overall=="High", na.rm=TRUE),
-                                         sm=sm_used,
-                                         TE.placebo.random=NA, seTE.placebo.random=NA, 
-                                         TE.placebo.fixed=NA, seTE.placebo.fixed=NA, 
-                                         TE.random=as.double(meta_comp$TE.random.w[p]), seTE.random=as.double(meta_comp$seTE.random.w[p]),
-                                         tau2=as.double(meta_comp$tau2.w[p]), 
-                                         i2=as.double(meta_comp$I2.w[p]),
-                                         TE.fixed=as.double(meta_comp$TE.fixed.w[p]), seTE.fixed=as.double(meta_comp$seTE.fixed.w[p]))
-              meta_outcome<-rbind(meta_outcome, meta_outcome_i)
-            }
-        } else {
-          for(p in length(meta_comp$subgroup.levels)){
-            
-            
-            meta_outcome_i<-data.frame(outcome=o, comparison=comparison,timepoint=time,
-                                       k=as.integer(meta_comp$k.all.w[p]), 
-                                       n=sum(pairwise_i[pairwise_i$population==meta_comp$subgroup.levels[p],]$n_total),
-                                       population=meta_comp$subgroup.levels[p],
-                                       duration=paste0(min(pairwise_i[pairwise_i$population==meta_comp$subgroup.levels[p],]$duration_weeks),"-", 
-                                                       max(pairwise_i[pairwise_i$population==meta_comp$subgroup.levels[p],]$duration_weeks)),
-                                       sm=sm_used,
-                                       low_bias=sum(pairwise_i[pairwise_i$population==meta_comp$subgroup.levels[p],]$Overall=="Low", na.rm=TRUE), 
-                                       moderate_bias=sum(pairwise_i[pairwise_i$population==meta_comp$subgroup.levels[p],]$Overall=="Some concerns", na.rm=TRUE), 
-                                       high_bias=sum(pairwise_i[pairwise_i$population==meta_comp$subgroup.levels[p],]$Overall=="High", na.rm=TRUE),
-                                       TE.placebo.random=meta_comp_plac$TE.random.w[p], seTE.placebo.random=meta_comp_plac$seTE.random.w[p], 
-                                       TE.placebo.fixed=meta_comp_plac$TE.fixed.w[p], seTE.placebo.fixed=meta_comp_plac$seTE.fixed.w[p], 
-                                       TE.random=as.double(meta_comp$TE.random.w[p]), seTE.random=as.double(meta_comp$seTE.random.w[p]),
-                                       tau2=as.double(meta_comp$tau2.w[p]), 
-                                       i2=as.double(meta_comp$I2.w[p]),
-                                       TE.fixed=as.double(meta_comp$TE.fixed.w[p]), seTE.fixed=as.double(meta_comp$seTE.fixed.w[p]))
-            meta_outcome<-rbind(meta_outcome, meta_outcome_i)
-            
-            
-          }
-        }} else {
-          
-        if(o %in% c(continuous_outcomes_md, continuous_outcomes_smd)){
-           meta_outcome_i<-data.frame(outcome=o, comparison=comparison,timepoint=time, 
-                                     k=meta_comp$k.all, 
+          meta_outcome_i<-data.frame(outcome=o, comparison=comparison,timepoint=time, 
+                                     k=meta_comp$k.all,
                                      n=sum(pairwise_i$n_total),
-                                     population=paste0(meta_comp$subgroup.levels),
                                      sm=sm_used, 
-                                     low_bias=sum(pairwise_i$Overall=="Low", na.rm=TRUE), 
-                                     moderate_bias=sum(pairwise_i$Overall=="Some concerns", na.rm=TRUE), 
-                                     high_bias=sum(pairwise_i$Overall=="High", na.rm=TRUE),
-                                     duration=paste0(min(pairwise_i$duration_weeks),"-", max(pairwise_i$duration_weeks)),
                                      TE.placebo.random=NA, seTE.placebo.random=NA, 
                                      TE.placebo.fixed=NA, seTE.placebo.fixed=NA, 
                                      TE.random=meta_comp$TE.random, seTE.random=meta_comp$seTE.random, 
-                                     tau2=meta_comp$tau2, i2=meta_comp$I2,
+                                     tau2=meta_comp$tau2, tau2_lb=meta_comp$lower.tau2, tau2_ub=meta_comp$upper.tau2, i2=meta_comp$I2,
                                      TE.fixed=meta_comp$TE.fixed, seTE.fixed=meta_comp$seTE.fixed)
-           meta_outcome<-rbind(meta_outcome, meta_outcome_i)
-          }
-           else{
+        } else{
           meta_outcome_i<-data.frame(outcome=o, comparison=comparison,timepoint=time, 
                                      k=meta_comp$k.all,
-                                     n=sum(pairwise_i$n_total), 
-                                     low_bias=sum(pairwise_i$Overall=="Low", na.rm=TRUE), 
-                                     moderate_bias=sum(pairwise_i$Overall=="Some concerns", na.rm=TRUE), 
-                                     high_bias=sum(pairwise_i$Overall=="High", na.rm=TRUE),
-                                     population=paste0(meta_comp$subgroup.levels, collapse=", "),
-                                     duration=paste0(min(pairwise_i$duration_weeks),"-", max(pairwise_i$duration_weeks)),
+                                     n=sum(pairwise_i$n_total),
                                      sm=sm_used, 
                                      TE.placebo.random=meta_comp_plac$TE.random, seTE.placebo.random=meta_comp_plac$seTE.random, 
                                      TE.placebo.fixed=meta_comp_plac$TE.fixed, seTE.placebo.fixed=meta_comp_plac$TE.fixed, 
                                      TE.random=meta_comp$TE.random, seTE.random=meta_comp$seTE.random,
-                                     tau2=meta_comp$tau2, i2=meta_comp$I2,
+                                     tau2=meta_comp$tau2, tau2_lb=meta_comp$lower.tau2, tau2_ub=meta_comp$upper.tau2, i2=meta_comp$I2,
                                      TE.fixed=meta_comp$TE.fixed, seTE.fixed=meta_comp$seTE.fixed)
-          meta_outcome<-rbind(meta_outcome, meta_outcome_i)
         }
         
-        }
-        }
+        meta_outcome<-rbind(meta_outcome, meta_outcome_i)
+         
+         
+         
+            }
         }
         
-  }
-}
-   
-      
+       
+        
+      }
+
+
 #Conducting analysis for QTc interval msec using the data from Tsukada et al 2023.
 master_qtc<-master[master$study_name=="Tsukada (2023)" & master$drug_name=="ulotaront",]
-master_qtc<-master_qtc %>% select(study_name, study_name_drug, qtc_md_point, qtc_md_se, qtc_prolongation_n, timepoint, duration_weeks, population) %>%
+master_qtc<-master_qtc %>% select(study_name, study_name_drug, qtc_md_point, qtc_md_se, qtc_prolongation_n, timepoint) %>%
   mutate(comparison="taar1_vs_placebo")
 
 rob_qtc<-rob %>% filter(outcome=="qtc_interval" & timepoint=="1 day-2 weeks")
 
 master_qtc<-master_qtc %>% left_join(rob_qtc)
 
-`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc_interval`<- metagen(data=master_qtc,
+`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc`<- metagen(data=master_qtc,
                TE=qtc_md_point, seTE=qtc_md_se, sm="MD", studlab = study_name_drug)
-
-
-meta_outcome_qtc<-data.frame(outcome="qtc_interval", comparison="taar1_vs_placebo",timepoint=unique(master_qtc$timepoint), 
-                           k=`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc_interval`$k.all,
-                           n=sum(master_qtc$qtc_prolongation_n),
-                           population=master_qtc$population,
-                           low_bias=sum(master_qtc$Overall=="Low", na.rm=TRUE), 
-                           moderate_bias=sum(master_qtc$Overall=="Some concerns", na.rm=TRUE), 
-                           high_bias=sum(master_qtc$Overall=="High", na.rm=TRUE),
-                           duration=paste0(min(master_qtc$duration_weeks),"-", max(master_qtc$duration_weeks)),
-                           sm="MD", 
-                           TE.placebo.random=NA, seTE.placebo.random=NA, 
-                           TE.placebo.fixed=NA, seTE.placebo.fixed=NA, 
-                           TE.random=`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc_interval`$TE.random, seTE.random=`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc_interval`$seTE.random,
-                           tau2=`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc_interval`$tau2, 
-                            i2=`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc_interval`$I2,
-                           TE.fixed=`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc_interval`$TE.fixed, seTE.fixed=`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc_interval`$seTE.fixed)
-
-meta_outcome<-rbind(meta_outcome, meta_outcome_qtc) 
-
-#Prepartion of the meta outcome object
-meta_outcome<-meta_outcome %>% filter(!is.na(outcome))
-
-meta_outcome<-meta_outcome %>% 
-  mutate(TE=ifelse(outcome=="serious" | outcome=="death", TE.fixed, TE.random),
-         seTE=ifelse(outcome=="serious" | outcome=="death", seTE.fixed, seTE.random),
-         TE.placebo=ifelse(outcome=="serious" | outcome=="death", TE.placebo.fixed, TE.placebo.random),
-         duration=ifelse(duration=="0.14-0.14", "1 day",
-                         ifelse(duration=="0.14-2", "1 day to 2 weeks",
-                                ifelse(duration=="4-4", "4 weeks", 
-                                       ifelse(duration=="4-6", "4-6 weeks",
-                                              ifelse(duration=="6-6", "6 weeks", NA)))))) %>% 
-  mutate(outcome_type=ifelse(outcome %in% effic_outcomes, "efficacy", "other")) %>% 
-  mutate(n_possible=ifelse(timepoint=="1 day-2 weeks" & comparison=="taar1_vs_antipsychotic", 100,
-                           ifelse(timepoint=="1 day-2 weeks" & comparison=="taar1_vs_placebo", 626,
-                                  ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_placebo" & outcome_type=="efficacy" & population=="Schizophrenia spectrum", 1383,
-                                         ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_placebo" & outcome_type=="efficacy" & population=="Parkinson Disease Psychosis", 39,
-                                                ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_antipsychotic" & outcome_type=="efficacy" & population=="Schizophrenia spectrum", 128,1422)))))) %>%
-  mutate(k_possible=ifelse(timepoint=="1 day-2 weeks" & comparison=="taar1_vs_antipsychotic", 2,
-                           ifelse(timepoint=="1 day-2 weeks" & comparison=="taar1_vs_placebo", 12,
-                                  ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_placebo" & outcome_type=="efficacy" & population=="Schizophrenia spectrum", 4,
-                                         ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_placebo" & outcome_type=="efficacy" & population=="Parkinson Disease Psychosis", 1,
-                                                ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_antipsychotic" & outcome_type=="efficacy" & population=="Schizophrenia spectrum", 1,5)))))) %>%
-  mutate(k_prop=k/k_possible, 
-         n_prop=ifelse(k_prop==1, 1, n/n_possible),
-         moderate_to_high_bias_prop=(moderate_bias+high_bias)/k)
-
-
-
 
 
 #Function to create RoB plots

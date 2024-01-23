@@ -111,7 +111,7 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`, 
-                 rightcols = c("effect", "ci","rob"), 
+                 rightcols = c("effect", "ci","Overall"), 
                  rightlabs = c("SMD", "95%-CI", "Risk of bias"),  
        xlim=c(-0.8,0.8),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`$data$treat1_new), 
@@ -138,8 +138,8 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("SMD", "95%-CI"),  xlim=c(-0.8,0.8),
+                 rightcols = c("effect", "ci", "Overall"), 
+                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  xlim=c(-0.8,0.8),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
@@ -164,8 +164,9 @@ No data available from RCT.
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_negative`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("SMD", "95%-CI"),  xlim=c(-0.8,0.8),
+                 rightcols = c("effect", "ci", "Overall"), 
+                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  
+       xlim=c(-0.8,0.8),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_negative`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
@@ -191,8 +192,8 @@ No data available from RCT.
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_depression`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("SMD", "95%-CI"),  xlim=c(-0.5,0.5),
+                 rightcols = c("effect", "ci", "Overall"), 
+                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  xlim=c(-0.5,0.5),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_depression`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
@@ -218,8 +219,8 @@ No data available from RCT.
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_cognition`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("SMD", "95%-CI"),  xlim=c(-0.8,0.8),
+                 rightcols = c("effect", "ci", "Overall"), 
+                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  xlim=c(-0.8,0.8),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_cognition`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
@@ -274,8 +275,8 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_response`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  xlim=c(0.2,5),
+                 rightcols = c("effect", "ci", "Overall"), 
+                 rightlabs = c("OR", "95%-CI", "Risk of bias"),  xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_response`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
@@ -311,8 +312,8 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_any`, 
-         leftcols = c("studlab",  "effect", "ci"),           
-       rightcols = FALSE,
+         leftcols = c("studlab",  "effect", "ci"),   
+       rightcols = c("Overall"), rightlabs = c("Risk of bias"),   
                  xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_any`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
@@ -330,7 +331,7 @@ Correlation was assumed 0 for the crossover study (Hopkins 2021)
 ```{r echo=F, fig.fullwidth=T, fig.width=10, fig.height=5}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_any`, 
       # leftcols = c("studlab", "TE", "seTE", "effect", "ci"),           
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                    xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_any`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
@@ -352,8 +353,8 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_ae`, 
-       leftcols = c("studlab",  "effect", "ci"),           
-       rightcols = FALSE,
+       leftcols = c("studlab",  "effect", "ci"),      
+       rightcols = c("Overall"), rightlabs = c("Risk of bias"),   
                 #  xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_ae`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
@@ -370,7 +371,7 @@ Correlation was assumed 0 for the crossover studies (Hopkins 2021, Tsukada 2023)
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_ae`, 
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                    xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_ae`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
@@ -393,8 +394,8 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_serious`, 
-       leftcols = c("studlab",  "effect", "ci"),           
-       rightcols = FALSE,
+       leftcols = c("studlab",  "effect", "ci"),   
+       rightcols = c("Overall"), rightlabs = c("Risk of bias"),   
                   xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_serious`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
@@ -414,7 +415,7 @@ This outcome was considered rare event, and it was analyzed with a fixed-effects
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_serious`, 
       # leftcols = c("studlab", "TE", "seTE", "effect", "ci"),           
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
        #layout="Revman",
                    xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_serious`$data$treat1_new), 
