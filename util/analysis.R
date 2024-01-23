@@ -272,6 +272,12 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
 
 
 
+rob_plot<-function(data, outcome, timepoint){
+  plot(rob_traffic_light(data=rob[data$outcome==outcome & data$timepoint==timepoint, 
+                                  c("study_name","D1", "D2", "D3", "D4", "D5", "Overall")], tool = "ROB2",  psize = 12))
+}
+
+
 
 forest_presentation<-function(meta_comp, outcome){
   
