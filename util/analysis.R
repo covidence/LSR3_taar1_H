@@ -7,11 +7,12 @@ library(netmeta)
 
 rm(list=ls())
 
-master<-read_xlsx("data/data_2024-01-22_LSR3_H.xlsx")
+master<-read_xlsx("data/data_2024-01-22_LSR3_H.xlsx") #Main dataset
 
-rob<-read_xlsx("data/rob_secondary_2024.01.23.xlsx")
+rob<-read_xlsx("data/rob_secondary_2024.01.24.xlsx") #RoB assessments for all outcomes
 
-
+outcome_names<-read_xlsx("data/outcome_names.xlsx") #Refined outcome names usesd later for refining the SoE table
+outcome_names<-outcome_names %>% mutate(id_outcome_population=paste0(outcome, population)) 
 #rob <- master %>% select(study_name, Overall) %>% rename(rob=Overall) %>% unique()
 
 
@@ -34,7 +35,7 @@ meta_outcome<-data.frame(outcome=NA,  comparison=NA, timepoint=NA, k=NA, n=NA,po
                          TE.random=NA, seTE.random=NA, TE.fixed=NA, seTE.fixed=NA)
 
 o<-"overall"
-time<-"1 day-2 weeks"
+time<-"3-13 weeks"
 comparison="taar1_vs_placebo"
 
 for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes_common, dichotomous_outcomes_rare)){
@@ -247,14 +248,13 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
            }
         }
         
-        if(nrow(master_pooled_i)>1){        
+    if(nrow(master_pooled_i)>1){        
       if((o %in% effic_outcomes) & length(meta_comp$subgroup.levels)>1){
         
         if(o %in% c(continuous_outcomes_md, continuous_outcomes_smd)){
             
-            for(p in length(meta_comp$subgroup.levels)){
-            
-              pairwise_i[pairwise_i$population=="Schizophrenia spectrum",]
+          
+            for(p in 1:length(meta_comp$subgroup.levels)){
               
               meta_outcome_i<-data.frame(outcome=o, comparison=comparison,timepoint=time,
                                          k_schiz=as.integer(nrow(pairwise_i[pairwise_i$population=="Schizophrenia spectrum",])),
@@ -277,7 +277,9 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
               meta_outcome<-rbind(meta_outcome, meta_outcome_i)
             }
         } else {
-          for(p in length(meta_comp$subgroup.levels)){
+          
+          
+          for(p in 1:length(meta_comp$subgroup.levels)){
             
             
             meta_outcome_i<-data.frame(outcome=o, comparison=comparison,timepoint=time,
@@ -299,9 +301,8 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
                                        i2=as.double(meta_comp$I2.w[p]),
                                        TE.fixed=as.double(meta_comp$TE.fixed.w[p]), seTE.fixed=as.double(meta_comp$seTE.fixed.w[p]))
             meta_outcome<-rbind(meta_outcome, meta_outcome_i)
-            
-            
           }
+          
         }} else {
           
         if(o %in% c(continuous_outcomes_md, continuous_outcomes_smd)){
@@ -387,7 +388,7 @@ meta_outcome<-rbind(meta_outcome, meta_outcome_qtc)
 #Prepartion of the meta outcome object
 meta_outcome<-meta_outcome %>% filter(!is.na(outcome))
 
-meta_outcome2<-meta_outcome %>% 
+meta_outcome_soe<-meta_outcome %>% 
   mutate(TE=ifelse(outcome=="serious" | outcome=="death", TE.fixed, TE.random),
          seTE=ifelse(outcome=="serious" | outcome=="death", seTE.fixed, seTE.random),
          TE.placebo=ifelse(outcome=="serious" | outcome=="death", TE.placebo.fixed, TE.placebo.random),
@@ -429,17 +430,41 @@ meta_outcome2<-meta_outcome %>%
          study_limitations=ifelse(moderate_to_high_bias_prop==0 & k==1, "1 study with an overall low risk of bias",
                                   ifelse(moderate_bias==1 & k==1, "1 study with overall some concerns in risk of bias",
                                          ifelse(high_bias==1 & k==1, "1 study with overall high risk of bias",
-                                                paste0(round(100*(1-moderate_to_high_bias_prop),1),"% had overall low risk of bias")))),
-         reporting_bias=ifelse(k_prop==1 & k_possible==1, "The single study eligible had usable data",
-                               ifelse(k_prop==1 & k_possible>1, paste0("All eligible studies had usuable data"),
+                                                ifelse(moderate_to_high_bias_prop==0 & k>1, " All studies had overall low risk of bias",
+                                                paste0(round(100*(1-moderate_to_high_bias_prop),1),"% had overall low risk of bias"))))),
+         reporting_bias=ifelse(k_prop==1 & k_possible==1, "1 eligible study with usable data",
+                               ifelse(k_prop==1 & k_possible>1, paste0("All eligible studies had usable data"),
                                       ifelse(k_prop<1, paste0(round(100*k_prop,1), "% of eligible studies and ", round(100*n_prop,1),"% of participants had usable data"), NA))),
          indirectness=ifelse(outcome_type=="efficacy", "No clear indication of indirectness",
                              ifelse(k_schiz_prop==1, "No clear indication of indirectness",
-                                    paste0(round(100*k_schiz_prop,1), "% of eligible studies and ", round(100*n_schiz_prop,1), "% of participants in schizophrenia spectrum")))) %>% 
-  select(outcome, comparison, timepoint, duration, association, study_limitations, reporting_bias, indirectness)
+                                    paste0(round(100*k_schiz_prop,1), "% studies and ", round(100*n_schiz_prop,1), "% participants with schizophrenia")))) %>% 
+  mutate(population=ifelse(outcome_type=="efficacy", population, NA),
+         id_outcome_population=paste0(outcome, population))  %>%
+left_join(outcome_names)  %>%
+  select(comparison, outcome_type, id_outcome_population, order, outcome_new, population, timepoint, duration, association, study_limitations, reporting_bias, indirectness) %>%
+  mutate(outcome_new=ifelse(id_outcome_population=="positiveParkinson Disease Psychosis", "Positive symptoms (SAPS-PD)", #Manually add some variables that were not added before
+                            ifelse(id_outcome_population=="overallParkinson Disease Psychosis", "Overall symptoms (NPI)",
+                                   ifelse(id_outcome_population=="cognitionParkinson Disease Psychosis", "Cognitive impairment (MMSE)",
+                                          ifelse(id_outcome_population=="responseParkinson Disease Psychosis", "Response to treatment (≥50% in SAPS-PD)", outcome_new))))) %>% 
+  mutate(order=ifelse(id_outcome_population=="positiveParkinson Disease Psychosis", 3, #Manually add some variables that were not added before
+                            ifelse(id_outcome_population=="overallParkinson Disease Psychosis", 1,
+                                   ifelse(id_outcome_population=="cognitionParkinson Disease Psychosis", 6,
+                                          ifelse(id_outcome_population=="responseParkinson Disease Psychosis", 2, order))))) %>% 
+  mutate(comparison_order=ifelse(comparison=="taar1_vs_placebo",1,2),
+         population_order=ifelse(population=="Schizophrenia spectrum", 1,
+                                 ifelse(population=="Parkinson Disease Psychosis", 2, 3)), 
+         time_order=ifelse(timepoint=="3-13 weeks",1,2)) %>% 
+  mutate(text_comparison=ifelse(comparison=="taar1_vs_placebo", paste0('TAAR1 agonists vs. placebo'), "TAAR1 agonists vs. antipsychotics")) %>%
+  mutate(text_population=ifelse(is.na(population), "any eligible population",
+                                ifelse(population=="Schizophrenia spectrum","adults with schizophrenia","Parkinson Disease Psychosis"))) %>%
+  mutate(text_description=paste0(text_comparison," in ", text_population)) %>%
+  mutate(other_bias=ifelse(comparison=="taar1_vs_placebo" & (id_outcome_population=="overallSchizophrenia spectrum" | id_outcome_population=="responseSchizophrenia spectrum"),
+                           "Two phase III trials conducted during COVID-19, which could be associated with factors assocaited with increased placebo effects and smaller effect sizes", "No clear indication of other biases"))
 
 
+meta_outcome_soe<-meta_outcome_soe[order(meta_outcome_soe$comparison_order, meta_outcome_soe$order, meta_outcome_soe$population_order, meta_outcome_soe$time_order),]
 
+meta_outcome_soe<-meta_outcome_soe %>% select(text_description, outcome_new, duration, association, study_limitations, reporting_bias, indirectness, other_bias)
 
 #Function to create RoB plots
 rob_plot<-function(data){ #RoB function using the extended meta objects

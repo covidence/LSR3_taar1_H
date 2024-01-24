@@ -50,7 +50,7 @@ prisma<-read.csv("data/LSR3_H_PRISMA_2024.01.23.csv") #csv file for the prisma20
 prisma<-PRISMA_data(prisma)
 
 #risk of bias data
-rob<-read_xlsx("data/rob_secondary_2024.01.23.xlsx")
+rob<-read_xlsx("data/rob_secondary_2024.01.24.xlsx")
 
 #Round off results to two digits
 options(scipen=1, digits=2)
@@ -123,6 +123,7 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`,
 ```
 
 Meta-analysis of variance was not conducted because 1) SDs were not reported in two studies (NCT04072354 and NCT04092686) and thus they were imputed, 2) SD of change was reported in one of the studies on schizophrenia (Koblan 2020), while SD of endpoint scores in another studt (NCT04512066).
+
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -2052,6 +2053,6 @@ TAAR1 agonists may have little to no effect compared to placebo on overall sympt
 ## Summary of the evidence tables for all outcomes
 
 ```{r echo=FALSE}
-knitr::kable(meta_outcome2)
+knitr::kable(meta_outcome_soe[, 1:8])
 ```
 

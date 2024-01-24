@@ -3,9 +3,9 @@ NA,node4,prevstud,Grey title box; Previous studies,Previous studies,Grey title b
 previous_studies,node5,box1,Studies included in previous version of review,Studies included in previous version of review,Studies included in previous version of review,previous_studies.html,0
 previous_reports,NA,box1,Reports of studies included in previous version of review,Reports of studies included in previous version of review,NA,previous_reports.html,0
 NA,node6,newstud,Yellow title box; Identification of new studies via databases and registers,Identification of new studies via databases and registers,Yellow title box; Identification of new studies via databases and registers,newstud.html,0
-database_results,node7,box2,Records identified from: Databases,Databases,Records identified from: Databases and Registers,database_results.html,6473
+database_results,node7,box2,Records identified from: Databases,Databases,Records identified from: Databases and Registers,database_results.html,6347
 database_specific_results,NA,box2,Records identified from: specific databases,Specific Databases,NA,database_results.html,"Biosis Citation Index, 1185; Cochrane SR, 8; CENTRAL, 78; EMBASE. 1332; International Pharmaceutical Abstracts, 21; MEDLINE, 1212; OpenAlex, 978; PsychINFO, 131; WoS CORE, 1346; ScanMedicine, 56"
-register_results,NA,box2,Records identified from: Registers,Registers,NA,NA,0
+register_results,NA,box2,Records identified from: Registers,Registers,NA,NA,126
 register_specific_results,NA,box2,Records identified from: specific registers,Specific Registers,NA,database_results.html,"ClinicalTrials.gov, 67; WHO ICTRP, 59"
 NA,node16,othstud,Grey title box; Identification of new studies via other methods,Identification of new studies via other methods,Grey title box; Identification of new studies via other methods,othstud.html,0
 website_results,node17,box11,Records identified from: Websites,Websites,"Records identified from: Websites, Organisations and Citation Searching",website_results.html,0
