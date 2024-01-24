@@ -464,9 +464,11 @@ left_join(outcome_names)  %>%
                            "Two phase III trials conducted during COVID-19, which could be associated with factors assocaited with increased placebo effects and smaller effect sizes", "No clear indication of other biases"))
 
 
-meta_outcome_soe<-meta_outcome_soe[order(meta_outcome_soe$comparison_order, meta_outcome_soe$order, meta_outcome_soe$population_order, meta_outcome_soe$time_order),]
+meta_outcome_soe<-meta_outcome_soe[order(meta_outcome_soe$comparison_order, meta_outcome_soe$outcome_type,
+                                         meta_outcome_soe$population_order, 
+                                         meta_outcome_soe$order, meta_outcome_soe$time_order),]
 
-meta_outcome_soe<-meta_outcome_soe %>% select(text_description, outcome_new, duration, association, study_limitations, reporting_bias, indirectness, other_bias)
+meta_outcome_soe<-meta_outcome_soe %>% select(text_description, outcome_type, outcome_new, duration, association, study_limitations, reporting_bias, indirectness, other_bias)
 
 
 #Meta-analysis of the primary outcome for schizophrenia per TAAR1 agonist (using the same code as above)
