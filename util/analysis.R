@@ -212,9 +212,9 @@ for(o in c(continuous_outcomes_smd, continuous_outcomes_md, dichotomous_outcomes
                   event2_new_corrected=ifelse(event2_new==0, 0.5, event2_new),
                   subtr_event1_new_corrected=ifelse(n1_new- event1_new==0, 0.5, n1_new- event1_new),
                   subtr_event2_new_corrected=ifelse(n2_new- event1_new==0, 0.5, n2_new- event2_new)) %>% 
-           mutate(varTE=ifelse(crossover_periods==1, seTE^2,       #correct for crossover studies using correlation of 0.2 and the formula in Elbourne
-                               seTE^2-0.4*(n1_new+n2_new)/(sqrt(event1_new_corrected*subtr_event1_new_corrected*event2_new_corrected* subtr_event2_new_corrected))), 
-                  n_total=(n1_new+n2_new)/crossover_periods) %>% 
+           mutate(n_total=(n1_new+n2_new)/crossover_periods) %>%
+           mutate(varTE=ifelse(crossover_periods==1, seTE^2,       #correct for crossover studies using correlation of 0.2 and the formula in Elbourne, n = n total of the whole crossover (not by adding twice the same population)
+                               seTE^2-0.4*(n_total)/(sqrt(event1_new_corrected*subtr_event1_new_corrected*event2_new_corrected* subtr_event2_new_corrected)))) %>% 
            unique()
           
          rob_i<-rob %>% filter(outcome==o & timepoint==time)
@@ -465,6 +465,58 @@ left_join(outcome_names)  %>%
 meta_outcome_soe<-meta_outcome_soe[order(meta_outcome_soe$comparison_order, meta_outcome_soe$order, meta_outcome_soe$population_order, meta_outcome_soe$time_order),]
 
 meta_outcome_soe<-meta_outcome_soe %>% select(text_description, outcome_new, duration, association, study_limitations, reporting_bias, indirectness, other_bias)
+
+
+#Meta-analysis of the primary outcome for schizophrenia per TAAR1 agonist (using the same code as above)
+master_drug<- master %>% 
+    filter(timepoint=="3-13 weeks") %>%  
+  filter(population=="Schizophrenia spectrum") %>%
+    filter(!is.na(overall_mean)) %>% 
+    select(study_name, study_name_drug, crossover_periods, population, duration_weeks,drug_new, drug_name, overall_mean, overall_sd, overall_n) %>%  
+    filter(drug_new=="TAAR1 agonist" | drug_new=="placebo")  
+
+master_pooled_drug<-master_drug %>%  
+  group_by(study_name, study_name_drug, drug_name, population, duration_weeks)%>%
+  summarise(n_an=sum(overall_n),
+            mean_an=weighted.mean(overall_mean,overall_n), 
+            sd_an=sqrt(((sum((overall_n - 1) * overall_sd^2 + overall_n * overall_mean^2)) - sum(overall_n) * mean_an^2)/(sum(overall_n) -  1)))
+
+master_pooled_drug_studies<-master_pooled_drug %>% 
+  select(study_name) %>% group_by(study_name) %>% summarise(count=n()) %>% filter(count!=1) 
+
+master_pooled_drug<-master_pooled_drug %>% filter(study_name %in% master_pooled_drug_studies$study_name) 
+
+pairwise_drug<-pairwise(data=master_pooled_drug, studlab = study_name_drug, treat=drug_name,
+                       mean=mean_an, sd=sd_an, n=n_an, sm="SMD")
+  
+  pairwise_drug<-as.data.frame(pairwise_drug) %>% 
+    mutate(treat1_new=ifelse(treat1!="placebo" , treat1, treat2),
+           treat2_new=ifelse(treat1!="placebo" , treat2, treat1),
+           mean1_new=ifelse(treat1!="placebo" , -1*mean1, -1*mean2),
+           mean2_new=ifelse(treat1!="placebo" , -1*mean2, -1*mean1),
+           sd1_new=ifelse(treat1!="placebo" , sd1, sd2),
+           sd2_new=ifelse(treat1!="placebo" , sd2, sd1),
+           n1_new=ifelse(treat1!="placebo" ,n1, n2),
+           n2_new=ifelse(treat1!="placebo" , n2, n1)) %>%
+    mutate(comp=paste0(treat1_new," vs. ", treat2_new)) %>%
+    select(study_name, study_name_drug, duration_weeks,
+           comp, population, treat1_new, treat2_new, mean1_new, sd1_new, n1_new, mean2_new,  sd2_new, n2_new) %>% 
+    mutate(n_total=n1_new + n2_new) %>%
+    mutate(drug=treat1_new) %>%
+    unique()
+  
+  
+  rob_drug<-rob %>% filter(outcome=="overall" & timepoint=="3-13 weeks")
+  
+  pairwise_drug<- pairwise_drug %>% left_join(rob_drug) %>% 
+    unique()
+  
+  meta_comp_drug<-metacont(data=pairwise_drug,  
+                      mean.e = mean1_new, sd.e=sd1_new, n.e=n1_new, mean.c = mean2_new, sd.c=sd2_new, n.c=n2_new,
+                      sm="SMD", random=TRUE, fixed=TRUE,    
+                      studlab = study_name_drug, prediction = FALSE, subgroup = drug, 
+                      prediction.subgroup = FALSE)
+  
 
 #Function to create RoB plots
 rob_plot<-function(data){ #RoB function using the extended meta objects
