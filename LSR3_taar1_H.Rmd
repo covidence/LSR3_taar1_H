@@ -1989,10 +1989,10 @@ ggplot(data=data_doses, aes(x=dose,
 \*It should be noted that Koblan 2020 was a two-arm flexible dose study, and its effect size is placed in the middle of the range of the administered dose (50mg/d to 75mg/d), yet the median or mean dose in the trial could be different and was not reported. \*\*The study of Isaacson 2023 was not presented here, as it was included participants with Parkinson disease psychosis.
 
 
-We further conducted a dose response meta-analysis by plotting the assumed response to the TAAR1 receptor that each of the ulotaront and ralmitaront doses would elicity using the E50, Emax and the relationship between dose and concentation in Michaelis-Menten formulas.
+We further conducted a dose response meta-analysis by standardizing the dose between ulotaront and ralmitaront by taking into consdieration their E50 (see HTML animal studies --- text to be revised --- probably this analysis will be deeted)
 ```{r echo=F, fig.fullwidth=T, fig.width=5, fig.height=3, warning=FALSE}
 ggplot(data= pred, aes(x= dose, y = pred))+
-  xlab("TAAR1 activation (%)")+
+  xlab("Standardized Dose")+
   ylab("SMD 95%")+
   geom_line(size=1)+
   geom_rug(data=master_dose, mapping=aes(x=standardized_dose, y= 0)) +

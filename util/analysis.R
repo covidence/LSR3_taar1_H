@@ -521,8 +521,11 @@ pairwise_drug<-pairwise(data=master_pooled_drug, studlab = study_name_drug, trea
   
 #Dose-response analysis 
 master_dose<-master_drug %>% filter(study_name!="Koblan (2020)") %>% mutate(dose=as.integer(dose)) %>% 
-  mutate(standardized_dose=ifelse(drug_name=="ulotaront", 101.3*(3*dose*10^(-6))/((3*dose*10^(-6))+(183.072*0.14*(10^(-6)))), #From Gallupi 2021 pharmacokineetics where they have plot for the concentration 
-                                  ifelse(drug_name=="ralmitaront",42*(dose/75000)/((dose/75000)+(314.39*0.059*(10^(-6)))), 0))) #Michaelis Menten
+#  mutate(standardized_dose=ifelse(drug_name=="ulotaront", 101.3*(3*dose*10^(-6))/((3*dose*10^(-6))+(183.072*0.14*(10^(-6)))), #From Gallupi 2021 pharmacokineetics where they have plot for the concentration 
+ #                                 ifelse(drug_name=="ralmitaront",42*(dose/75000)/((dose/75000)+(314.39*0.059*(10^(-6)))), 0))) #Michaelis Menten
+  
+    mutate(standardized_dose=ifelse(drug_name=="ulotaront", log((dose/75000)/(183.072*0.14*(10^(-6)))), #From Malcolm's animal HTML
+                                   ifelse(drug_name=="ralmitaront",log((dose/75000)/(314.39*0.059*(10^(-6)))), 0))) #From Malcolm's animal HTML
 master_dose<-master_dose[order(master_dose$study_name, master_dose$drug_name, master_dose$dose),] 
 
 ##Dose-response meta-analysis for ulotaront 
