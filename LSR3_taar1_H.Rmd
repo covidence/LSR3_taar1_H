@@ -5,7 +5,7 @@ date: "`r format(Sys.Date(), '%e %b %Y')`"
 output:
   html_document:
     df_print: paged
-mainfont: Arial
+mainfont: Arialh
 ---
 
 ```{r setup,message=F,echo=F,include=F}
@@ -1987,6 +1987,22 @@ ggplot(data=data_doses, aes(x=dose,
 ```
 
 \*It should be noted that Koblan 2020 was a two-arm flexible dose study, and its effect size is placed in the middle of the range of the administered dose (50mg/d to 75mg/d), yet the median or mean dose in the trial could be different and was not reported. \*\*The study of Isaacson 2023 was not presented here, as it was included participants with Parkinson disease psychosis.
+
+
+We further conducted a dose response meta-analysis by plotting the assumed response to the TAAR1 receptor that each of the ulotaront and ralmitaront doses would elicity using the E50, Emax and the relationship between dose and concentation in Michaelis-Menten formulas.
+```{r echo=F, fig.fullwidth=T, fig.width=5, fig.height=3, warning=FALSE}
+ggplot(data= pred, aes(x= dose, y = pred))+
+  xlab("TAAR1 activation (%)")+
+  ylab("SMD 95%")+
+  geom_line(size=1)+
+  geom_rug(data=master_dose, mapping=aes(x=standardized_dose, y= 0)) +
+  geom_line(data=pred, aes(x= dose, y = ci.lb), linetype='dashed', size=0.7)+
+  geom_line(data=pred, aes(x= dose, y = ci.ub), linetype='dashed',size=0.7)+
+  geom_hline(yintercept = 0, colour='black', size=0.2)+
+  theme_bw()
+```
+
+
 
 ## Sensitivity analyses
 

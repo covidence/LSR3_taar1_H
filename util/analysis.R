@@ -3,6 +3,8 @@ library(readxl)
 library(writexl)
 library(meta)
 library(netmeta)
+library(dosresmeta)
+library(rms)
 
 
 rm(list=ls())
@@ -472,7 +474,7 @@ master_drug<- master %>%
     filter(timepoint=="3-13 weeks") %>%  
   filter(population=="Schizophrenia spectrum") %>%
     filter(!is.na(overall_mean)) %>% 
-    select(study_name, study_name_drug, crossover_periods, population, duration_weeks,drug_new, drug_name, overall_mean, overall_sd, overall_n) %>%  
+    select(study_name, study_name_drug, crossover_periods, population, duration_weeks,drug_new, drug_name, dose, overall_mean, overall_sd, overall_n) %>%  
     filter(drug_new=="TAAR1 agonist" | drug_new=="placebo")  
 
 master_pooled_drug<-master_drug %>%  
@@ -517,6 +519,27 @@ pairwise_drug<-pairwise(data=master_pooled_drug, studlab = study_name_drug, trea
                       studlab = study_name_drug, prediction = FALSE, subgroup = drug, 
                       prediction.subgroup = FALSE)
   
+#Dose-response analysis 
+master_dose<-master_drug %>% filter(study_name!="Koblan (2020)") %>% mutate(dose=as.integer(dose)) %>% 
+  mutate(standardized_dose=ifelse(drug_name=="ulotaront", 101.3*(3*dose*10^(-6))/((3*dose*10^(-6))+(183.072*0.14*(10^(-6)))), #From Gallupi 2021 pharmacokineetics where they have plot for the concentration 
+                                  ifelse(drug_name=="ralmitaront",42*(dose/75000)/((dose/75000)+(314.39*0.059*(10^(-6)))), 0))) #Michaelis Menten
+master_dose<-master_dose[order(master_dose$study_name, master_dose$drug_name, master_dose$dose),] 
+
+##Dose-response meta-analysis for ulotaront 
+knots <- quantile(master_dose$standardized_dose, c(0.25, 0.5, 0.75))
+
+dosres_model <- dosresmeta(formula = -1*overall_mean ~ rcs(standardized_dose, knots), #knot points here are not important since are not used in the estimation of var/covar
+                                id =study_name, 
+                                sd=overall_sd,n=overall_n, 
+                                covariance = 'smd', method.smd = "hedges",
+                                data = master_dose,
+                                proc = "1stage")
+
+pred<-predict(object=dosres_model, newdata=data.frame(standardized_dose = seq(0, max(master_dose$standardized_dose), 0.1)), xref=0,
+                   expo = FALSE)
+
+pred<-pred  %>% rename(dose= `rcs(standardized_dose, knots)standardized_dose`) %>% select( dose, pred, ci.lb, ci.ub)
+
 
 #Function to create RoB plots
 rob_plot<-function(data){ #RoB function using the extended meta objects
