@@ -391,10 +391,7 @@ meta_outcome<-rbind(meta_outcome, meta_outcome_qtc)
 meta_outcome<-meta_outcome %>% filter(!is.na(outcome))
 
 meta_outcome_soe<-meta_outcome %>% 
-  mutate(TE=ifelse(outcome=="serious" | outcome=="death", TE.fixed, TE.random),
-         seTE=ifelse(outcome=="serious" | outcome=="death", seTE.fixed, seTE.random),
-         TE.placebo=ifelse(outcome=="serious" | outcome=="death", TE.placebo.fixed, TE.placebo.random),
-         duration=ifelse(duration=="0.14-0.14", "1 day",
+  mutate(duration=ifelse(duration=="0.14-0.14", "1 day",
                          ifelse(duration=="0.14-2", "1 day to 2 weeks",
                                 ifelse(duration=="4-4", "4 weeks", 
                                        ifelse(duration=="4-6", "4-6 weeks",
@@ -414,20 +411,28 @@ meta_outcome_soe<-meta_outcome %>%
          n_prop=ifelse(k_prop==1, 1, n/n_possible),
          k_schiz_prop=k_schiz/k, n_schiz_prop=n_schiz/n,
          moderate_to_high_bias_prop=(moderate_bias+high_bias)/k) %>%
-  mutate(TE_lb=TE-1.96*seTE, 
-         TE_ub=TE+1.96*seTE) %>%
-  mutate(cer_point=exp(TE.placebo)/(1+exp(TE.placebo))) %>%
-  mutate(point=ifelse(sm=="OR", round(exp(TE), 2), round(TE, 2)),
-         lb=ifelse(sm=="OR", round(exp(TE_lb), 2), round(TE_lb, 2)),
-         ub=ifelse(sm=="OR", round(exp(TE_ub), 2), round(TE_ub, 2))) %>% 
-  mutate(ACR=ifelse(sm=="OR", round(100*point*cer_point/(1-cer_point+point*cer_point),1), NA),
-         CER=ifelse(!is.na(point), round(100*cer_point, 1), NA),
+  mutate(TE_lb.random=TE.random-1.96*seTE.random, 
+         TE_ub.random=TE.random+1.96*seTE.random,
+         TE_lb.fixed=TE.fixed-1.96*seTE.fixed, 
+         TE_ub.fixed=TE.fixed+1.96*seTE.fixed) %>%
+  mutate(cer_point=exp(TE.placebo.random)/(1+exp(TE.placebo.random))) %>%
+  mutate(point.random=ifelse(sm=="OR", round(exp(TE.random), 2), round(TE.random, 2)),
+         lb.random=ifelse(sm=="OR", round(exp(TE_lb.random), 2), round(TE_lb.random, 2)),
+         ub.random=ifelse(sm=="OR", round(exp(TE_ub.random), 2), round(TE_ub.random, 2)),
+         point.fixed=ifelse(sm=="OR", round(exp(TE.fixed), 2), round(TE.fixed, 2)),
+         lb.fixed=ifelse(sm=="OR", round(exp(TE_lb.fixed), 2), round(TE_lb.fixed, 2)),
+         ub.fixed=ifelse(sm=="OR", round(exp(TE_ub.fixed), 2), round(TE_ub.fixed, 2))) %>% 
+  mutate(ACR=ifelse(sm=="OR", round(100*point.random*cer_point/(1-cer_point+point.random*cer_point),1), NA),
+         CER=ifelse(!is.na(point.random), round(100*cer_point, 1), NA),
          t2=round(tau2,4)) %>% 
-  mutate(association=ifelse(!is.na(point), 
-                            ifelse(k>1 & !is.na(t2), ifelse(sm=="OR", paste0("N=", k, " n=", n, "; ", ACR,"% vs. ", CER,"%, ", sm,"=",point,", 95%CI: ", lb, ", ", ub,"; tau2=", t2),
-                                   paste0("N=", k, " n=", n, "; ", sm,"=",point,", 95%CI: ", lb, ", ", ub,"; tau2=", t2)), 
-                                   ifelse(sm=="OR", paste0("N=", k, " n=", n, "; ", ACR,"% vs. ", CER,"%, ", sm,"=",point,", 95%CI: ", lb, ", ", ub),
-                                          paste0("N=", k, " n=", n, "; ", sm,"=",point,", 95%CI: ", lb, ", ", ub))),
+  mutate(association=ifelse(!is.na(point.random), 
+                            ifelse(k>1 & !is.na(t2), ifelse(sm=="OR", paste0("N=", k, " n=", n, "; Random-effects: ", ACR,"% vs. ", CER,"%, ",
+                                                                             sm,"=",point.random,", 95%CI: ", lb.random, ", ", ub.random,"; Fixed-effecs: ", 
+                                                                             sm,"=",point.fixed,", 95%CI: ", lb.fixed, ", ", ub.fixed),
+                                   paste0("N=", k, " n=", n, "; Random-effects: ", sm,"=",point.random,", 95%CI: ", lb.random, ", ", ub.random,"; Fixed-effecs: ", 
+                                          sm,"=",point.fixed,", 95%CI: ", lb.fixed, ", ", ub.fixed)), 
+                                   ifelse(sm=="OR", paste0("N=", k, " n=", n, "; ", ACR,"% vs. ", CER,"%, ", sm,"=",point.random,", 95%CI: ", lb.random, ", ", ub.random),
+                                          paste0("N=", k, " n=", n, "; ", sm,"=",point.random,", 95%CI: ", lb.random, ", ", ub.random))),
                                    paste0("N=", k, " n=", n, "; not estimable effect size 0 events in both arms")),
          study_limitations=ifelse(moderate_to_high_bias_prop==0 & k==1, "1 study with an overall low risk of bias",
                                   ifelse(moderate_bias==1 & k==1, "1 study with overall some concerns in risk of bias",
@@ -470,6 +475,7 @@ meta_outcome_soe<-meta_outcome_soe[order(meta_outcome_soe$comparison_order, meta
 
 meta_outcome_soe<-meta_outcome_soe %>% select(text_description, outcome_type, outcome_new, duration, association, study_limitations, reporting_bias, indirectness, other_bias)
 
+write_xlsx(meta_outcome_soe, "data/meta_outcome_soe.xlsx")
 
 #Meta-analysis of the primary outcome for schizophrenia per TAAR1 agonist (using the same code as above)
 master_drug<- master %>% 
