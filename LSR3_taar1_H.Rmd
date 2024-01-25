@@ -1,6 +1,6 @@
 ---
 title: "Trace amine-associated receptor 1 (TAAR1) agonists for psychosis - Results from the human studies <span style='font-size:25px'></style>"
-author: "Spyridon Siafis, Virginia Chiocchia, Georgia Salanti <span style='font-size: 15px'></style>"
+author: "Drafted by Spyridon Siafis, commented by Virginia Chiocchia, Charlotte Austin, Georgia Salanti <span style='font-size: 15px'></style>"
 date: "`r format(Sys.Date(), '%e %b %Y')`"
 output:
   html_document:
@@ -72,7 +72,7 @@ options(scipen=1, digits=2)
 
 7. Meta-analysis was conducted primarily using a random-effects model with inverse variance and REML estimator of tau-squared. Due to the small number of studies (<5) in all analyses, we corrected the confidence intervals using the Hartung-Knapp method, and we also presented the findings from fixed-effects models using the Mantel-Haenszel method throughout. Meta-analysis of proportions was conducted to pool the control groups to estimate the control event rate using logit transformation of the proportions and inverse variance method. Moreover, continuity corrections of 0.5 were applied in case of 0 events in one of the groups.
 
-8. Sensitivity analysis of the primary outcome included using fixed-effect methods and excluding studies with an overall some concerns or high risk of bias.
+8. Sensitivity analysis of the primary outcome included using fixed-effect methods (post-hoc due to the small number of studies), restricting the analysis to studies with an overall low risk of bias, and excluding studies with imputed values.
 
 9. Subgroup analyses and meta-regressions were not conducted due to the paucity of data. However, we explored potential dose-effects for the primary outcome by plotting the effect sizes for different fixed doses of TAAR1 agonists compared to placebo (while correcting for the use of common comparators).
 
@@ -96,7 +96,8 @@ PRISMA_flowdiagram(prisma, previous = FALSE, other=FALSE)
 ## Table of included studies
 
 ```{r echo=FALSE, fig.width=12, fig.height=8}
-knitr::kable(studies[, 1:14])
+studies_to_plot<-studies[order(studies$Name),]
+knitr::kable(studies_to_plot[, 1:14])
 ```
 
 **Table 1** Table of included studies.
@@ -355,6 +356,46 @@ No usable data available from RCT.
 
 No usable data available from RCT.
 
+## Summary plot for efficacy outcomes
+
+
+```{r echo=F, fig.fullwidth=T, fig.width=10, fig.height=5, warning=FALSE}
+
+outcome_categories<-outcome_names %>% 
+  select(outcome, event_text) 
+
+efficacy_primary<-meta_outcome %>% left_join(outcome_categories) %>% 
+  filter(outcome=="cognition" | outcome=="depression" | outcome=="negative" | outcome=="overall" | outcome=="positive") %>% #efficacy outcome
+  filter(!is.na(TE.random)) %>% filter(!is.na(event_text)) %>%
+  mutate(point=TE.random,
+         lb=TE.random-1.96*seTE.random,
+         ub=TE.random+1.96*seTE.random) %>% 
+  unique() %>%
+  filter(comparison=="taar1_vs_placebo") 
+
+efficacy_primary$population <- factor(efficacy_primary$population, levels=unique(efficacy_primary$population))
+efficacy_primary$event_text <- factor(efficacy_primary$event_tex, levels=unique(efficacy_primary$event_tex))
+level_outcomes<- c("Overall symptoms", "Positive symptoms", "Negative symptoms", "Depressive symptoms", "Cognitive impairement")
+level_population<-c("Schizophrenia spectrum", "Parkinson Disease Psychosis")
+
+ggplot(data=efficacy_primary, 
+       aes(y=factor(event_text, level=rev(level_outcomes)), x=point))+
+  geom_point(aes(size=n), position=position_dodge(width = 0.5), colour="royalblue4")+ #Size proportional to the number of participants
+  coord_cartesian(xlim=c(-0.8,0.8))+
+  geom_errorbar(aes(x=point, xmin=lb, 
+                    xmax=ub),
+                width=0, position=position_dodge(width = 0.5), colour="royalblue4")+
+  scale_size_continuous(guide=FALSE)+
+  geom_vline(xintercept=0, linetype='dashed')+
+  facet_grid(~factor(population, levels=level_population))+
+  ylab("")+
+  xlab("SMD 95%CI (SMD>0: TAAR1 agonist better)")+
+  theme_bw()
+
+
+```
+**Figure 9** Summary plot for efficacy outcomes at 4-6 weeks for the comparison of TAAR1 agonists vs. placebo in the two populations of patients with an acute episode of schizophrenia and Parkinson's disease psychosis. There were only available data for the timepoint of 3-13 weeks. The size of the points are proportional to the number of participants used in the analysis. SMD>0 correspond to more symptom improvement by TAAR1 agonists compared to placebo. 
+
 ## Secondary outcome: Dropouts due to any reason
 
 ### Timepoint 1: *1 day - 2 weeks*
@@ -372,7 +413,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_any`,
                  subgroup = FALSE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
 ```
-**Figure 9** Forest plot for dropouts due to any reason for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks.Studies with no estimable effect size had 0 events in both arms.
+**Figure 10** Forest plot for dropouts due to any reason for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks.Studies with no estimable effect size had 0 events in both arms.
 
 
 ### Timepoint 2: *3 weeks - 13 weeks*
@@ -391,7 +432,7 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_any`,
                  label.left = "TAAR1 better", label.right="Placebo better")
 
 ```
-**Figure 10** Forest plot for dropouts due to any reason for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
+**Figure 11** Forest plot for dropouts due to any reason for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
 
 
 ### Timepoint 3: *\> 13 weeks*
@@ -619,7 +660,7 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_hypotension`,
        label.c="placebo",      
        rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_hypotension`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 subgroup.hetstat = FALSE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
                  subgroup = TRUE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
@@ -899,7 +940,7 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_prolactin`,
        label.c="placebo",      
        rightcols = c("effect", "ci", "Overall"),rightlabs = c("MD ng/ml", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_prolactin`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 subgroup.hetstat = FALSE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
                  subgroup = FALSE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
@@ -959,7 +1000,7 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_eps_symptoms`,
        label.c="placebo",      
        rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_eps_symptoms`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 subgroup.hetstat = FALSE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
                  subgroup = FALSE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
@@ -1014,7 +1055,7 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_anxiety`,
 ```
 
 
-**Figure 32** Forest plot for anxiety for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint).
+**Figure 32** Forest plot for anxiety as adverse event for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint).
 
 
 
@@ -1167,13 +1208,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_insomnia`,
 
 ```
 
-**Figure 37** Forest plot for insomnia for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). Potential differences between ulotaront and ralmitaront could be explained by their differnet pharmacological profile.
+**Figure 38** Forest plot for insomnia for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). Potential differences between ulotaront and ralmitaront could be explained by their differnet pharmacological profile.
 
 ### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Summary plot for  dropouts and side-effects
+## Summary plot for dropouts and side-effects
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=8, warning=FALSE}
 
@@ -1194,10 +1235,7 @@ safety_primary<-meta_outcome %>% left_join(ae_categories) %>%  #I need to change
          ub=TE.random+1.96*seTE.random) %>% unique() %>%
   filter(comparison=="taar1_vs_placebo")
 
-safety_primary_timepoint<-safety_primary %>% filter(timepoint=="3-13 weeks") 
-
-
-safety_primary_plot <-safety_primary %>% filter(event_text %in% safety_primary_timepoint$event_text) 
+safety_primary_plot <-safety_primary
 
 safety_primary_plot$event_text <- factor(safety_primary_plot$event_tex, levels=unique(safety_primary_plot$event_tex))
 level_order<- sort(unique(safety_primary_plot$event_text))
@@ -1206,30 +1244,38 @@ lever_order_meddra<-c("dropouts", "any", "serious", "autonomic", "endocrinic", "
 safety_primary_plot$event_text <- factor(safety_primary_plot$event_tex, levels=unique(safety_primary_plot$event_tex))
 level_order<- sort(unique(safety_primary_plot$event_text))
 lever_order_meddra<-c("dropouts", "any", "serious", "autonomic", "endocrinic", "neuromuscular", "neuropsychiatric")
+
+safety_primary_plot<-safety_primary_plot %>% mutate(type_outcome=ifelse(outcome=="dropout_any" | outcome=="dropout_ae", "dropout", "side"))
 
 ggplot(data=safety_primary_plot, 
-       aes(y=factor(event_text, level=rev(level_order)), x=exp(point), colour=timepoint))+
-  geom_point(position=position_dodge(width = 0.5))+
+       aes(y=factor(event_text, level=rev(level_order)), x=exp(point),colour=type_outcome, shape=timepoint))+
+  geom_point(aes(size=n), position=position_dodge(width = 0.5))+
   geom_errorbar(aes(x=exp(point), xmin=exp(TE.random-1.96*seTE.random), 
-                    xmax=exp(TE.random+1.96*seTE.random), colour=timepoint),
+                    xmax=exp(TE.random+1.96*seTE.random), colour=type_outcome,shape=timepoint),
                 width=0, position=position_dodge(width = 0.5))+
   geom_vline(xintercept=1, linetype='dashed')+
+  scale_size_continuous(guide=FALSE)+
   facet_grid(factor(MedDRA_group, levels=lever_order_meddra)~., scales = "free", space = "free")+
   scale_x_log10() +
   ylab("")+
-  xlab("OR 95%CI")+
+  scale_shape_manual(values=c(1,19))+
+  scale_colour_manual(guide=FALSE, values=c("green4", "firebrick4"))+
+  xlab("OR 95%CI (OR>1: TAAR1 agonsits worse)")+
   theme_bw()
 
 
 ```
-**Figure 38** Summary forest plot for dropouts and side-effects as dichotomous outcomes and for the two timepoints with usable data.
+**Figure 39** Summary forest plot for dropouts and side-effects for the comparison of TAAR1 agonists compared to placebo and for the two timepoints with usable data. It should be noted that different populations have been pooled in the analysis of dropouts and adverse events including schizophrenia, Parkinson's disease psychosis, narcolepsy-cateplexy and healthy volunteers. The size is proportional to the number of participants in the analysis. OR>1 corresponds to more events with TAAR1 agonists compared to placebo.  
 
 
 ## Secondary outcome: Neurobiological measures relevant relevant to psychosis such as dopaminergic, glutamatergic and serotonergic signalling
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No usable data available from RCT.
+No usable data were available from RCTs. However, Perini et al. 2023 examined the effects of single doses of ulotaront compared to placebo in volunteers with low or high schizotypy traits on fMRI of BOLD responses to neuropsychological tasks that could be considered only as weak proxies for neurotransmitter signaling. Thus, they were not quantitatively further analyzed but narratively described in this iteration of the review. The primary outocme of this study was the response of the changes in BOLD responses in the striatum during the anticipation phase of the monetary incentive delay (MID) task and interaction with schizotypy traits. This was potentially selected a posteriori given that the complete protocol was not available and the 
+
+
+Specifically, ulotaront, compared to placebo, appeared to reverse increased BOLD responses in the striatum during the anticipation phase of the monetary incentive delay (MID) task in participants with high schizotypy traits compared to those with low schizotypy traits. This was the primary outcome of this study, which selection was described to be due to its relevance to reward processing and increased dopamine synthesis capacity, thus serving as a weak proxy for ulotaront's effects on decreasing presynaptic dopamine synthesis capacity. However, there is possibility that this outcome was selected a posteriori due to significant findings and the protocol of the study was not available and the clinicaltrials.gov did not specify a primary outcome. Thus, there is the possibility of risk of bias of selected reported outcome. There were also differences between ulotaront and placebo in some other fMRI and neuropsychological measures, including that ulotaront compared to placebo decreasing the performance in N-back tasks (working memory measure) and emotional test battery (). 
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
@@ -1251,17 +1297,21 @@ No usable data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("SMD", "95%-CI"),  
+       col.diamond = "royalblue4",
+       col.square =   "royalblue1",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  
        xlim=c(-0.8,0.8),
+       label.c="risperidone",
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
                  label.left = "Antipsychotic better", label.right="TAAR1 better")
 
 ```
+**Figure 40** Forest plot for overall symptoms (primary outcome) for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint)
+
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1277,16 +1327,19 @@ No usable data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_positive`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("SMD", "95%-CI"),  
+       col.diamond = "royalblue4",
+       col.square =   "royalblue1",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  
        xlim=c(-0.8,0.8),
+       label.c="risperidone",
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_positive`$data$treat1_new), 
-   #    label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_positive`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
                  label.left = "Antipsychotic better", label.right="TAAR1 better")
 ```
+**Figure 41** Forest plot for positive symptoms for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint)
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1302,16 +1355,20 @@ No usable data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_negative`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("SMD", "95%-CI"),  
+       col.diamond = "royalblue4",
+       col.square =   "royalblue1",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  
        xlim=c(-0.8,0.8),
+       label.c="risperidone",
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_negative`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_negative`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
                  label.left = "Antipsychotic better", label.right="TAAR1 better")
 ```
+
+**Figure 42** Forest plot for negative symptoms for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint)
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1327,17 +1384,21 @@ No usable data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_depression`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("SMD", "95%-CI"),  
+       col.diamond = "royalblue4",
+       col.square =   "royalblue1",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  
+       label.c = "risperidone",
        xlim=c(-0.8,0.8),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_depression`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_depression`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
                  label.left = "Antipsychotic better", label.right="TAAR1 better")
 
 ```
+
+**Figure 43** Forest plot for depression symptoms for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint)
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1396,11 +1457,13 @@ No usable data available from RCT.
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_response`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
+       col.diamond = "royalblue4",
+       col.square =   "royalblue1",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("OR", "95%-CI", "Risk of bias"),  
        xlim=c(0.2,5),
+       label.c="risperidone",
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_response`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_response`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
@@ -1408,6 +1471,8 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_response`,
 
 
 ```
+**Figure 44** Forest plot for response to treatment (>50% symptom reduction from baseline) for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint)
+
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1427,41 +1492,91 @@ No usable data available from RCT.
 
 No usable data available from RCT.
 
+
+## Summary plot for efficacy outcomes
+
+
+```{r echo=F, fig.fullwidth=T, fig.width=10, fig.height=5, warning=FALSE}
+
+outcome_categories<-outcome_names %>% 
+  select(outcome, event_text) 
+
+efficacy_primary_2<-meta_outcome %>% left_join(outcome_categories) %>% 
+  filter(outcome=="cognition" | outcome=="depression" | outcome=="negative" | outcome=="overall" | outcome=="positive") %>% #efficacy outcome
+  filter(!is.na(TE.random)) %>% filter(!is.na(event_text)) %>%
+  mutate(point=TE.random,
+         lb=TE.random-1.96*seTE.random,
+         ub=TE.random+1.96*seTE.random) %>% 
+  unique() %>%
+  filter(comparison=="taar1_vs_antipsychotic") 
+
+efficacy_primary_2$population <- factor(efficacy_primary_2$population, levels=unique(efficacy_primary_2$population))
+efficacy_primary_2$event_text <- factor(efficacy_primary_2$event_tex, levels=unique(efficacy_primary_2$event_tex))
+level_outcomes<- c("Overall symptoms", "Positive symptoms", "Negative symptoms", "Depressive symptoms", "Cognitive impairement")
+level_population<-c("Schizophrenia spectrum", "Parkinson Disease Psychosis")
+
+ggplot(data=efficacy_primary_2, 
+       aes(y=factor(event_text, level=rev(level_outcomes)), x=point))+
+  geom_point(size=3.4,position=position_dodge(width = 0.5), colour="royalblue4")+ #Size proportional to the number of participants
+  coord_cartesian(xlim=c(-0.8,0.8))+
+  geom_errorbar(aes(x=point, xmin=lb, 
+                    xmax=ub),
+                width=0, position=position_dodge(width = 0.5), colour="royalblue4")+
+  scale_size_continuous(guide=FALSE)+
+  geom_vline(xintercept=0, linetype='dashed')+
+  facet_grid(~factor(population, levels=level_population))+
+  ylab("")+
+  xlab("SMD 95%CI (SMD>0: TAAR1 agonists better)")+
+  theme_bw()
+
+
+```
+**Figure 45** Summary plot for efficacy outcomes at 4 weeks for the comparison of TAAR1 agonists versus antipscyhotcs in patients with an acute episode of schizophrenia. There were only data for the timepoint of 3-13 weeks. SMD>0 correspond to more symptom improvement by TAAR1 agonists compared to placebo. 
+
+
 ## Secondary outcome: Dropouts due to any reason
 
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_any`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "green4",
+       col.square =   "green3",    
+       xlim=c(0.2,5),
+       label.c="amisulpride",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_any`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 
 
 ```
+**Figure 46** Forest plot for dropouts due to any reason for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.
+
+
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "green4",
+       col.square =   "green3",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("OR", "95%-CI", "Risk of bias"),  
+       label.c = "risperidone",
+       xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
+       
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 ```
+**Figure 47** Forest plot for dropouts due to any reason for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint).
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1472,37 +1587,42 @@ No usable data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_ae`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
-                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_ae`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
-                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
-                 overall = FALSE, prediction.subgroup = FALSE,
-                 subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+#forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_ae`, 
+ #      col.diamond = "green4",
+  #     col.square =   "green3",     
+   #    label.c="amisulpride",      
+    #   rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
+     #            label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_ae`$data$treat1_new), 
+      #           subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+       #          overall = FALSE, prediction.subgroup = FALSE,
+        #         subgroup = TRUE, fixed=TRUE,
+         #        label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 
 ```
+There were usable data in Perini et al 2023, whcih reported 0 events in both groups and an effect size cannot be estimated with the current approach.
+
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "green4",
+       col.square =   "green3",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("OR", "95%-CI", "Risk of bias"),  
+       label.c = "risperidone",
+       xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 
 ```
+**Figure 48** Forest plot for dropouts due to adverse events for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint).
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1514,36 +1634,41 @@ No usable data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_serious`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="amisulpride",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
+      xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_serious`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 
 ```
+**Figure 49** Forest plot for serious adverse events for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_serious`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("OR", "95%-CI", "Risk of bias"),  
+       label.c = "risperidone",
+       xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_serious`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 
 ```
+**Figure 50** Forest plot for serious adverse events for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint).
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1554,34 +1679,39 @@ No usable data available from RCT.
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_death`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
-                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_death`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
-                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
-                 overall = FALSE, prediction.subgroup = FALSE,
-                 subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+#forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_death`, 
+ #      col.diamond = "firebrick4",
+  #     col.square =   "firebrick3",     
+   #    label.c="amisulpride",      
+    #   rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
+     # xlim=c(0.2,5),
+      #           label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_death`$data$treat1_new), 
+       #          subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+        #         overall = FALSE, prediction.subgroup = FALSE,
+         #        subgroup = TRUE, fixed=TRUE,
+          #       label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 ```
+There were usable data in Perini et al 2023, whcih reported 0 events in both groups and an effect size cannot be estimated with the current approach.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
-forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_death`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
+#forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_death`, 
+ #      col.diamond = "firebrick4",
+  #     col.square =   "firebrick3",
+   #              rightcols = c("effect", "ci","Overall"), 
+    #             rightlabs = c("OR", "95%-CI", "Risk of bias"),  
+     #  label.c = "risperidone",
       # xlim=c(0.2,5),
-                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_death`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
-                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
-                 overall = FALSE, prediction.subgroup = FALSE,
-                 subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+       #          label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_death`$data$treat1_new), 
+        #         subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+         #        overall = FALSE, prediction.subgroup = FALSE,
+          #       subgroup = TRUE, fixed=TRUE,
+           #      label.left = "TAAR1 better", label.right="Antipsychotic better")
 ```
+There were usable data in NCT04512066, whcih reported 0 events in both groups and an effect size cannot be estimated with the current approach.
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1593,34 +1723,45 @@ No usable data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_adverse_event`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="amisulpride",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
+      #xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_adverse_event`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 ```
+
+**Figure 51** Forest plot for any adverse event for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.
+
+
+
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_adverse_event`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("OR", "95%-CI", "Risk of bias"),  
+       label.c = "risperidone",
+       xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_adverse_event`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 ```
+**Figure 52** Forest plot for any adverse event for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint).
+
+
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1634,17 +1775,19 @@ Terms that were considered as reported in the trials: dry mouth (no other releva
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anticholinergic_symptom`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="amisulpride",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
+      #xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anticholinergic_symptom`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 ```
+**Figure 53** Forest plot for anticholinergic side effects (e.g., dry mouth in this study) for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
@@ -1676,18 +1819,20 @@ No usable data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dizziness`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="amisulpride",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
+     # xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dizziness`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 
 ```
+**Figure 54** Forest plot for dizziness for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
@@ -1705,36 +1850,39 @@ Terms that were considered as reported in the trials: nausea, vomiting, emesis
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_nausea_vomitting`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="amisulpride",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
+     # xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_nausea_vomitting`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 ```
+**Figure 55** Forest plot for nausea or vomitting for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.It should be noted that the study Perini et al 2023 examined ulotaront that is also a partial agonsit of 5-HT1A causing potentially gastrointestinal side-effects. In comparison, ralmitaront is not a partial agonist of the 5-HT1A receptor.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_nausea_vomitting`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("OR", "95%-CI", "Risk of bias"),  
+       label.c = "risperidone",
       # xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_nausea_vomitting`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
-
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 ```
+**Figure 56** Forest plot for nausea or vomitting for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint). It should be noted that the study NCT04512066 examined ralmitaront, which compared to ulotaront is not a partial agonist of the 5-HT1A receptor that can be associated with gastrointestinal side effects.
 
-It should be noted that the study NCT04512066 examined ralmitaront (which compared to ulotaront is not a partial agonist of the 5-HT1A receptor)
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1782,17 +1930,20 @@ No usable data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_weight_increased`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("OR", "95%-CI", "Risk of bias"),  
+       label.c = "risperidone",
       # xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_weight_increased`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
-
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 ```
+
+**Figure 57** Forest plot for weight increase for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint). 
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1874,34 +2025,42 @@ No usable data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anxiety`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="amisulpride",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
+      #xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anxiety`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 ```
+**Figure 58** Forest plot for anxiety as adverse event for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.
+
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_anxiety`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("OR", "95%-CI", "Risk of bias"),  
+       label.c = "risperidone",
+       xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_anxiety`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 ```
+
+**Figure 59** Forest plot for anxiety as adverse event for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint). 
+
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1917,18 +2076,23 @@ No usable data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_agitation`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("OR", "95%-CI", "Risk of bias"),  
+       label.c = "risperidone",
+       #xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_agitation`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 
 ```
+
+**Figure 60** Forest plot for agitation for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint). 
+
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1940,33 +2104,40 @@ No usable data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_headache`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="amisulpride",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
+     # xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_headache`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 ```
+**Figure 61** Forest plot for headache as adverse event for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_headache`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("OR", "95%-CI", "Risk of bias"),  
+       label.c = "risperidone",
+       xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_headache`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 
 ```
+
+**Figure 62** Forest plot for headache for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint). 
+
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1980,16 +2151,18 @@ Terms that were considered as reported in the trials: fatigue, sedation, somnole
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_sedation`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="amisulpride",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
+     # xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_sedation`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 ```
+**Figure 63** Forest plot for sedation for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
@@ -2009,16 +2182,19 @@ No usable data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_insomnia`, 
-                 rightcols = c("effect", "ci"), 
-                 rightlabs = c("OR", "95%-CI"),  
-      # xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("OR", "95%-CI", "Risk of bias"),  
+       label.c = "risperidone",
+       xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_insomnia`$data$treat1_new), 
-     #  label.c=unique(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
-                 label.left = "Antipsychotic better", label.right="TAAR1 better")
+                 label.left = "TAAR1 better", label.right="Antipsychotic better")
 ```
+**Figure 64** Forest plot for insomnia for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint). 
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -2027,47 +2203,47 @@ No usable data available from RCT.
 ## Summary plot for the side-effects
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=8, warning=FALSE}
-safety_primary<-meta_outcome %>% left_join(ae_categories) %>% 
+safety_primary_2<-meta_outcome %>% left_join(ae_categories) %>%  #I need to change a bit 
   mutate(event_text=ifelse(outcome=="death", "Mortality", 
                            ifelse(outcome=="serious", "Serious event", 
                                   ifelse(outcome=="dropout_any", "Dropouts any reason",
                                          ifelse(outcome=="dropout_ae", "Dropouts adverse event", event_text)))),
          MedDRA_group=ifelse(outcome=="death" | outcome=="serious", "serious",
                              ifelse(outcome=="dropout_any" | outcome=="dropout_ae", "dropouts", MedDRA_group))) %>% 
-  filter(!is.na(TE.random)) %>% filter(!is.na(event_text)) %>%  #May need to be revised a bit 
+  filter(!is.na(TE.random)) %>% filter(!is.na(event_text)) %>%
   mutate(point=TE.random,
          lb=TE.random-1.96*seTE.random,
          ub=TE.random+1.96*seTE.random) %>% unique() %>%
   filter(comparison=="taar1_vs_antipsychotic")
 
-safety_primary_timepoint<-safety_primary %>% filter(timepoint=="3-13 weeks") 
+safety_primary_plot_2 <-safety_primary_2
 
-
-safety_primary_plot <-safety_primary %>% filter(event_text %in% safety_primary_timepoint$event_text) 
-
-safety_primary_plot$event_text <- factor(safety_primary_plot$event_tex, levels=unique(safety_primary_plot$event_tex))
-level_order<- sort(unique(safety_primary_plot$event_text))
+safety_primary_plot_2$event_text <- factor(safety_primary_plot_2$event_tex, levels=unique(safety_primary_plot_2$event_tex))
+level_order_2<- sort(unique(safety_primary_plot_2$event_text))
 lever_order_meddra<-c("dropouts", "any", "serious", "autonomic", "endocrinic", "neuromuscular", "neuropsychiatric")
 
-safety_primary_plot$event_text <- factor(safety_primary_plot$event_tex, levels=unique(safety_primary_plot$event_tex))
-level_order<- sort(unique(safety_primary_plot$event_text))
-lever_order_meddra<-c("dropouts", "any", "serious", "autonomic", "endocrinic", "neuromuscular", "neuropsychiatric")
+safety_primary_plot_2<-safety_primary_plot_2 %>% mutate(type_outcome=ifelse(outcome=="dropout_any" | outcome=="dropout_ae", "dropout", "side"))
 
-ggplot(data=safety_primary_plot, 
-       aes(y=factor(event_text, level=rev(level_order)), x=exp(point), colour=timepoint))+
-  geom_point(position=position_dodge(width = 0.5))+
+ggplot(data=safety_primary_plot_2, 
+       aes(y=factor(event_text, level=rev(level_order_2)), x=exp(point),colour=type_outcome, shape=timepoint))+
+  geom_point(aes(size=n), position=position_dodge(width = 0.5))+
   geom_errorbar(aes(x=exp(point), xmin=exp(TE.random-1.96*seTE.random), 
-                    xmax=exp(TE.random+1.96*seTE.random), colour=timepoint),
+                    xmax=exp(TE.random+1.96*seTE.random), colour=type_outcome,shape=timepoint),
                 width=0, position=position_dodge(width = 0.5))+
   geom_vline(xintercept=1, linetype='dashed')+
+  scale_size_continuous(guide=FALSE, range=c(1,3))+
   facet_grid(factor(MedDRA_group, levels=lever_order_meddra)~., scales = "free", space = "free")+
   scale_x_log10() +
   ylab("")+
-  xlab("OR 95%CI")+
+  scale_shape_manual(values=c(1,19))+
+  scale_colour_manual(guide=FALSE, values=c("green4", "firebrick4"))+
+  xlab("OR 95%CI (OR>1: TAAR1 agonsits worse)")+
   theme_bw()
 
 
+
 ```
+**Figure 65** Summary forest plot for dropouts and side-effects for the comparison of TAAR1 agonists compared to antipsychotics and for the two timepoints with usable data. There were data for single doses of ralmitaront versus amisulpride in healthy volunteers at 1 day, and ulotaront versus risperidone in acute schizophrenia or schizoaffective disorder at 4 weeks. The size of the points is proporitonal tothe number of participants. OR>1 corresponds to more events with TAAR1 agonists compared to placebo. 
 
 ## Secondary outcome: Neurobiological measures relevant relevant to psychosis such as dopaminergic, glutamatergic and serotonergic signalling
 
@@ -2085,11 +2261,34 @@ No usable data available from RCT.
 
 ## Subgroup analyses and meta-regressions
 
-We did not conduct subgroup analyses and meta-regressions for the primary outcome due to the small number of included studies (i.e., 5) that precluded the exploration of potential reasons of heterogeneity.
 
-### Descriptive exploration of potential dose-effects
+There were less than 5 studies available for the analyses of the primary outcome, precluding the exploration of potential reasons of heterogeneity with subgroup analyses and meta-regressions. 
 
-We wanted to further explore the potential dose-effects of ulotaront or ralmitaront on improving overall symptoms in acute patients with schizophrenia, given that their doses were pooled in the analyses mentioned above. For this reason, we caclulated the effect sizes of each of the doses of these drugs compared to placebo (correcting the smaple of placebo as a shared control in a trial), and we plotted them in the figure below. *No clear dose-effects can be observed.*
+Nevertheless, we explored potential differences between ulotaront and ralmitaront in improving overall symptoms of acute schizophrenia, and potential dose-effects by plotting the effect sizes for each fixed-dose level of TAAR1 agonist compared to placebo. However, we did not conduct any formal subgroup test or dose-response meta-analysis due to the limited number of studies.
+
+Moreover, it should be noted that we presented the effect sizes in each specific subgroup of participants for all outcomes, but we did not perform a formal subgroup test
+
+### Exploration of differences between ulotaront and ralmitaront in their effects on overall symptoms of acute schizophrenia.
+
+```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4}
+forest(meta_comp_drug, 
+       col.diamond = "royalblue4",
+       col.square =   "royalblue1",
+                 rightcols = c("effect", "ci","Overall"), 
+                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  
+       xlim=c(-0.8,0.8),
+                 label.e = unique(meta_comp_drug$data$treat1_new), 
+       label.c=unique(meta_comp_drug$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Placebo better", label.right="TAAR1 better")
+```
+
+**Figure 66** Forest plot presenting the effects of ulotaront and ralmitaront compared to placebo on overall symptoms in acute schizophrenia at 4-6 weeks separately.
+
+
+### Exploration of dose-effects of ulotaront and ralmitaront on overall symptoms of acute schizophrenia
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, warning=FALSE}
 ggplot(data=data_doses, aes(x=dose,
@@ -2100,40 +2299,42 @@ ggplot(data=data_doses, aes(x=dose,
   xlim(c(0,150))+
   coord_cartesian(ylim=c(-0.5,0.5), expand=TRUE)+
   xlab("dose (mg//d)")+
-  ylab("SMD 95%CI")+
-  scale_shape_manual(values = c(15,0), guide=FALSE)+
+  ylab("SMD 95%CI (SMD>0: TAAR1 agonists better")+
+  scale_shape_manual(values = c(15,0))+
   geom_hline(yintercept = 0, linetype="dashed")+
   facet_wrap(~drug_name,  scales = "free", nrow=2)+
   theme_bw()
 ```
 
-\*It should be noted that Koblan 2020 was a two-arm flexible dose study, and its effect size is placed in the middle of the range of the administered dose (50mg/d to 75mg/d), yet the median or mean dose in the trial could be different and was not reported. \*\*The study of Isaacson 2023 was not presented here, as it was included participants with Parkinson disease psychosis.
+**Figure 67** Effect sizes for each dose level of ulotaront and ralmitaront compared to placebo in improving overall symptoms of acute schizophrenia at 4-6 weeks are presented separately. The findings of each study are presented separately, and the effect sizes were corrected for using the same control condition in each study. It should be noted that Koblan 2020 was a two-arm flexible dose study, and its effect size is placed in the middle of the range of the administered dose (50mg/d to 75mg/d)
 
-
-We further conducted a dose response meta-analysis by standardizing the dose between ulotaront and ralmitaront by taking into consdieration their E50 (see HTML animal studies --- text to be revised --- probably this analysis will be deeted)
-```{r echo=F, fig.fullwidth=T, fig.width=5, fig.height=3, warning=FALSE}
-ggplot(data= pred, aes(x= dose, y = pred))+
-  xlab("Standardized Dose")+
-  ylab("SMD 95%")+
-  geom_line(size=1)+
-  geom_rug(data=master_dose, mapping=aes(x=standardized_dose, y= 0)) +
-  geom_line(data=pred, aes(x= dose, y = ci.lb), linetype='dashed', size=0.7)+
-  geom_line(data=pred, aes(x= dose, y = ci.ub), linetype='dashed',size=0.7)+
-  geom_hline(yintercept = 0, colour='black', size=0.2)+
-  theme_bw()
-```
-
+In the fixed-dosing studies, higher doses (i.e., ulotaront 100mg/d and ralmitaront 100mg/d) may be associated with more improvement compared to smaller doses. However, the effect sizes at these high doses still appear to be small, with a standardized mean difference (SMD) of approximately 0.2. In the flexible dosing study by Koblan et al. 2020, which utilized doses of ulotaront up to 75mg/d, small-to-medium effect sizes were observed. Importantly, the available data are limited. Therefore, the findings are inconclusive.
 
 
 ## Sensitivity analyses
 
-We did not conduct the following pre-planned sensitivity analyses for the primary outcome due to the small number of included studies (i.e., 5), i.e., 1) restricting the analysis to studies with an overall low risk of bias (no study had an overall low risk of bias) and 2) excluding estimates with imputed values (the N and SD of the ulotaront unpublished studies was imputed.
+
+We did not conduct the following sensitivity analyses for the primary outcome due to the limited data: 1) Restricting the analysis to studies with low risk of bias, since there were 4 studies with low risk of bias in acute schizophrenia, and 1 study with high risk of bias in Parkinson's disease psychosis (1 study with high risk of bias). 2) Excluding imputed data, since no imputed data were used in the analysis of the primary outcome."
+There were no imputed data in the analysis of the primary outcome.
+
+Due to the limited number of studies, we also presented a fixed-effects model for all outcomes in addition to the random-effects model to assess the robustness of the findings. The findings were robust in the majority of cases. For the primary outcome in the meta-analysis of 4 studies in acute schizophrenia, the point estimate of the effect sizes did not differ between random- and fixed-effects (SMD=0.15 and 0.13, respectively), but the 95% CI in the fixed-effects model was narrower, excluding the null effect (95% CI: -0.05, 0.34, and 0.02, 0.05, respectively). Nonetheless, the interpretation of the findings that TAAR1 agonists have little to no effect compared to placebo in improving overall symptoms does not change
+
 
 ## Reporting bias
 
-We evaluated the potential reporting bias for the primary outcome (overall symptoms in acute psychosis) using the ROB-ME tool.
+Reporting bias was evaluated using the ROB-ME tool, taking into account the usable data from the eligible studies identified in the search, the comprehensiveness of the search, and potential patterns of missingness and small-study effects. We followed the algorithm to assign a low or high risk of reporting bias, or to express some concerns, by answering signaling questions related to the domains mentioned above.
 
-### Results matrix for the primary outcome
+### Funnel plots and examination of small-study effects
+
+There were insufficient data for the primary outcome but also other outcomes (i.e., fewer than 10 studies) to examine small-study effects with funnel plots. Thus, we cannot examine any particular pattern of missing evidence.
+
+### Coverage of the search strategy
+
+We conducted a comprehensive search for both published and unpublished studies in multiple electronic databases, supplemented by manual searches of the reference lists of included studies and previous reviews. Screening was carried out by at least two independent reviewers. All studies identified in the search were conducted by the pharmaceutical industry. Although we contacted them, we have not received additional data for the first iteration. Considering that all eligible studies are experimental and were conducted recently, it is expected that most, if not all, have been registered, thus facilitating their detection during searches in clinical trial registries. Nonetheless, it's possible that small phase I studies focusing on pharmacokinetics may not have been registered and could therefore have been overlooked. Consequently, we do not anticipate that our search has missed any major or significant studies (ROB-ME-3.1: No, ROB-ME-3.2: PY, ROB-ME-3.3:PY).
+
+### Results matrix and ROB-ME evaluation 
+
+The results matrix of the eligible studies found in the search for the primary outcome can be found below in **Table 2**.
 
 ```{r echo=FALSE}
 studies_primary<-studies %>% filter(Name=="NCT04512066 (2020)"  | Name=="Isaacson (2023)" | Name=="NCT04072354 (2019)" |
@@ -2143,20 +2344,17 @@ studies_primary<-studies %>% filter(Name=="NCT04512066 (2020)"  | Name=="Isaacso
 
 knitr::kable(studies_primary[order(studies_primary$Diagnosis, studies_primary$Name),])
 ```
+**Table 2** Results matrix for the primary outcome. ✓: A study result is available for inclusion in the meta-analysis.; \~:No study result is available for inclusion in the meta-analysis, for a reason unrelated to the P value, magnitude or direction of the result.; ?: Unclear whether an eligible study result was generated. \*NCT04072354 included two parts, i.e., adults (sample size 435) and adolescents (sample size unclear but it was probably 28; planned 90). It should be noted that all of the other studies included adult populations. \*\*NCT04825860 is an ongoing trial.
 
-✓: A study result is available for inclusion in the meta-analysis.; \~:No study result is available for inclusion in the meta-analysis, for a reason unrelated to the P value, magnitude or direction of the result.; ?: Unclear whether an eligible study result was generated. \*NCT04072354 included two parts, i.e., adults (sample size 435) and adolescents (sample size unclear but probably 28; planned 90). It should be noted that all of the other studies included adult populations. \*\*NCT04825860 is an ongoing trial.
+Data were available for all eligible studies concerning the primary outcome, i.e., answers to the ROB-ME signalling question 4.1: no, ROB-ME-4.3: "yes" for adolescents, ROB-ME-4.4: "no", thus leading to low risk of  reporting bias - considering also the comprehensiveness of the search.
 
-### Funnel plots and examination of small-study effects
+The results matrix in **Table 2** could also apply to the secondary efficacy outcomes in acute psychosis, although some studies did not have usable data for these outcomes. Specifically, the two phase III trials, NCT04092686 and NCT04072354, did not report effects on symptom domains. Consequently, these analyses would be prone to bias due to missing evidence (ROB-ME-4.1: Yes, ROB-ME-4.2: Yes, thus leading to high risk of reo ).
 
-There were no sufficient data (i.e., 5 studies \< 10) to examine small-study effects with funnel plots.
+Additionally, we identified the total number of eligible and completed studies, with or without usable data, that could contribute to dropout and safety data for each comparison (as shown in **Table 1**): 1) There were 12 studies with 626 participants for the comparison of TAAR1 agonists versus placebo over a period of 1 day to 2 weeks. 2) There were 2 studies with 100 participants for the comparison of TAAR1 agonists versus placebo over the same duration. 3) For the comparison of TAAR1 agonists versus placebo over 3-13 weeks (as detailed in **Table 2**), there were 6 studies involving 1550 participants, including also 1 study (NCT03669640) focusing predominantly on negative symptoms. 4) Finally, it should be noted that one study (NCT04115319) with 475 participants could contribute to the comparison of TAAR1 agonists versus other antipsychotics for periods exceeding 13 weeks. However, no usable data for this analysis were available from any other study. 
 
-### Coverage of the search strategy
 
-We conducted a comprehensive search of published and unpublished studies. Although we have not contacted the pharmaceutical companies (Hoffman-Roche for ralmitaront, and Sunovion/Sumitomo for ulotaront), it is not expected that any study was not identified in the search, as all of the trials were very recently published, and they should all have been registered.
+The reasons for the missingness of data for these outcomes can be unclear, either due to them not being measured or not reported because of unfavorable findings. As a general rule, we employed the approach responding to ROB-ME-4.3: 'yes', ROB-ME-4.3: 'yes', ROB-ME-4.2: 'yes' if less than 50% of the studies or participants had usable data (balancing the fact that additional data in this small number of studies and participants could impact the findings, but the missingness may not be related to the findings of these outcomes but rather to other factors), and 'no information' otherwise. Thus, if there were usable data for fewer than 50% of the eligible studies or participants, we judged there to be a high risk of reporting bias. Otherwise, considering ROB-ME-4.5: 'no' and ROB-ME-4.7 and ROBM-4.8: 'no' (due to insufficient data to identify patterns of missing evidence and to conduct sensitivity analysis), we assigned some concerns. We also considered potential narrative descriptions of these outcomes or other factors in order to optimize the judgments, and we mention them in the summary of evidence tables below.
 
-### ROB-ME evaluation
-
-There were no missing results in the studies identified (except for one small trial in adolescnets which data should not have an impact on the findings).There wre also no circumstances indicating potential for missing studies, and no clear patter of the results indicate potential missing studies (although funnel plots could not have been conducted due to the small number of studies). The same evaluation is relevant for both the comparisons of TAAR1 agonists vs. placebo and TAAR1 agonsits vs. antipsychotics. Therefore, there was assigned a low risk of bias in reporting bias.
 
 ## Summary of the evidence on the primary outcome from the human studies
 
@@ -2190,6 +2388,6 @@ TAAR1 agonists may have little to no effect compared to placebo on overall sympt
 ## Summary of the evidence tables for all outcomes
 
 ```{r echo=FALSE}
-knitr::kable(meta_outcome_soe[, 1:8])
+#knitr::kable(meta_outcome_soe[, 1:8])
 ```
 
