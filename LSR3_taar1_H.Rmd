@@ -22,7 +22,7 @@ library(kableExtra)
 library(meta)
 library(devtools)
 library(metafor)
-library(robvis)
+library(robvis) #Need to install from devtools::install_github("mcguinlu/robvis")
 library(PRISMA2020)
 #devtools::install_github("haozhu233/kableExtra") I need to remove this, otherwise the R markdown didnt work
 
@@ -56,18 +56,44 @@ rob<-read_xlsx("data/rob_secondary_2024.01.24.xlsx")
 options(scipen=1, digits=2)
 
 ```
+# Description of the methodological approach
+
+1. We analyzed usable data from all randomized controlled studies examining any TAAR1 agonist in comparison to placebo or current antipsychotics in people with psychosis, other mental health conditions, or healthy volunteers.
+
+2. We examined efficacy outcomes, including overall symptoms of psychosis (primary) and symptom domains, dropouts due to any reason, and adverse events. Safety outcomes included death, serious adverse events, and specific adverse events. We also sought mechanistic outcomes, specifically neurobiological measures of dopaminergic, glutamatergic, and serotonergic signaling. We examined these outcomes at three time points: immediately after a single dose up to 2 weeks of treatment, 3-13 weeks of treatment (preferably at 6 weeks), and longer-term outcomes.
+
+3. In terms of efficacy outcomes, we pooled the data for each specific subgroup, considering that differences can be expected among different diagnoses (e.g., schizophrenia and Parkinson's disease psychosis) and patient subgroups (e.g., patients with an acute episode of schizophrenia or with predominant negative symptoms). In terms of other outcomes, we combined data from all subgroups but also presented data separately for each subgroup.
+
+4. Summary of data extraction: For continuous outcomes, we preferred change over endpoint scores and data from appropriate models or imputations considering missing outcome data. For dichotomous outcomes, we again preferred data from all participants, but in case of participants with missing outcome data, we assumed that they did not experience the event; an assumption usually used in meta-analysis in schizophrenia (e.g., Huhn et al. 2023). In terms of crossover studies, we preferred data from appropriate models considering period or carry-over effects. If not available, we assumed a correlation (i.e., 0.2 for adverse events) to correct the variance of the estimates according to Elbourne et al. 2002. If an outcome was measured multiple times after a single dose of the drug, we calculated the area under the curve according to the linear trapezoid rule (Chiou et al. 1978) and divided by the time of assessment to remove the time component.
+
+5. Risk of bias was assessed using the RoB2 tool for parallel and crossover studies. When only one domain had some concerns, we assigned an overall low risk of bias. Otherwise, we used the worst judgment across domains.
+
+6. The effect sizes were as follows: 1) standardized mean differences (SMD) for efficacy outcomes, given that various scales have been used in the literature to allow comparability of the findings with other studies of antipsychotic drugs; 2) mean differences (MD) for laboratory measures, i.e., weight (kg), QTc interval (msec), and prolactin levels (ng/ml); 3) odds ratios (OR) for dichotomous outcomes, which were also converted to absolute risks using a control event rate (see 7. for meta-analysis). 95% confidence intervals (95% CI) are presented, but 95% prediction intervals are not presented due to the small number of studies. Other effect sizes were not used in the first iteration of the review, e.g., those used in meta-analysis of variance due to the paucity of data.
+
+7. Meta-analysis was conducted primarily using a random-effects model with inverse variance and REML estimator of tau-squared. Due to the small number of studies (<5) in all analyses, we corrected the confidence intervals using the Hartung-Knapp method, and we also presented the findings from fixed-effects models using the Mantel-Haenszel method throughout. Meta-analysis of proportions was conducted to pool the control groups to estimate the control event rate using logit transformation of the proportions and inverse variance method. Moreover, continuity corrections of 0.5 were applied in case of 0 events in one of the groups.
+
+8. Sensitivity analysis of the primary outcome included using fixed-effect methods and excluding studies with an overall some concerns or high risk of bias.
+
+9. Subgroup analyses and meta-regressions were not conducted due to the paucity of data. However, we explored potential dose-effects for the primary outcome by plotting the effect sizes for different fixed doses of TAAR1 agonists compared to placebo (while correcting for the use of common comparators).
+
+
+10. Summary of evidence tables were constructed for all outcomes, including a summary of the association, biases due to study limitations, biases due to reporting bias, biases due to indirectness, and other biases. We adapted the GRADE approach. We used the ROB-ME approach for evaluating biases in missing evidence for the primary outcomes and considered the percentage of missing studies and participants for secondary outcomes. Indirectness was considered especially relevant for non-efficacy outcomes, where we pooled data across diagnoses and subgroups, and considered the percentage of studies and participants with schizophrenia, the main group for which this evidence would be applicable.
+
+*Please see the manuscript and the protocol for more details.*
 
 # Results
 
-## Flow of study selection and descriptives
+**We present below the results, including the PRISMA flow diagram, table of included studies, risk of bias assessment, and forest plots, to facilitate a better understanding of the summary of evidence tables and the manuscript. Please refer to the detailed description of the findings in the latter part of the manuscript for more information.**
 
-The PRISMA flow diagram can be found below.
+
+## Flow of study selection
+
 ```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=8}
 PRISMA_flowdiagram(prisma, previous = FALSE, other=FALSE)
 ```
+**Figure 1** PRISMA 2020 flow diagram
 
-
-The table of included studies is presented in Table 1.
+## Table of included studies
 
 ```{r echo=FALSE, fig.width=12, fig.height=8}
 knitr::kable(studies[, 1:14])
@@ -75,29 +101,39 @@ knitr::kable(studies[, 1:14])
 
 **Table 1** Table of included studies.
 
-**Acute psychosis**: There were *five trials* that provived data for the timepoint of 3-13 weeks: 1) One study on ralmitaront, i.e., NCT04512066 examining the comparisons of ralmitaront vs. placebo or risperidone in adults with schizophrenia or schizoaffective disorder. 2) Four studies on ulotaront, i.e., Isaacson 2023 in adults with Parkinson disease psychosis, and Koblan 2020, NCT04072354 and NCT04092686 in adults with schizophrenia. *Unavailable trials*: 1) The study NCT04072354 (ulotaront vs. placebo) consisted of adolescent and adult parts, but data for the former were not found and the status is unclear. 2) One study (NCT04825860) examining ulotaront vs. placebo in adults with schizophrenia is currently ongoing.
 
-**Clinically stable patients with psychosis**: There were data from *one trial* that provided data for the timepoint 1 day - 2 weeks: Tsukada 2023 that was a single dose crossover trial examining mainly the effects of ulotaront vs. placebo or moxifloxacin (not relevant for this analysis) on QTc interval prolongation in stable patients with schizophrenia. *Unavailable trials*: 1) NCT04115319 examining the long-term efficacy and safety of ulotaront vs. quetiapine in clinically stable patients with schizophrenia (recently completed), 2) Seven trials examining single or multiple doses of ulotaront focusing on pharmacokinetics or safety (e.g., physical dependence or metabolic side-effects) (completed and unpublished: NCT01940159, Koblan 2016, NCT04325737, NCT04865835; ongoing NCT05848700, NCT05542264, NCT05402111). No study examining ralmitaront was found for clinically stable psychosis.
+## Description of included studies
 
-**Other patient subgroups**: No study with available data was found for other patient subgroup such as first-episode and predominant negative symptoms. *Unavailable trials*: One study examined ralmitaront vs. placebo (as monotherapy or add-on to current antipsychotic treatment) in patients with schizophrenia or schizoaffective disroder and predominant negative symptoms (NCT03669640), which was reported to be failed but no data were available to be synthesized.
+There were 25 eligible studies, which characteristics can be found in **Table 1**, with 20 studies (2147 participants) being completed and 5 studies being still ongoing up to 20.01.2024. There were usable data for this analysis from 9 studies (1711 participants), which enrolled adult populations across multiple countries and were funded by the industry manufactuing the TAAR1 agonists. 
 
-**Other mental health conditions**: There was *one crossover study* examining ulotaront vs. placebo in patients with narcolepsy-cataplexy that provided safety data for the timepoint of 1 day - 2 weeks (Szabo 2023). *Unavailable trials*: Two trials are currently ongoing and examine the efficacy of ulotaront compared to placebo in patients with generalized anxiety disorder (NCT05729373) and major depression (NCT05593029). None of the trials examined ralmitaront in patients with other mental health conditions.
+The usable studies compared single or multiple doses of two TAAR1 agonists (i.e., ulotaront or ralmitaront) with placebo or current antipsychotics (i.e., risperidone or amisulpride) in people with schizophrenia, Parkinson's disease psyschosis, other mental health conditions (narcolepsy/cateplexy as sleep disorder) and healthy volunteers.
+*Five studies* used a parallel design to examine the efficacy and safety of multiple doses of TAAR1 agonists in psychosis within 3-13 weeks
+*Four studies* examining daily doses of TAAR1 agonists in *adults with an acute episode of schizophrenia* spectrum conditions for 4-6 weeks, 3 examined ulotaront (Koblan et al. 2020, NCT04072354 and NCT04092686) and 1 examined ralmitaront (NCT04512066). These studies used placebo as control group, and the 1 study on ralmitaront used also the antipsychotic risperidone as active comparator. *One study* comparing daily doses of ulotaront in *Parkinson's dissease psychosis* to placebo for 4 weeks (Isaacson et al. 2023).
+*Four studies* examined the pharmacokinetics, safety and/or neuroimaging of single doses of TAAR1 agonists or multiple doses for up to 2 weeks: *One study* examining the effects of a single dose of 150mg ulotaront in *clinically stable adults with schizophrenia** on QTc interval within a day (Tsukada et al 2023). The study utilized a three-period crossover period comparing ulotaront with placebo and moxifloxacin (an antibiotic used as active comparator, not relevant for our analysis). *Two studies* examined the effects of single doses of ulotaront in *healthy volunteers* on sleep parameters (Hopkins et al 2021) or fMRI tasks (Perini et al 2023). Hopkins et al 2021 included two cohorts of crossover studies comparing two single doses of ulotaront with placebo. Perini et al 2023 was a parallel trial comparing ulotaront to placebo or the antipsychotic amisulpride on fMRI tasks relevant to reward, working memory and emotion processing in volunteers with high or low schizotypy traits. *One study* examined two single doses of ulotaront in *adults with narcolepsy-cateplyxy* compared to placebo using a three-period crossover design.
 
-**Healthy volunteers**: There were *four trials* examining ulotaront in healthy volunteers that provided safety data for the timepoint of 1 day - 2 weeks: 1) One trial examining the effects of a single dose of ulotaront on fMRI compared to placebo or amisulpride in participants with low or high levels of schizotypy (Perini 2023; safety data were used, fMRI data deeemed not relevant for the first iteration of the review), 2) Two crossover trials examining the pharmacokinetics of single doses of ulotaront vs. placebo in healthy volunteers (SEP361-111 and SEP361-117 as reported in Chen 2023), and 3) One crossover trial examining the effects of single administration of two doses of ulotaront vs. placebo on sleep parameters in healthy volunteers (Hopkin 2021, only safety data were used in the first iteration, and data from the low dose were not used due to the crossover design of the study). *Unavailable trials*: 1) Three studies examining the pharmacokinetcis and safety of ralmitaront in healthy volunteers (Fowler 2015, JapicCTI-194581, NCT02699372), 2) Two studies examining the pharmacokinetics of ulotaront in healthy volunteers (SEP361-101 , DA801002).
+The following studies were unavailable:
+*One study* examined the efficacy and safety of ulotaront in comparison to placebo in *adolescents with an acute episode schizophrenia* (NCT04072354). This study had two parts with adults and adolescents. This study has been recently completed, and although some usable data in the adult population are available (see above), these are not available for the adolsecents.
+*One study* examined the long-term efficacy and safety of ulotaront in comparisong to the antispychotic quetiapine in *adults with clinically stable schizophrenia* (NCT04115319). The study should have been completed in 12.2022, and there are currently no usable data available.
+*One study* examined monotherapy or add-on treamtent with ralmitaront in comparison to placebo in *adults with schizophrenia or schizoaffective disorder and predominant negative symptoms* (NCT03669640). The study has been recently completed in 05.2023, and it has been reported to be failed, yet no usable data were available.
+*Nine studies* examined pharmacokinetics and safety of single or few multiple doses of ulotaront or ralmitaront in **healthy volunteers** (Fowler 2015, JapicCTI-194581, NCT02699372, SEP361-101, DA801002, NCT01940159, Koblan 2016, NCT04325737, NCT04865835).
+
+The following studies are ongoing:
+- *One study* is examining the efficacy and safety of two ulotaront doses of 50mg/d and 75mg/d in comparison to placebo in *adults with an acute episode of schizophrenia* (NCT04825860). The study is expected to be completed in 06.2025.
+- *Two studies* are examining the efficacy and safety of ulotaront compared to placebo in other mental health conditions, i.e., adults with *major depression* (NCT05593029) and *generalized anxiety disorder* (NCT05729373). These trials are expected to be completed in 2025, and their safety data are relevant for this review.
+
 
 ## Risk of bias assessment
 
-Risk of bias was evaluated using the RoB2 tool for the primary outcome, i.e., overall symptoms. There were available data only for the primary timepoint (3 weeks - 13 weeks) in acutely ill patients with Parkinson disease psychosis (Isaacson 2023) and schizophrenia spectrum disorder (Koblan 2020, NCT04092686, NCT04072354, NCT04512066).
+The risk of bias of the studies was examined using the RoB2 tool for parallel and crossover studies for all outcomes. Here, we present the risk of bias of using the worst judgement of a domain across outcomes. It should be noted that when there were some concerns in only one of the domains, we assigned an overall low risk of bias according to our protocol. 
 
-The risk of bias assessment per domain and study is reported in Figure 1.
 
-```{r echo =F, fig.fullwidth=T, fig.width=8, fig.height=8}
-rob_plot(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`)
+```{r echo =F, fig.fullwidth=T, fig.width=7.2, fig.height=6}
+rob_traffic_light(rob_all, tool="Generic")
 ```
 
-**Figure 1** Risk of bias for overall symptoms
+**Figure 2** Risk of bias of studies with usable data
 
-Three of the studies had an overall high risk of bias due to high risk of bias in missing outcome data (either due to high dropout rates Issacson 2023 or due to the non-reporting of dropouts in the two unpublished studies NCT04072354 and NCT04092686). The other two studies (Koblan 2020 and NCT03669640) had some concerns overall due to some concerns in the domain of missing outcome data (high dropout rates with unclear impact on the findings).
+All the studies were double-blind randomized controlled studies, with a low risk of bias in most cases in their respective domains of biases due to randomization, deviations from intended interventions, and outcome measurement. There were also no indications of selectively reported results; thus, the studies had a low risk of bias in their respective domains. Most of the studies had missing outcome data, but there was no clear indication that the missingness depended on the true value of the effects for most of the outcomes. Therefore, there were some concerns, except for Isaacson et al. 2023, which had a high risk of bias for efficacy outcomes but not for adverse events and other outcomes. Additionally, there were few differences in this domain across outcomes, such as a low risk for the outcome of dropouts. In terms of the three crossover studies, there was a low risk of bias in period and carry-over effects, except for some concerns in the three-period crossover study of Tsukada et al. 2023. Few differences across outcomes can be found in the overall judgment of the risk of bias for each study per outcome in the respective forest plots below.  
 
 ## Comparison 1: *TAAR1 agonist* vs *placebo*
 
@@ -105,70 +141,76 @@ Three of the studies had an overall high risk of bias due to high risk of bias i
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks* (primary timepoint)
 
 ```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`, 
+       col.diamond = "royalblue4",
+       col.square =   "royalblue1",
                  rightcols = c("effect", "ci","Overall"), 
                  rightlabs = c("SMD", "95%-CI", "Risk of bias"),  
        xlim=c(-0.8,0.8),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`$data$treat1_new), 
-      # label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`$data$treat2_new),
+       label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
                  label.left = "Placebo better", label.right="TAAR1 better")
 ```
 
-Meta-analysis of variance was not conducted because 1) SDs were not reported in two studies (NCT04072354 and NCT04092686) and thus they were imputed, 2) SD of change was reported in one of the studies on schizophrenia (Koblan 2020), while SD of endpoint scores in another studt (NCT04512066).
-
+**Figure 3** Forest plot for overall symptoms (primary outcome) for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Positive symptoms
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`, 
+       col.diamond = "royalblue4",
+       col.square =   "royalblue1",
                  rightcols = c("effect", "ci", "Overall"), 
                  rightlabs = c("SMD", "95%-CI", "Risk of bias"),  xlim=c(-0.8,0.8),
-                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`$data$treat1_new),
+       label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
                  label.left = "Placebo better", label.right="TAAR1 better")
 ```
 
-No data were available from the two unpublished acute studies on ulotaront (i.e., NCT04072354, NCT04092686).
+**Figure 4** Forest plot for positive symptoms for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Negative symptoms
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_negative`, 
+       col.diamond = "royalblue4",
+       col.square =   "royalblue1",
                  rightcols = c("effect", "ci", "Overall"), 
                  rightlabs = c("SMD", "95%-CI", "Risk of bias"),  
        xlim=c(-0.8,0.8),
-                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_negative`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_negative`$data$treat1_new), 
+       label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_negative`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
@@ -176,136 +218,142 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_negative`,
 
 ```
 
-No data were available from the two unpublished acute studies on ulotaront (i.e., NCT04072354, NCT04092686).
+**Figure 5** Forest plot for negative symptoms for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
+
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Depressive symptoms
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_depression`, 
+       col.diamond = "royalblue4",
+       col.square =   "royalblue1",
                  rightcols = c("effect", "ci", "Overall"), 
                  rightlabs = c("SMD", "95%-CI", "Risk of bias"),  xlim=c(-0.5,0.5),
-                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_depression`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_depression`$data$treat1_new),  label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_depression`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
                  label.left = "Placebo better", label.right="TAAR1 better")
-#forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_depression`, "efficacy")
 ```
 
-No data were available from the two unpublished acute studies on ulotaront (i.e., NCT04072354, NCT04092686).
+**Figure 6** Forest plot for depressive symptoms for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
+
+
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Cognitive symptoms
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_cognition`, 
+       col.diamond = "royalblue4",
+       col.square =   "royalblue1",
                  rightcols = c("effect", "ci", "Overall"), 
                  rightlabs = c("SMD", "95%-CI", "Risk of bias"),  xlim=c(-0.8,0.8),
-                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_cognition`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_cognition`$data$treat1_new),  label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_cognition`$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
                  label.left = "Placebo better", label.right="TAAR1 better")
-
-#forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_cognition`, "efficacy")
-
 ```
 
-Data were available only from the study on Parkinson disease psychosis (i.e., Isaachson 2023). No data from RCT on schizophrenia.
+**Figure 7** Forest plot for cognitive impairment (measured with MMSE) for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Quality of life
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Functioning
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Response to treatment
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_response`, 
+       col.diamond = "royalblue4",
+       col.square =   "royalblue1",
                  rightcols = c("effect", "ci", "Overall"), 
                  rightlabs = c("OR", "95%-CI", "Risk of bias"),  xlim=c(0.2,5),
-                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_response`$data$treat1_new), #label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_forest`$data$treat2_new),
+                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_response`$data$treat1_new),
+       label.c="placebo",
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
                  label.left = "Placebo better", label.right="TAAR1 better")
-#forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_response`, "efficacy")
 
 ```
 
-Imputations of responders were required in the unpublished ulotaront studies (i.e., NCT04072354, NCT04092686); cutoff of 50% change from baseline was used.
+
+**Figure 8** Forest plot for response (>50% or 20% symptom reduction from baseline) for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Relapse
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Dropouts due to any reason
 
@@ -313,25 +361,27 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_any`, 
+       col.diamond = "green4",
+       col.square =   "green3",
          leftcols = c("studlab",  "effect", "ci"),   
        rightcols = c("Overall"), rightlabs = c("Risk of bias"),   
                  xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_any`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
-                 overall = TRUE, prediction.subgroup = FALSE,
-                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = FALSE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
-# forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_any`, "safety")
-
 ```
+**Figure 9** Forest plot for dropouts due to any reason for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks.Studies with no estimable effect size had 0 events in both arms.
 
-Correlation was assumed 0 for the crossover study (Hopkins 2021)
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=10, fig.height=5}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_any`, 
-      # leftcols = c("studlab", "TE", "seTE", "effect", "ci"),           
+       col.diamond = "green4",
+       col.square =   "green3",     
+       label.c="placebo",
        rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                    xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_any`$data$treat1_new), 
@@ -341,12 +391,12 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_any`,
                  label.left = "TAAR1 better", label.right="Placebo better")
 
 ```
+**Figure 10** Forest plot for dropouts due to any reason for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
 
-No data were available from the unpublished ulotaront studies (i.e., NCT04072354, NCT04092686).
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Dropouts due to adverse event
 
@@ -354,24 +404,30 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_ae`, 
+       col.diamond = "green4",
+       col.square =   "green3",     
+       label.c="placebo",
        leftcols = c("studlab",  "effect", "ci"),      
        rightcols = c("Overall"), rightlabs = c("Risk of bias"),   
-                #  xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_ae`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
-                 overall = TRUE, prediction.subgroup = FALSE,
-                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 subgroup.hetstat = FALSE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = FALSE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
 
 
 ```
 
-Correlation was assumed 0 for the crossover studies (Hopkins 2021, Tsukada 2023)
+**Figure 12** Forest plot for dropouts due to adverse event for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. Studies with no estimable effect size had 0 events in both arms.
+
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_ae`, 
+       col.diamond = "green4",
+       col.square =   "green3",     
+       label.c="placebo",
        rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                    xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_ae`$data$treat1_new), 
@@ -379,15 +435,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_ae`,
                  overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
                  subgroup = TRUE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
-#forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_ae`, "safety")
-
 ```
 
-No data were available from the unpublished ulotaront studies (i.e., NCT04072354, NCT04092686).
+**Figure 13** Forest plot for dropouts due to adverse event for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Serious adverse event
 
@@ -395,6 +449,9 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_serious`, 
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",          
        leftcols = c("studlab",  "effect", "ci"),   
        rightcols = c("Overall"), rightlabs = c("Risk of bias"),   
                   xlim=c(0.2,5),
@@ -403,21 +460,18 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_serious`,
                  overall = TRUE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
-
-#forest_presentation(`meta_comp_taar1_vs_placebo_1 day-2 weeks_serious`, "safety")
-
 ```
 
-This outcome was considered rare event, and it was analyzed with a fixed-effects MH method. A correlation of 0 was assumed for crossover studies.
+**Figure 14** Forest plot for serious adverse events for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. Studies with no estimable effect size had 0 events in both arms.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_serious`, 
-      # leftcols = c("studlab", "TE", "seTE", "effect", "ci"),           
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",          
        rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
-       #layout="Revman",
                    xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_serious`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
@@ -425,57 +479,56 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_serious`,
                  subgroup = TRUE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
 
-#forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_serious`, "safety")
 ```
 
-This outcome was considered rare event, and it was analyzed with a fixed-effects MH method. No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686).
+**Figure 15** Forest plot for serious adverse events for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
+
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Death
 
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-
-forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_death`, 
-       leftcols = c("studlab",  "effect", "ci"),           
-       rightcols = FALSE,
-                  xlim=c(0.2,5),
-                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_death`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
-                 overall = TRUE, prediction.subgroup = FALSE,
-                 subgroup = TRUE, fixed=TRUE, random=TRUE,
-                 label.left = "TAAR1 better", label.right="Placebo better")
-
-
+#forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_death`, 
+ #      col.diamond = "firebrick4",
+  #     col.square =   "firebrick3",     
+   #    label.c="placebo",      
+    #   leftcols = c("studlab",  "effect", "ci"),           
+     #  rightcols = FALSE,
+      #            xlim=c(0.2,5),
+       #          label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_death`$data$treat1_new), 
+        #         subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+         #        overall = TRUE, prediction.subgroup = FALSE,
+          #       subgroup = TRUE, fixed=TRUE, random=TRUE,
+           #      label.left = "TAAR1 better", label.right="Placebo better")
 
 ```
-
-This outcome was considered rare event, and it was analyzed with a fixed-effects MH method. A correlation of 0 was used for crossover studies.
+There were available usable data from four studies (i.e., Hopkins et al 2021, Perini et al 2023, Szabo et al 2023 and Tsukada et al 2023) but all of them reported 0 deaths so that could not provide estimable effect sizes with the current approach. 
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_death`, 
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_death`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
-                 overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
-                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 subgroup.hetstat = FALSE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
+                 subgroup = FALSE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
-
-
-#forest_presentation(`meta_comp_taar1_vs_placebo_3-13 weeks_death`, "safety")
 ```
 
-This outcome was considered rare event, and it was analyzed with a fixed-effects MH method.
+**Figure 16** Forest plot for death for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). Studies with 0 events in both arms could not provide estimable effect sizes with the current approach.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Any adverse event
 
@@ -483,9 +536,11 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=5}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_adverse_event`, 
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+        rightcols = c("Overall"), rightlabs = c("Risk of bias"),   
        leftcols = c("studlab",  "effect", "ci"),           
-       rightcols = FALSE,
-            #      xlim=c(0.2,5),
                  label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_adverse_event`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = TRUE, prediction.subgroup = FALSE, prediction=FALSE,
@@ -494,13 +549,16 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_adverse_event`,
 
 ```
 
-A correlation of 0 was assumed for crossover studies.
+**Figure 17** Forest plot for any adverse events for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. 
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_adverse_event`, 
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_adverse_event`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
@@ -509,40 +567,40 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_adverse_event`,
 
 ```
 
-No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686).
+**Figure 18** Forest plot for any adverse event for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). 
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Anticholinergic symptoms
-
-Terms that were considered as reported in the trials: dry mouth (no other relevant anticholinergic side-effects were reported such as urinary retention, constipation, mydriasis or blurred vision)
 
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anticholinergic_symptom`, 
-       leftcols = c("studlab",  "effect", "ci"),           
-       rightcols = FALSE,
-            #      xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       leftcols = c("studlab",  "effect", "ci"),          
+        rightcols = c("Overall"), rightlabs = c("Risk of bias"),   
                  label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anticholinergic_symptom`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
-                 subgroup = TRUE, fixed=TRUE, random=TRUE,
+                 subgroup = FALSE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
 
 ```
 
-Only data from one study on healthy volunteers were available (Perini 2023)
+**Figure 19** Forest plot for anticholinergic side-effects (i.e., dry mouth) for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. 
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Hypotension
 
@@ -550,13 +608,16 @@ Terms that were considered as reported in the trials: hypotension or orthostatic
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_hypotension`, 
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_hypotension`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
@@ -565,22 +626,23 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_hypotension`,
 
 ```
 
-No data were available from the four trials on acute schizophrenia.
+**Figure 20** Forest plot for hypotension for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). 
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Dizziness
 
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dizziness`, 
-       leftcols = c("studlab",  "effect", "ci"),           
-       rightcols = FALSE,
-            #      xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       leftcols = c("studlab",  "effect", "ci"),          
+        rightcols = c("Overall"), rightlabs = c("Risk of bias"),   
                  label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dizziness`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = TRUE, prediction.subgroup = FALSE, prediction=FALSE,
@@ -589,40 +651,42 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dizziness`,
 
 ```
 
-A correlation of 0 was assumed for crossover studies.
+**Figure 21** Forest plot for dizziness for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. 
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dizziness`, 
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_dizziness`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
                  subgroup = TRUE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
 
 ```
 
-No data were available from the four trials on acute schizophrenia.
+**Figure 22** Forest plot for dizziness for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). 
+
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Nausea or vomiting
-
-Terms that were considered as reported in the trials: nausea, vomiting, emesis
 
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-
-
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_nausea_vomitting`, 
-       leftcols = c("studlab",  "effect", "ci"),           
-       rightcols = FALSE,
-            #      xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       leftcols = c("studlab",  "effect", "ci"),          
+        rightcols = c("Overall"), rightlabs = c("Risk of bias"),  
                  label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_nausea_vomitting`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = TRUE, prediction.subgroup = FALSE, prediction=FALSE,
@@ -631,13 +695,16 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_nausea_vomitting`,
 
 ```
 
-A correlation of 0 was assumed for crossover studies.
+**Figure 23** Forest plot for nausea or vomiting for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. 
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_nausea_vomitting`, 
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_nausea_vomitting`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
@@ -647,11 +714,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_nausea_vomitting`,
 
 ```
 
-No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686). The study NCT04512066 examined ralmitaront while the other trials ulotaront (which is also a 5-HT1A receptor partial agonist).
+**Figure 24** Forest plot for nausea or vomitting for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). 
+
+It should be noted that there appears to be some heterogeneity in the findings between ulotaront and ralmitaront. This heterogeneity may potentially be driven by the fact that ulotaront is also a 5-HT1A receptor partial agonist, which is associated with gastrointestinal symptoms. 
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: QTc prolongation
 
@@ -661,75 +730,85 @@ Terms that were considered as reported in the trials: QTc prolongation above ≥
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_qtc_prolongation`, 
-       leftcols = c("studlab",  "effect", "ci"),           
-       rightcols = FALSE,
-            #      xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       leftcols = c("studlab",  "effect", "ci"),          
+        rightcols = c("Overall"), rightlabs = c("Risk of bias"),  
                  label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_qtc_prolongation`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
                  subgroup = TRUE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
 
 ```
+**Figure 25** Forest plot for QTc prolongation for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. Studies with not estimable effect sizes had 0 events in both groups.
 
-A correlation of 0 was assumed for the two crossover studies with reported QTc prolongation.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
-forest(`meta_comp_taar1_vs_placebo_3-13 weeks_qtc_prolongation`, 
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
-                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_qtc_prolongation`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
-                 overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
-                 subgroup = TRUE, fixed=TRUE, random=TRUE,
-                 label.left = "TAAR1 better", label.right="Placebo better")
+#forest(`meta_comp_taar1_vs_placebo_3-13 weeks_qtc_prolongation`, 
+ #      col.diamond = "firebrick4",
+  #     col.square =   "firebrick3",     
+   #    label.c="placebo",      
+    #   rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
+     #            label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_qtc_prolongation`$data$treat1_new), 
+      #           subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+       #          overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
+        #         subgroup = TRUE, fixed=TRUE, random=TRUE,
+         #        label.left = "TAAR1 better", label.right="Placebo better")
 
 ```
-
-No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686). The study NCT04512066 examined ralmitaront while the other trials ulotaront (which is also a 5-HT1A receptor partial agonist).
+There were available data in Koblan et al 2020, which reported 0 events in both groups, so that an effect. size cannot be estimated with the current approach. 
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: QTc interval in msec
 
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest(metagen(data=master[master$study_name=="Tsukada (2023)" & master$drug_name=="ulotaront",],
-         TE=qtc_md_point, seTE=qtc_md_se, sm="MD", studlab = study_name_drug),
-       prediction = FALSE,
-        leftcols = c("studlab",  "effect", "ci"),           
-       rightcols = FALSE,
-                 label.e = unique(meta_comp$data$treat1_new), label.c=unique(meta_comp$data$treat2_new),
-                 label.left = "TAAR1 better",
-                 label.right="TAAR1 worse")
+forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc_interval`, 
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       leftcols = c("studlab",  "effect", "ci"),   leftlabs = c("Study", "MD msec", "95%-CI"),       
+        rightcols = c("Overall"), rightlabs = c("Risk of bias"),  
+                 label.e = unique(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc_interval`$data$treat1_new), 
+                 subgroup.hetstat = FALSE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
+                 subgroup = FALSE, fixed=TRUE, random=TRUE,
+                 label.left = "TAAR1 better", label.right="Placebo better")
 ```
 
-One crossover study reported data for this outcome (Tsukada 2023). The analysis was adjusted for crossover and was reported for several timepoints within a day. The AUC was calculated and the divided by 24 hours for presentation.
+**Figure 26** Forest plot for QTc interval in msec for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. 
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Weight increased
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_weight_increased`, 
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_weight_increased`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
@@ -738,25 +817,29 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_weight_increased`,
 
 ```
 
-No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686) and the study on Parkinson disease psychosis (Isaacson 2023).
+**Figure 27** Forest plot for weight gain for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). 
+
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Weight in kg
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_weight`, 
-       rightcols = c("effect", "ci"),rightlabs = c("MD", "95%-CI"),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("MD kg", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_weight`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
                  subgroup = FALSE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
@@ -765,51 +848,56 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_weight`,
 
 ```
 
-No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023), and the unpublisshed study on ralmitaront (NCT04512066)
+**Figure 28** Forest plot for weight change in kg for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). 
+
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Hyperprolactinemia
 
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_hyperprolactinemia`, 
-       leftcols = c("studlab",  "effect", "ci"),           
-       rightcols = FALSE,
-            #      xlim=c(0.2,5),
-                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_hyperprolactinemia`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
-                 overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
-                 subgroup = TRUE, fixed=TRUE, random=TRUE,
-                 label.left = "TAAR1 better", label.right="Placebo better")
+#forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_hyperprolactinemia`, 
+ #      col.diamond = "firebrick4",
+  #     col.square =   "firebrick3",     
+   #    label.c="placebo",      
+    #   rightcols = c("effect", "ci", "Overall"),
+     #            label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_hyperprolactinemia`$data$treat1_new), 
+      #           subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+       #          overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
+        #         subgroup = TRUE, fixed=TRUE, random=TRUE,
+         #        label.left = "TAAR1 better", label.right="Placebo better")
 
 ```
 
-Only one data from cossover RCT with assumed correlation of 0 (Hopkins 2021)
+There were available data from one study Hopkins et al 2021 reporting 0 events in both arms so that an effect size cannot be estimated with the current approach.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Prolactin levels
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_prolactin`, 
-       rightcols = c("effect", "ci"),rightlabs = c("MD", "95%-CI"),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("MD ng/ml", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_prolactin`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
@@ -817,12 +905,11 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_prolactin`,
                  label.left = "TAAR1 better", label.right="Placebo better")
 
 ```
-
-SD was imputed from Huhn et al 2021. No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023), and the unpublisshed study on ralmitaront (NCT04512066)
+**Figure 29** Forest plot for prolactin levels in ng/ml for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). SD was imputed from the dataset of antipsychotic trials in Huhn et al 2021.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Akathisia
 
@@ -830,16 +917,19 @@ Terms considered included: restlessness (when was used to describe akathisia)
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_akathisia`, 
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_akathisia`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
                  subgroup = FALSE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
@@ -847,27 +937,29 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_akathisia`,
 
 ```
 
-No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023), and the unpublisshed study on ralmitaront (NCT04512066)
+**Figure 30** Forest plot for akathisia for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint).
+
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Extrapyramidal symptoms
 
-Terms considered included: any extrapyramidal symptom, no finding in the movement disorder scales, use of anticholinergic medications (when used to treat extrapyramidal symptosm)
-
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_eps_symptoms`, 
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_eps_symptoms`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE, prediction = FALSE,
                  subgroup = FALSE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
@@ -875,12 +967,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_eps_symptoms`,
 
 
 ```
+**Figure 31** Forest plot for extrapyrmidal side-effects (use of antiparkinsonian medication as proxy) for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023), and the unpublisshed study on ralmitaront (NCT04512066).
 
-No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023), and the unpublisshed study on ralmitaront (NCT04512066)
+Furthermore, data presented in a conference abstract at the ACNP 2023 regarding NCT04072354 and NCT04092686 describe that ulotaront did not differ in experimental side-effect compared to placebo.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Anxiety
 
@@ -888,26 +981,30 @@ No data available from RCT.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
-forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anxiety`, 
-       leftcols = c("studlab",  "effect", "ci"),           
-       rightcols = FALSE,
-            #      xlim=c(0.2,5),
-                 label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anxiety`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
-                 overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
-                 subgroup = TRUE, fixed=TRUE, random=TRUE,
-                 label.left = "TAAR1 better", label.right="Placebo better")
+#forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anxiety`, 
+ #      col.diamond = "firebrick4",
+  #     col.square =   "firebrick3",     
+   #    label.c="placebo",      
+    #   leftcols = c("studlab",  "effect", "ci"),   
+     #            label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anxiety`$data$treat1_new), 
+      #           subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+       #          overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
+        #         subgroup = TRUE, fixed=TRUE, random=TRUE,
+         #        label.left = "TAAR1 better", label.right="Placebo better")
 
 
 ```
 
-Data were available only from one RCT on healthy volunteers.
+There were usable data for one study Perini et al 2023, which reported 0 events in both groups so that an effect size could not be estimated with the current approach.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_anxiety`, 
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_anxiety`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
@@ -916,23 +1013,29 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_anxiety`,
 
 ```
 
-No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023).
+
+**Figure 32** Forest plot for anxiety for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint).
+
+
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Agitation
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_agitation`, 
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_agitation`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
@@ -942,11 +1045,12 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_agitation`,
 
 ```
 
-No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023).
+
+**Figure 33** Forest plot for agitation for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint).
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Headache
 
@@ -955,24 +1059,30 @@ No data available from RCT.
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_headache`, 
-       leftcols = c("studlab",  "effect", "ci"),           
-       rightcols = FALSE,
-            #      xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       leftcols = c("studlab",  "effect", "ci"),  
                  label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_headache`$data$treat1_new), 
-                 subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
                  subgroup = TRUE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
 ```
 
-Data were available only from one RCT on healthy volunteers.
+
+**Figure 34** Forest plot for headache for the comparison of TAAR1 agonist vs. placebo at 1 day to 2 weeks.
+
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_headache`, 
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_headache`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
@@ -981,11 +1091,12 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_headache`,
 
 ```
 
-No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023).
+
+**Figure 35** Forest plot for headache for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint).
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Sedation
 
@@ -995,9 +1106,10 @@ Terms that were considered as reported in the trials: fatigue, sedation, somnole
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_sedation`, 
-       leftcols = c("studlab",  "effect", "ci"),           
-       rightcols = FALSE,
-            #      xlim=c(0.2,5),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       leftcols = c("studlab",  "effect", "ci"),   
                  label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_sedation`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
@@ -1006,14 +1118,18 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_sedation`,
 
 ```
 
-Data were available only from two RCT on healthy volunteers. Correlation was assumed 0 for the crossover study (Hopkins 2021)
+
+**Figure 36** Forest plot for sedation for the comparison of TAAR1 agonist vs. placebo at 1 day to 2 weeks.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_sedation`, 
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_sedation`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
@@ -1022,24 +1138,27 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_sedation`,
 
 ```
 
-No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023).
+**Figure 37** Forest plot for sedation for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint).
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Insomnia
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_insomnia`, 
-       rightcols = c("effect", "ci"),rightlabs = c("OR", "95%-CI"),
+       col.diamond = "firebrick4",
+       col.square =   "firebrick3",     
+       label.c="placebo",      
+       rightcols = c("effect", "ci", "Overall"),rightlabs = c("OR", "95%-CI", "Risk of bias"),
                  label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_insomnia`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = TRUE, prediction.subgroup = FALSE, prediction = FALSE,
@@ -1048,13 +1167,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_insomnia`,
 
 ```
 
-No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023).
+**Figure 37** Forest plot for insomnia for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). Potential differences between ulotaront and ralmitaront could be explained by their differnet pharmacological profile.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
-## Summary plot for the side-effects
+## Summary plot for  dropouts and side-effects
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=8, warning=FALSE}
 
@@ -1103,20 +1222,22 @@ ggplot(data=safety_primary_plot,
 
 
 ```
+**Figure 38** Summary forest plot for dropouts and side-effects as dichotomous outcomes and for the two timepoints with usable data.
+
 
 ## Secondary outcome: Neurobiological measures relevant relevant to psychosis such as dopaminergic, glutamatergic and serotonergic signalling
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Comparison 2: *TAAR1 agonist* vs *antipsychotic*
 
@@ -1124,7 +1245,7 @@ No data available from RCT.
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks* (primary timepoint)
 
@@ -1144,13 +1265,13 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`,
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Positive symptoms
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
@@ -1169,13 +1290,13 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_positive`,
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Negative symptoms
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
@@ -1194,13 +1315,13 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_negative`,
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Depressive symptoms
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
@@ -1220,55 +1341,55 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_depression`,
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Cognitive symptoms
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Quality of life
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Functioning
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Response to treatment
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
@@ -1290,21 +1411,21 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_response`,
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Relapse
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Dropouts due to any reason
 
@@ -1344,7 +1465,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`,
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Dropouts due to adverse event
 
@@ -1385,7 +1506,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`,
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Serious adverse event
 
@@ -1426,7 +1547,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_serious`,
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Death
 
@@ -1464,7 +1585,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_death`,
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Any adverse event
 
@@ -1503,7 +1624,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_adverse_event`,
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Anticholinergic symptoms
 
@@ -1527,11 +1648,11 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anticholinergic_symptom`,
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Hypotension
 
@@ -1539,15 +1660,15 @@ Terms that were considered as reported in the trials: hypotension or orthostatic
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Dizziness
 
@@ -1570,11 +1691,11 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dizziness`,
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Nausea or vomiting
 
@@ -1617,7 +1738,7 @@ It should be noted that the study NCT04512066 examined ralmitaront (which compar
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: QTc prolongation
 
@@ -1625,29 +1746,29 @@ Terms that were considered as reported in the trials: QTc prolongation above ≥
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: QTc interval in msec
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Weight increased
 
@@ -1655,7 +1776,7 @@ Terms considered included: any weight increase, weight increase >7%
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
@@ -1675,77 +1796,77 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_weight_increased`,
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Weight in kg
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Hyperprolactinemia
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Prolactin levels
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Akathisia
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Exrapyramidal symptoms
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Anxiety
 
@@ -1784,13 +1905,13 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_anxiety`,
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Agitation
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
@@ -1811,7 +1932,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_agitation`,
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Headache
 
@@ -1849,7 +1970,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_headache`,
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Sedation
 
@@ -1872,17 +1993,17 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_sedation`,
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Secondary outcome: Insomnia
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
@@ -1901,7 +2022,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_insomnia`,
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Summary plot for the side-effects
 
@@ -1952,15 +2073,15 @@ ggplot(data=safety_primary_plot,
 
 ### Timepoint 1: *1 day - 2 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 2: *3 weeks - 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ### Timepoint 3: *\> 13 weeks*
 
-No data available from RCT.
+No usable data available from RCT.
 
 ## Subgroup analyses and meta-regressions
 

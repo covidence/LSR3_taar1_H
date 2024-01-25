@@ -5,6 +5,7 @@ library(meta)
 library(netmeta)
 library(dosresmeta)
 library(rms)
+library(robvis)
 
 
 rm(list=ls())
@@ -552,9 +553,47 @@ pred<-predict(object=dosres_model, newdata=data.frame(standardized_dose = seq(0,
 pred<-pred  %>% rename(dose= `rcs(standardized_dose, knots)standardized_dose`) %>% select( dose, pred, ci.lb, ci.ub)
 
 
+#Overall risk of bias of the studies using the highest across outcomes
+rob_all<-rob %>% select(study_name, D1, D2, D3, D4, D5, DS, Overall)
+rob_all[rob_all=="Low"]<-"0"
+rob_all[rob_all=="Some concerns"]<-"1"
+rob_all[rob_all=="High"]<-"2"
+
+rob_all<-rob_all %>% group_by(study_name) %>%
+  summarise(D1=as.character(max(as.integer(D1))), 
+            D2=as.character(max(as.integer(D2))),
+            D3=as.character(max(as.integer(D3))),
+            D4=as.character(max(as.integer(D4))),
+            D5=as.character(max(as.integer(D5))),
+            DS=as.character(max(as.integer(DS))),
+            Overall=as.character(max(as.integer(Overall))))
+
+rob_all[rob_all==0]<-"Low"
+rob_all[rob_all==1]<-"Some concerns"
+rob_all[rob_all==2]<-"High"
+
+colnames(rob_all) <- c("Study", "Bias due to randomization", "Bias due to deviations from intended intervention",
+                    "Bias due to missing data", "Bias due to outcome measurement", "Bias due to selected reported results",
+                    "Bias due to period and carryover effects", "Overall bias")
+
 #Function to create RoB plots
 rob_plot<-function(data){ #RoB function using the extended meta objects
-  plot(rob_traffic_light(data=data$data[, 
-                                        c("study_name","D1", "D2", "D3", "D4", "D5", "Overall")], tool = "ROB2",  psize = 12))
+  data<-data$data[, c("study_name","D1", "D2", "D3", "D4", "D5", "DS", "Overall")]
+  colnames(data) <- c("Study", "Bias due to randomization", "Bias due to deviations from intended intervention",
+                      "Bias due to missing data", "Bias due to outcome measurement", "Bias due to selected reported results",
+                      "Bias due to period and carryover effects", "Overall bias")
+  
+    rob_traffic<-rob_traffic_light(data=data, tool = "Generic",  psize = 12)
+  return(rob_traffic)
+}
+
+rob_summary<-function(data){ #RoB function using the extended meta objects
+  data<-data$data[, c("study_name","D1", "D2", "D3", "D4", "D5", "DS", "Overall")]
+  colnames(data) <- c("Study", "Bias due to randomization", "Bias due to deviations from intended intervention",
+                      "Bias due to missing data", "Bias due to outcome measurement", "Bias due to selected reported results",
+                      "Bias due to period and carryover effects", "Overall bias")
+  
+  rob_summary<-rob_summary(data=data, tool = "Generic",  psize = 12)
+  return(rob_summary)
 }
 
