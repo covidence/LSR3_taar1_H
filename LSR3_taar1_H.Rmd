@@ -2351,11 +2351,11 @@ For each comparison, outcome and timepoint, we presented the summary of the evid
 
 **Summary of the association**: We presented the number of studies (N), participants (n) contributing to the analysis, the point estimates and 95% confidence intervals for both random- and fixed-effects models. We also made a statement about dose-effects for the primary outcome (**Figure 67**). 
 
-**Biases due to study limitations**: The majority of the studies had a low risk of bias, or at most, some concerns across domains and outcomes, except for one small study (Isaacson et al., 2023) with a high risk of bias due to missing outcome data for some of the outcomes. Thus, we assigned "low risk" except for "high risk" when findings were based on the latter single study.
+**Within-study biases**: This is referring to the study limitations measured with the risk of bias assessemnets using RoB2. The majority of the studies had a low risk of bias, or at most, some concerns across domains and outcomes, except for one small study (Isaacson et al., 2023) with a high risk of bias due to missing outcome data for some of the outcomes. Thus, we assigned "low risk" except for "high risk" when findings were based on the latter single study.
 
-**Biases due to reporting bias**: We used the approach mentioned above to assigned "low risk", "some concerns" or "high risk". 
+**Across-study bias**: This is referring to reporting bias, and we used the approach mentioned above to assign "low risk", "some concerns" or "high risk". 
 
-**Biases due to indirectness**: We assigned "no concerns" in indirectness, as there were no issues related to population, interventions, control conditions, outcomes, or settings in the analysis of efficacy outcomes using data from clinical trials in adults with an acute episode of schizophrenia or Parkinson's disease psychosis. However, potential indirectness in terms of population characteristics may exist in the analysis of other outcomes. This is because we pooled data from diverse populations, including those with schizophrenia spectrum disorders, Parkinson's disease psychosis, narcolepsy-cataplexy, and healthy volunteers. Although the majority of adverse events might not vary across these groups, we considered "some concerns" in indirectness when the analyses included fewer than 50% of participants with schizophrenia. This is because schizophrenia is the primary population to which these findings would be applied. Nevertheless, the impact on the magnitude and direction of the effects can be unclear. 
+**Indirectness**: We assigned "no concerns" in indirectness, as there were no issues related to population, interventions, control conditions, outcomes, or settings in the analysis of efficacy outcomes using data from clinical trials in adults with an acute episode of schizophrenia or Parkinson's disease psychosis. However, potential indirectness in terms of population characteristics may exist in the analysis of other outcomes. This is because we pooled data from diverse populations, including those with schizophrenia spectrum disorders, Parkinson's disease psychosis, narcolepsy-cataplexy, and healthy volunteers. Although the majority of adverse events might not vary across these groups, we considered "some concerns" in indirectness when the analyses included fewer than 50% of participants with schizophrenia. This is because schizophrenia is the primary population to which these findings would be applied. Nevertheless, the impact on the magnitude and direction of the effects can be unclear. 
 
 **Other biases**: We considered additional biases, such as potential factors that could impact the magnitude and direction of the findings. Specifically, we considered "some concerns" for other biases for the primary outcome and response to treatment in adults with an acute episode of schizophrenia due to potential problems in the execution of trials during COVID-19 (NCT0407254, NCT04092686, NCT04512066). The two phase III trials of ulotaront, NCT04072354 and NCT04092686, had high placebo effects of about 14 points and 19 points reduction in PANSS total scores (compared to a mean of 6 points in other antipsychotic trials), suggesting that potential factors associated with placebo effects could have diluted effect sizes and underestimated the effects. A conference abstract at ACNP 2024 reported that pooled analyses of these two trials using participants enrolled before COVID-19 found effect sizes similar to the phase II trial (Koblan 2019). A potential explanation, among others, could be baseline inflation due to recruitment pressure during the COVID-19 pandemic. Thus, the possibility that the findings have been underestimated cannot be excluded.
 
@@ -2364,15 +2364,9 @@ For each comparison, outcome and timepoint, we presented the summary of the evid
 
 ### Summary of evidence tables
 
-#### Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in adults with an acute episode of schizophrenia
+#### Summary of evidence table for efficacy outcomes
 
-```{r echo=FALSE, fig.width=12, fig.height=8}
-knitr::kable(soe_sch_ta1_pl_eff)
-```
-
-
-#### Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in adults with an acute episode of schizophrenia
-
+##### TAAR1 agonists versus placebo in adults with an acute episode of schizophrenia
 
 ```{r echo=FALSE, fig.width=12, fig.height=8}
 knitr::kable(soe_sch_ta1_pl_eff)
@@ -2380,38 +2374,36 @@ knitr::kable(soe_sch_ta1_pl_eff)
 **Table 3** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in adults with an acute episode of schizophrenia. There were data for ulotaront and ralmitaront.
 
 
-#### Summary of evidence table for the comparison of TAAR1 agonists versus antipsychotics for efficacy outcomes in adults with an acute episode of schizophrenia
-
-
-```{r echo=FALSE, fig.width=12, fig.height=8}
-knitr::kable(soe_sch_ta1_apd_eff)
-```
-**Table 3** Summary of evidence table for the comparison of TAAR1 agonists versus antipsychotics for efficacy outcomes in adults with an acute episode of schizophrenia. There were data from a single study for ralmitaront versus risperidone.
-
-#### Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in Parkinson's disease psychosis
-
+##### TAAR1 agonists versus antipsychotics in adults with an acute episode of schizophrenia
 
 ```{r echo=FALSE, fig.width=12, fig.height=8}
 knitr::kable(soe_sch_ta1_apd_eff)
 ```
-**Table 4** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in Parkinson's disease psychosis. There were data from a single study for ulotaront.
+**Table 4** Summary of evidence table for the comparison of TAAR1 agonists versus antipsychotics for efficacy outcomes in adults with an acute episode of schizophrenia. There were data from a single study for ralmitaront versus risperidone.
 
-#### Summary of evidence table for the comparison of TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers
+##### TAAR1 agonists versus placebo for efficacy outcomes in Parkinson's disease psychosis
 
+```{r echo=FALSE, fig.width=12, fig.height=8}
+knitr::kable(soe_sch_ta1_apd_eff)
+```
+**Table 5** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in Parkinson's disease psychosis. There were data from a single study for ulotaront.
+
+#### Summary of evidence table for dropouts and side-effecs
+
+##### TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers
 
 ```{r echo=FALSE, fig.width=12, fig.height=8}
 knitr::kable(soe_all_ta1_pl_saf)
 ```
-**Table 5** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers. There were data for ulotaront and ralmitaront.
+**Table 6** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers. There were data for ulotaront and ralmitaront.
 
 
-#### Summary of evidence table for the comparison of TAAR1 agonists versus antipsychotics for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers
-
+##### TAAR1 agonists versus antipsychotics for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers
 
 ```{r echo=FALSE, fig.width=12, fig.height=8}
 knitr::kable(soe_all_ta1_apd_saf)
 ```
-**Table 6** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers. There were data for ulotaront vs. amisulpride (single dose) and ralmitaront vs. risperidone (4 weeks).
+**Table 7** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers. There were data for ulotaront vs. amisulpride (single dose) and ralmitaront vs. risperidone (4 weeks).
 
 
 #### Summary of evidence table for the mechanistic insights of TAAR1 agonism for pscyhosis
@@ -2420,4 +2412,4 @@ knitr::kable(soe_all_ta1_apd_saf)
 ```{r echo=FALSE, fig.width=12, fig.height=8}
 knitr::kable(soe_mechanistic)
 ```
-**Table 6** Summary of evidence table for the mechanistic insights of TAAR1 agonism for psychosis. The findings of two studies with available neurobiological measures relevant to psychosis are narratively reported. These include the double-blind randomized controlled trial of Perini et al. 2023 with the fMRI BOLD striatal responses in the anticipatory phase of the Monetary Incentive Delay (MID) task (the primary outcome of this study), and the open label single-arm study of NCT04038957 with F-DOPA PET in the striatum 
+**Table 8** Summary of evidence table for the mechanistic insights of TAAR1 agonism for psychosis. The findings of two studies with available neurobiological measures relevant to psychosis are narratively reported. These include the double-blind randomized controlled trial of Perini et al. 2023 with the fMRI BOLD striatal responses in the anticipatory phase of the Monetary Incentive Delay (MID) task (the primary outcome of this study), and the open label single-arm study of NCT04038957 with F-DOPA PET in the striatum 
