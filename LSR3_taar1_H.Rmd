@@ -59,6 +59,7 @@ soe_sch_ta1_apd_eff<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 2)
 soe_pd_ta1_pl_eff<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 3)
 soe_all_ta1_pl_saf<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 4)
 soe_all_ta1_apd_saf<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 5)
+soe_mechanistic<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 6)
 
 #Round off results to two digits
 options(scipen=1, digits=2)
@@ -85,6 +86,9 @@ options(scipen=1, digits=2)
 9. Subgroup analyses and meta-regressions were not conducted due to the paucity of data. However, we explored potential dose-effects for the primary outcome by plotting the effect sizes for different fixed doses of TAAR1 agonists compared to placebo (while correcting for the use of common comparators).
 
 10. Summary of evidence tables were constructed for all outcomes, including a summary of the association, biases due to study limitations, biases due to reporting bias, biases due to indirectness, and other biases. We adapted the GRADE approach. We used the ROB-ME approach for evaluating biases in missing evidence for the primary outcomes and considered the percentage of missing studies and participants for secondary outcomes. Indirectness was considered especially relevant for non-efficacy outcomes, where we pooled data across diagnoses and subgroups, and considered the percentage of studies and participants with schizophrenia, the main group for which this evidence would be applicable.
+
+11. Finally, as there were no usable data from controlled experimental studies on the effects of TAAR1 agonists on neurobiological measures relevant to dopaminergic, serotonergic, or glutamatergic signaling, we could not analyze them as secondary outcomes in the current review. Nevertheless, to provide mechanistic insights, we narratively described the findings of any available mechanistic data from controlled and uncontrolled studies, irrespective of their inclusion in this review, given that we had comprehensively searched for them. We also presented the findings of these studies narratively in summary of evidence tables and discussed potential issues of risk of bias, reporting bias, indirectness, and other biases, but without formally using risk of bias tools.
+
 
 *Please see the manuscript and the protocol for more details.*
 
@@ -130,6 +134,8 @@ The following studies are ongoing:
 - *Two studies* are examining the efficacy and safety of ulotaront compared to placebo in other mental health conditions, i.e., adults with *major depression* (NCT05593029) and *generalized anxiety disorder* (NCT05729373). These trials are expected to be completed in 2025, and their safety data are relevant for this review.
 
 
+The studies used to describe mechanistic insights are provided in the relevant section below.
+
 ## Risk of bias assessment
 
 The risk of bias of the studies was examined using the RoB2 tool for parallel and crossover studies for all outcomes. Here, we present the risk of bias of using the worst judgement of a domain across outcomes. It should be noted that when there were some concerns in only one of the domains, we assigned an overall low risk of bias according to our protocol. 
@@ -145,13 +151,13 @@ All the studies were double-blind randomized controlled studies, with a low risk
 
 ## Comparison 1: *TAAR1 agonist* vs *placebo*
 
-## Primary outcome: Overall symptoms
+### Primary outcome: Overall symptoms
 
-### Timepoint 1: *1 day - 2 weeks*
+##### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks* (primary timepoint)
+#### Timepoint 2: *3 weeks - 13 weeks* (primary timepoint)
 
 ```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`, 
@@ -170,17 +176,17 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`,
 
 **Figure 3** Forest plot for overall symptoms (primary outcome) for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Positive symptoms
+### Secondary outcome: Positive symptoms
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`, 
@@ -198,17 +204,17 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`,
 
 **Figure 4** Forest plot for positive symptoms for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Negative symptoms
+### Secondary outcome: Negative symptoms
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_negative`, 
@@ -229,17 +235,17 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_negative`,
 **Figure 5** Forest plot for negative symptoms for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Depressive symptoms
+### Secondary outcome: Depressive symptoms
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -259,17 +265,17 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_depression`,
 
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Cognitive symptoms
+### Secondary outcome: Cognitive symptoms
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -287,45 +293,45 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_cognition`,
 
 **Figure 7** Forest plot for cognitive impairment (measured with MMSE) for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Quality of life
+### Secondary outcome: Quality of life
 
-### Timepoint 1: *1 day - 2 weeks*
-
-No usable data available from RCT.
-
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Functioning
-
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+### Secondary outcome: Functioning
+
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Response to treatment
-
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+### Secondary outcome: Response to treatment
+
+#### Timepoint 1: *1 day - 2 weeks*
+
+No usable data available from RCT.
+
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_response`, 
@@ -345,25 +351,25 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_response`,
 
 **Figure 8** Forest plot for response (>50% or 20% symptom reduction from baseline) for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Relapse
+### Secondary outcome: Relapse
 
-### Timepoint 1: *1 day - 2 weeks*
-
-No usable data available from RCT.
-
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-## Summary plot for efficacy outcomes
+#### Timepoint 3: *\> 13 weeks*
+
+No usable data available from RCT.
+
+### Summary outcome plot: Efficacy outcomes
 
 
 ```{r echo=F, fig.fullwidth=T, fig.width=10, fig.height=5, warning=FALSE}
@@ -403,9 +409,9 @@ ggplot(data=efficacy_primary,
 ```
 **Figure 9** Summary plot for efficacy outcomes at 4-6 weeks for the comparison of TAAR1 agonists vs. placebo in the two populations of patients with an acute episode of schizophrenia and Parkinson's disease psychosis. There were only available data for the timepoint of 3-13 weeks. The size of the points are proportional to the number of participants used in the analysis. SMD>0 correspond to more symptom improvement by TAAR1 agonists compared to placebo. 
 
-## Secondary outcome: Dropouts due to any reason
+### Secondary outcome: Dropouts due to any reason
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_any`, 
@@ -423,7 +429,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_any`,
 **Figure 10** Forest plot for dropouts due to any reason for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks.Studies with no estimable effect size had 0 events in both arms.
 
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=10, fig.height=5}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_any`, 
@@ -442,13 +448,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_any`,
 **Figure 11** Forest plot for dropouts due to any reason for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Dropouts due to adverse event
+### Secondary outcome: Dropouts due to adverse event
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_ae`, 
@@ -469,7 +475,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_ae`,
 **Figure 12** Forest plot for dropouts due to adverse event for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. Studies with no estimable effect size had 0 events in both arms.
 
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_ae`, 
@@ -487,13 +493,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_ae`,
 
 **Figure 13** Forest plot for dropouts due to adverse event for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Serious adverse event
+### Secondary outcome: Serious adverse event
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_serious`, 
@@ -512,7 +518,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_serious`,
 
 **Figure 14** Forest plot for serious adverse events for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. Studies with no estimable effect size had 0 events in both arms.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_serious`, 
@@ -532,13 +538,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_serious`,
 **Figure 15** Forest plot for serious adverse events for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Death
+### Secondary outcome: Death
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 #forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_death`, 
@@ -557,7 +563,7 @@ No usable data available from RCT.
 ```
 There were available usable data from four studies (i.e., Hopkins et al 2021, Perini et al 2023, Szabo et al 2023 and Tsukada et al 2023) but all of them reported 0 deaths so that could not provide estimable effect sizes with the current approach. 
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_death`, 
@@ -574,13 +580,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_death`,
 
 **Figure 16** Forest plot for death for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). Studies with 0 events in both arms could not provide estimable effect sizes with the current approach.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Any adverse event
+### Secondary outcome: Any adverse event
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=5}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_adverse_event`, 
@@ -599,7 +605,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_adverse_event`,
 
 **Figure 17** Forest plot for any adverse events for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. 
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_adverse_event`, 
@@ -617,13 +623,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_adverse_event`,
 
 **Figure 18** Forest plot for any adverse event for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Anticholinergic symptoms
+### Secondary outcome: Anticholinergic symptoms
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anticholinergic_symptom`, 
@@ -642,23 +648,23 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anticholinergic_symptom`,
 
 **Figure 19** Forest plot for anticholinergic side-effects (i.e., dry mouth) for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. 
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Hypotension
+### Secondary outcome: Hypotension
 
 Terms that were considered as reported in the trials: hypotension or orthostatic hypotension
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_hypotension`, 
@@ -676,13 +682,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_hypotension`,
 
 **Figure 20** Forest plot for hypotension for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Dizziness
+### Secondary outcome: Dizziness
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dizziness`, 
@@ -701,7 +707,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dizziness`,
 
 **Figure 21** Forest plot for dizziness for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. 
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dizziness`, 
@@ -720,13 +726,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dizziness`,
 **Figure 22** Forest plot for dizziness for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). 
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Nausea or vomiting
+### Secondary outcome: Nausea or vomiting
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_nausea_vomitting`, 
@@ -745,7 +751,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_nausea_vomitting`,
 
 **Figure 23** Forest plot for nausea or vomiting for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. 
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_nausea_vomitting`, 
@@ -766,13 +772,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_nausea_vomitting`,
 
 It should be noted that there appears to be some heterogeneity in the findings between ulotaront and ralmitaront. This heterogeneity may potentially be driven by the fact that ulotaront is also a 5-HT1A receptor partial agonist, which is associated with gastrointestinal symptoms. 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: QTc prolongation
+### Secondary outcome: QTc prolongation
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_qtc_prolongation`, 
@@ -791,7 +797,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_qtc_prolongation`,
 **Figure 25** Forest plot for QTc prolongation for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. Studies with not estimable effect sizes had 0 events in both groups.
 
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -809,13 +815,13 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_qtc_prolongation`,
 ```
 There were available data in Koblan et al 2020, which reported 0 events in both groups, so that an effect. size cannot be estimated with the current approach. 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: QTc interval in msec
+### Secondary outcome: QTc interval in msec
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc_interval`, 
@@ -833,21 +839,21 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc_interval`,
 
 **Figure 26** Forest plot for QTc interval in msec for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. 
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Weight increased
+### Secondary outcome: Weight increased
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_weight_increased`, 
@@ -866,17 +872,17 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_weight_increased`,
 **Figure 27** Forest plot for weight gain for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). 
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Weight in kg
+### Secondary outcome: Weight in kg
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_weight`, 
@@ -897,13 +903,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_weight`,
 **Figure 28** Forest plot for weight change in kg for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). 
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Hyperprolactinemia
+### Secondary outcome: Hyperprolactinemia
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 #forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_hyperprolactinemia`, 
@@ -921,21 +927,21 @@ No usable data available from RCT.
 
 There were available data from one study Hopkins et al 2021 reporting 0 events in both arms so that an effect size cannot be estimated with the current approach.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Prolactin levels
+### Secondary outcome: Prolactin levels
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -953,19 +959,19 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_prolactin`,
 ```
 **Figure 29** Forest plot for prolactin levels in ng/ml for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). SD was imputed from the dataset of antipsychotic trials in Huhn et al 2021.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Akathisia
+### Secondary outcome: Akathisia
 
 Terms considered included: restlessness (when was used to describe akathisia)
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -986,17 +992,17 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_akathisia`,
 **Figure 30** Forest plot for akathisia for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint).
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Extrapyramidal symptoms
+### Secondary outcome: Extrapyramidal symptoms
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_eps_symptoms`, 
@@ -1015,13 +1021,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_eps_symptoms`,
 ```
 **Figure 31**  Forest plot for extrapyramidal side effects (use of antiparkinsonian medication as a proxy) for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). Furthermore, narratively described findings in a conference abstract at ACNP 2023 regarding NCT04072354 and NCT04092686 mention that ulotaront did not differ in experimental side effects compared to placebo. Moreover, ulotaront was reported not to deteriorate movement symptoms in participants with Parkinson's disease psychosis as measured with the Unified Parkinson Disease Rating Scale Part III.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Anxiety
+### Secondary outcome: Anxiety
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -1041,7 +1047,7 @@ No usable data available from RCT.
 
 There were usable data for one study Perini et al 2023, which reported 0 events in both groups so that an effect size could not be estimated with the current approach.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_anxiety`, 
@@ -1062,17 +1068,17 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_anxiety`,
 
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Agitation
+### Secondary outcome: Agitation
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_agitation`, 
@@ -1092,13 +1098,13 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_agitation`,
 
 **Figure 33** Forest plot for agitation for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint).
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Headache
+### Secondary outcome: Headache
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -1119,7 +1125,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_headache`,
 **Figure 34** Forest plot for headache for the comparison of TAAR1 agonist vs. placebo at 1 day to 2 weeks.
 
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -1139,15 +1145,15 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_headache`,
 
 **Figure 35** Forest plot for headache for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint).
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Sedation
+### Secondary outcome: Sedation
 
 Terms that were considered as reported in the trials: fatigue, sedation, somnolence
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_sedation`, 
@@ -1167,7 +1173,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_sedation`,
 
 **Figure 36** Forest plot for sedation for the comparison of TAAR1 agonist vs. placebo at 1 day to 2 weeks.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -1186,17 +1192,17 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_sedation`,
 
 **Figure 37** Forest plot for sedation for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint).
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Insomnia
+### Secondary outcome: Insomnia
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -1215,11 +1221,11 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_insomnia`,
 
 **Figure 38** Forest plot for insomnia for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint).
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Summary plot for dropouts and side-effects
+### Summary outcome plot: Dropouts and side-effects
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=8, warning=FALSE}
 
@@ -1272,33 +1278,15 @@ ggplot(data=safety_primary_plot,
 ```
 **Figure 39** Summary forest plot for dropouts and side-effects for the comparison of TAAR1 agonists compared to placebo and for the two timepoints with usable data. It should be noted that different populations have been pooled in the analysis of dropouts and adverse events including schizophrenia, Parkinson's disease psychosis, narcolepsy-cateplexy and healthy volunteers. The size is proportional to the number of participants in the analysis. OR>1 corresponds to more events with TAAR1 agonists compared to placebo.  
 
-
-## Secondary outcome: Neurobiological measures relevant relevant to psychosis such as dopaminergic, glutamatergic and serotonergic signalling
-
-### Timepoint 1: *1 day - 2 weeks*
-
-No usable data were available from RCTs. However, Perini et al. 2023 examined the effects of single doses of ulotaront compared to placebo in volunteers with low or high schizotypy traits on fMRI of BOLD responses to neuropsychological tasks that could be considered only as weak proxies for neurotransmitter signaling. Thus, they were not quantitatively further analyzed but narratively described in this iteration of the review. The primary outocme of this study was the response of the changes in BOLD responses in the striatum during the anticipation phase of the monetary incentive delay (MID) task and interaction with schizotypy traits. This was potentially selected a posteriori given that the complete protocol was not available and the 
-
-
-Specifically, ulotaront, compared to placebo, appeared to reverse increased BOLD responses in the striatum during the anticipation phase of the monetary incentive delay (MID) task in participants with high schizotypy traits compared to those with low schizotypy traits. This was the primary outcome of this study, which selection was described to be due to its relevance to reward processing and increased dopamine synthesis capacity, thus serving as a weak proxy for ulotaront's effects on decreasing presynaptic dopamine synthesis capacity. However, there is possibility that this outcome was selected a posteriori due to significant findings and the protocol of the study was not available and the clinicaltrials.gov did not specify a primary outcome. Thus, there is the possibility of risk of bias of selected reported outcome. There were also differences between ulotaront and placebo in some other fMRI and neuropsychological measures, including that ulotaront compared to placebo decreasing the performance in N-back tasks (working memory measure) and emotional test battery (). 
-
-### Timepoint 2: *3 weeks - 13 weeks*
-
-No usable data available from RCT.
-
-### Timepoint 3: *\> 13 weeks*
-
-No usable data available from RCT.
-
 ## Comparison 2: *TAAR1 agonist* vs *antipsychotic*
 
 ## Primary outcome: Overall symptoms
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks* (primary timepoint)
+#### Timepoint 2: *3 weeks - 13 weeks* (primary timepoint)
 
 ```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`, 
@@ -1318,17 +1306,17 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`,
 **Figure 40** Forest plot for overall symptoms (primary outcome) for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint)
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Positive symptoms
+### Secondary outcome: Positive symptoms
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_positive`, 
@@ -1346,17 +1334,17 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_positive`,
 ```
 **Figure 41** Forest plot for positive symptoms for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint)
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Negative symptoms
+### Secondary outcome: Negative symptoms
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_negative`, 
@@ -1375,17 +1363,17 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_negative`,
 
 **Figure 42** Forest plot for negative symptoms for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint)
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Depressive symptoms
+### Secondary outcome: Depressive symptoms
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_depression`, 
@@ -1405,59 +1393,59 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_depression`,
 
 **Figure 43** Forest plot for depression symptoms for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint)
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Cognitive symptoms
+### Secondary outcome: Cognitive symptoms
 
-### Timepoint 1: *1 day - 2 weeks*
-
-No usable data available from RCT.
-
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Quality of life
-
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+### Secondary outcome: Quality of life
+
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Functioning
-
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+### Secondary outcome: Functioning
+
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Response to treatment
-
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+### Secondary outcome: Response to treatment
+
+#### Timepoint 1: *1 day - 2 weeks*
+
+No usable data available from RCT.
+
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -1479,26 +1467,26 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_response`,
 **Figure 44** Forest plot for response to treatment (>50% symptom reduction from baseline) for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint)
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Relapse
+### Secondary outcome: Relapse
 
-### Timepoint 1: *1 day - 2 weeks*
-
-No usable data available from RCT.
-
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
+
+No usable data available from RCT.
+
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
 
-## Summary plot for efficacy outcomes
+### Summary outcome plot: Efficacy outcomes
 
 
 ```{r echo=F, fig.fullwidth=T, fig.width=10, fig.height=5, warning=FALSE}
@@ -1539,9 +1527,9 @@ ggplot(data=efficacy_primary_2,
 **Figure 45** Summary plot for efficacy outcomes at 4 weeks for the comparison of TAAR1 agonists versus antipscyhotcs in patients with an acute episode of schizophrenia. There were only data for the timepoint of 3-13 weeks. SMD>0 correspond to more symptom improvement by TAAR1 agonists compared to placebo. 
 
 
-## Secondary outcome: Dropouts due to any reason
+### Secondary outcome: Dropouts due to any reason
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_any`, 
@@ -1563,7 +1551,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_any`,
 
 
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`, 
@@ -1583,13 +1571,13 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`,
 ```
 **Figure 47** Forest plot for dropouts due to any reason for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint).
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Dropouts due to adverse event
+### Secondary outcome: Dropouts due to adverse event
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 #forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_ae`, 
@@ -1608,7 +1596,7 @@ No usable data available from RCT.
 There were usable data in Perini et al 2023, whcih reported 0 events in both groups and an effect size cannot be estimated with the current approach.
 
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -1629,13 +1617,13 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`,
 ```
 **Figure 48** Forest plot for dropouts due to adverse events for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint).
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Serious adverse event
+### Secondary outcome: Serious adverse event
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_serious`, 
@@ -1654,7 +1642,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_serious`,
 ```
 **Figure 49** Forest plot for serious adverse events for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -1675,13 +1663,13 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_serious`,
 ```
 **Figure 50** Forest plot for serious adverse events for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint).
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Death
+### Secondary outcome: Death
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 #forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_death`, 
@@ -1699,7 +1687,7 @@ No usable data available from RCT.
 ```
 There were usable data in Perini et al 2023, whcih reported 0 events in both groups and an effect size cannot be estimated with the current approach.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -1718,13 +1706,13 @@ There were usable data in Perini et al 2023, whcih reported 0 events in both gro
 ```
 There were usable data in NCT04512066, whcih reported 0 events in both groups and an effect size cannot be estimated with the current approach.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Any adverse event
+### Secondary outcome: Any adverse event
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_adverse_event`, 
@@ -1746,7 +1734,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_adverse_event`,
 
 
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -1768,15 +1756,15 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_adverse_event`,
 
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Anticholinergic symptoms
+### Secondary outcome: Anticholinergic symptoms
 
 Terms that were considered as reported in the trials: dry mouth (no other relevant anticholinergic side-effects were reported such as urinary retention, constipation, mydriasis or blurred vision)
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anticholinergic_symptom`, 
@@ -1794,33 +1782,33 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anticholinergic_symptom`,
 ```
 **Figure 53** Forest plot for anticholinergic side effects (e.g., dry mouth in this study) for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Hypotension
+### Secondary outcome: Hypotension
 
 Terms that were considered as reported in the trials: hypotension or orthostatic hypotension
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Dizziness
+### Secondary outcome: Dizziness
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dizziness`, 
@@ -1839,19 +1827,19 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dizziness`,
 ```
 **Figure 54** Forest plot for dizziness for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Nausea or vomiting
+### Secondary outcome: Nausea or vomiting
 
 Terms that were considered as reported in the trials: nausea, vomiting, emesis
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_nausea_vomitting`, 
@@ -1869,7 +1857,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_nausea_vomitting`,
 ```
 **Figure 55** Forest plot for nausea or vomitting for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.It should be noted that the study Perini et al 2023 examined ulotaront that is also a partial agonsit of 5-HT1A causing potentially gastrointestinal side-effects. In comparison, ralmitaront is not a partial agonist of the 5-HT1A receptor.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -1889,49 +1877,49 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_nausea_vomitting`,
 **Figure 56** Forest plot for nausea or vomitting for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint). It should be noted that the study NCT04512066 examined ralmitaront, which compared to ulotaront is not a partial agonist of the 5-HT1A receptor that can be associated with gastrointestinal side effects.
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: QTc prolongation
+### Secondary outcome: QTc prolongation
 
 Terms that were considered as reported in the trials: QTc prolongation above ≥450 msec or an increase of ≥60 msec (any threshold was eligible)
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: QTc interval in msec
+### Secondary outcome: QTc interval in msec
 
-### Timepoint 1: *1 day - 2 weeks*
-
-No usable data available from RCT.
-
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Weight increased
+#### Timepoint 3: *\> 13 weeks*
+
+No usable data available from RCT.
+
+### Secondary outcome: Weight increased
 
 Terms considered included: any weight increase, weight increase >7%
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_weight_increased`, 
@@ -1950,83 +1938,83 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_weight_increased`,
 
 **Figure 57** Forest plot for weight increase for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint). 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Weight in kg
+### Secondary outcome: Weight in kg
 
-### Timepoint 1: *1 day - 2 weeks*
-
-No usable data available from RCT.
-
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Hyperprolactinemia
-
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+### Secondary outcome: Hyperprolactinemia
+
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Prolactin levels
-
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+### Secondary outcome: Prolactin levels
+
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Akathisia
-
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+### Secondary outcome: Akathisia
+
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Exrapyramidal symptoms
-
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+### Secondary outcome: Exrapyramidal symptoms
+
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Anxiety
+#### Timepoint 3: *\> 13 weeks*
 
-### Timepoint 1: *1 day - 2 weeks*
+No usable data available from RCT.
+
+### Secondary outcome: Anxiety
+
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anxiety`, 
@@ -2045,7 +2033,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anxiety`,
 **Figure 58** Forest plot for anxiety as adverse event for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.
 
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -2067,17 +2055,17 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_anxiety`,
 **Figure 59** Forest plot for anxiety as adverse event for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint). 
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Agitation
+### Secondary outcome: Agitation
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_agitation`, 
@@ -2099,13 +2087,13 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_agitation`,
 **Figure 60** Forest plot for agitation for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint). 
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Headache
+### Secondary outcome: Headache
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_headache`, 
@@ -2123,7 +2111,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_headache`,
 ```
 **Figure 61** Forest plot for headache as adverse event for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_headache`, 
@@ -2144,15 +2132,15 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_headache`,
 **Figure 62** Forest plot for headache for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint). 
 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Sedation
+### Secondary outcome: Sedation
 
 Terms that were considered as reported in the trials: fatigue, sedation, somnolence
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_sedation`, 
@@ -2169,21 +2157,21 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_sedation`,
 ```
 **Figure 63** Forest plot for sedation for the comparison of TAAR1 agonist vs. antipsychotics at 1 day to 2 weeks.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Secondary outcome: Insomnia
+### Secondary outcome: Insomnia
 
-### Timepoint 1: *1 day - 2 weeks*
+#### Timepoint 1: *1 day - 2 weeks*
 
 No usable data available from RCT.
 
-### Timepoint 2: *3 weeks - 13 weeks*
+#### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_insomnia`, 
@@ -2201,11 +2189,11 @@ forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_insomnia`,
 ```
 **Figure 64** Forest plot for insomnia for the comparison of TAAR1 agonist vs. antipsychotics at 3-13 weeks (primary timepoint). 
 
-### Timepoint 3: *\> 13 weeks*
+#### Timepoint 3: *\> 13 weeks*
 
 No usable data available from RCT.
 
-## Summary plot for the side-effects
+### Summary outcome plot: Dropouts and side-effects
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=8, warning=FALSE}
 safety_primary_2<-meta_outcome %>% left_join(ae_categories) %>%  #I need to change a bit 
@@ -2250,19 +2238,20 @@ ggplot(data=safety_primary_plot_2,
 ```
 **Figure 65** Summary forest plot for dropouts and side-effects for the comparison of TAAR1 agonists compared to antipsychotics and for the two timepoints with usable data. There were data for single doses of ralmitaront versus amisulpride in healthy volunteers at 1 day, and ulotaront versus risperidone in acute schizophrenia or schizoaffective disorder at 4 weeks. The size of the points is proporitonal tothe number of participants. OR>1 corresponds to more events with TAAR1 agonists compared to placebo. 
 
-## Secondary outcome: Neurobiological measures relevant relevant to psychosis such as dopaminergic, glutamatergic and serotonergic signalling
+## Mechanistic insights into the effects of TAAR1 agonism for psychosis 
 
-### Timepoint 1: *1 day - 2 weeks*
+There were no usable data available from RCTs on neurobiological measures relevant to psychosis and neutrasmitter signalling that could be analyzed as secondary outcomes of this review. 
 
-No usable data available from RCT.
+Therefore, to be able to provide additional insights into the mechanism of TAAR1 agonism for pscyhsois, we sought to describe any potentially available data from both controlled and uncontrolled studies, irrespective of whether they have been included or not in the review. We had already searched for these studies, and comprehensively screened them for any such measure. 
 
-### Timepoint 2: *3 weeks - 13 weeks*
+There were some available neuroimaging data from two studies, one RCTs (Perini et al 2023) and one single-arm study (NCT04038957). 
 
-No usable data available from RCT.
+Perini et al 2023 was double-blind, three-arm parallel RCT examining the effects of a single dose of ulotaront compared to placebo and amisulpride on fMRI blood oxygen level-dependent (BOLD) striatal responses to reward processing, as measured during the anticipation phase of the Monetary Incentive Delay (MID) task. The interventions were administered 2 hours before the fMRI. BOLD striatal responses to reward during the anticipatory phase of MID were selected as the primary outcome due to their potential relation to increased dopamine release. The study enrolled 96 healthy volunteers, 51 with low schizotypy traits and 45 with high, as measured with the Schizotypal Personality Questionnaire (scores <10 indicate low schizotypy traits, >=40 high schizotypy traits) to examine interactions due to the potential shared increased striatal activity between positive symptoms and schizotypal traits. Moreover, the study measured responses to other brain regions, the outcome phase of MID, BOLD responses to the N-back task for working memory, responses to an emotional test battery, resting state connectivity, and arterial spin labeling. The findings of the primary outcome of this study are reported here as they were deemed most relevant to dopaminergic signaling. Ulotaront appeared to be associated with smaller BOLD striatal responses compared to placebo (left striatum: -0.13%, p=0.03; right striatum: -0.12%, p=0.06) but not to amisulpride (left: -0.07%, p=0.38; right: -0.03%, p=0.66) in the anticipation of loss, and did not differ from both placebo (left: -0.07%, p=0.30; right: -0.07%, p=0.27) and amisulpride (left: -0.03%, p=0.65; right: -0.02%, p=0.74) in the anticipation of win in the MID task. There were also no differences in BOLD right and left insular responses, but ulotaront seemed to increase BOLD responses in the medial orbital frontal cortex in anticipation of loss compared to placebo (left: 0.19%, p=0.07; right: 0.17%, p=0.10) and amisulpride (left: 0.25%, p=0.03; right: 0.22%, p=0.05) and in anticipation of win compared to placebo (left: 0.25%, p=0.01; right: 0.24%, p=0.01), but not clearly to amisulpride (left: 0.10%, p=0.30; right: 0.11%, p=0.19). Interactions with schizotypy traits were not reported for the primary outcome, but ulotaront was reported to reverse in comparison to placebo the aberrant increased BOLD response in the right insula observed in participants with high schizotypy traits but not in those with low schizotypy traits. However, it is unclear if the primary outcome was selected a priori or a posteriori, as no primary outcome was reported in the registration of the study on clinicaltrials.gov, thus biases due to seletected reported outcomes cannot be excluded. There were also differences between the interventions in some of the other measures, with ulotaront being reported as associated with the modification of signals in brain regions associated with cognitive symptoms in schizophrenia. Moreover, ulotaront was associated with sedation in 60% of the participants, more frequently than placebo (see **Figure 36**) and amisulpride (see **Figure 63**) that impaired reaction times in the tasks but was not correlated with BOLD responses. Nevertheless, the impact of this sedative effect on these findings is unclear. In conclusion, this study suggests that ulotaront might be able to reduce dopamine release in situations that are increased, like the anticipatory phase of MID, and potentially in psychosis.
 
-### Timepoint 3: *\> 13 weeks*
+NCT04038957 was an open-label single-arm trial examining the effects of a 2-week treatment with ulotaront as an add-on to antipsychotic treatment on dopamine synthesis capacity in clinically stable patients with schizophrenia (an uncontrolled study that was not included in this meta-analysis, with available data from a conference abstract in ACNP 2024). This study included 14 men and 5 women (aged 18-45 years, mean age 32.9 years) with clinically stable schizophrenia (DSM-5) on a stable dose of antipsychotics for at least 3 weeks before screening. Three additional patients were enrolled but did not complete the baseline scan, so they were excluded from the study. The patients underwent an F-DOPA PET scan both at baseline and after 2 weeks of treatment with ulotaront (50-75mg/d) as an add-on to antipsychotic treatment. At baseline, the patients had a mean PANSS total score of 79.3 (SD=7.3), PANSS positive subscale of 19.2 (SD=4.6), PANSS Marder positive factor of 24.3 (SD=4.6), and CGI-S of 4.2 (SD=0.6), indicating that the patients had on average symptoms of moderate severity. Moreover, patients had an increased dopamine synthesis capacity at baseline compared to that observed in healthy controls, as indicated by the F-DOPA PET scan. After 2 weeks of treatment with add-on ulotaront, there was a decrease in dopamine synthesis capacity in the striatum as indicated by the F-DOPA PET scan by 3.98% from baseline (95% CI: -8.68%, 0.72%), with the 95% CI not excluding the null effect, and the striatal subregions ranging from -3.38% in the associative striatum, -3.89% in the sensorimotor striatum, to -5.79% in the limbic striatum. This reduction was considered to be clinically meaningful, and although it was not correlated with the relative reduction in PANSS total scores (r=0.19, p>0.05), it was correlated with improvements in the PANSS Marder positive factor (r=0.49, p<0.05). The study can be considered to have a high risk of bias due to the single-arm design, lack of control conditions, and the absence of blinding, yet the measurement of the outcome can be cosnidered objective. In conclusion, this study suggests that ulotaront may be able to reduce the dopamine synthesis capacity in clinically stable, but still symptomatic, people with schizophrenia, and the decrease in dopamine synthesis could be associated with the improvement of symptoms.
 
-No usable data available from RCT.
+No other controlled or uncontrolled study (see *included and excluded studies* in the supplementary files of the review) reported any neurobiological measure. It should be noted that another study, i.e., NCT02699372, consisting of double-blind trials examining single and multiple ascending doses of ralmitaront compared to placebo in healthy volunteers (see *Table 1*), utilized neuropsychological tasks but did not couple them with neuroimaging or other neurobiological measures to provide further insights. There were no usable data for this study for any of the outcomes; only brief and narrative descriptions of the findings of these tasks were available in the study protocol of NCT04512066. These findings describe that ralmitaront improved reward-related behavioral tasks compared to placebo but lacked additional information.
+
 
 ## Subgroup analyses and meta-regressions
 
@@ -2317,26 +2306,16 @@ In the fixed-dosing studies, higher doses (i.e., ulotaront 100mg/d and ralmitaro
 
 ## Sensitivity analyses
 
-
 We did not conduct the following sensitivity analyses for the primary outcome due to the limited data: 1) Restricting the analysis to studies with low risk of bias, since there were 4 studies with low risk of bias in acute schizophrenia, and 1 study with high risk of bias in Parkinson's disease psychosis (1 study with high risk of bias). 2) Excluding imputed data, since no imputed data were used in the analysis of the primary outcome."
 There were no imputed data in the analysis of the primary outcome.
 
 Due to the limited number of studies, we also presented a fixed-effects model for all outcomes in addition to the random-effects model to assess the robustness of the findings. The findings were robust in the majority of cases. For the primary outcome in the meta-analysis of 4 studies in acute schizophrenia, the point estimate of the effect sizes did not differ between random- and fixed-effects (SMD=0.15 and 0.13, respectively), but the 95% CI in the fixed-effects model was narrower, excluding the null effect (95% CI: -0.05, 0.34, and 0.02, 0.05, respectively). Nonetheless, the interpretation of the findings that TAAR1 agonists have little to no effect compared to placebo in improving overall symptoms does not change
 
-
 ## Reporting bias
 
 Reporting bias was evaluated using the ROB-ME tool, taking into account the usable data from the eligible studies identified in the search, the comprehensiveness of the search, and potential patterns of missingness and small-study effects. We followed the algorithm to assign a low or high risk of reporting bias, or to express some concerns, by answering signaling questions related to the domains mentioned above.
 
-### Funnel plots and examination of small-study effects
-
-There were insufficient data for the primary outcome but also other outcomes (i.e., fewer than 10 studies) to examine small-study effects with funnel plots. Thus, we cannot explore the pattern of missing evidence or conduct sensitivity analysis to explore the potential impact of the missing evidence. Thus, we replied the following signalling questions as ROB-ME-4.7: "probably no" and ROB-ME-4.8: "probably no".  
-
-### Coverage of the search strategy
-
-We conducted a comprehensive search for both published and unpublished studies in multiple electronic databases, supplemented by manual searches of the reference lists of included studies and previous reviews. Screening was carried out by at least two independent reviewers. All studies identified in the search were conducted by the pharmaceutical industry. Although we contacted them, we have not received additional data for the first iteration. Considering that all eligible studies are experimental and were conducted recently, it is expected that most, if not all, have been registered, thus facilitating their detection during searches in clinical trial registries. Nonetheless, it's possible that small phase I studies focusing on pharmacokinetics may not have been registered and could therefore have been overlooked. Consequently, we do not anticipate that our search has missed any major or significant studies (ROB-ME-3.1: "no", ROB-ME-3.2: "probably yes", ROB-ME-3.3:"probably yes", ROB-ME-4.5: "no").
-
-### Results matrix and ROB-ME evaluation 
+### Results matrix
 
 We identified the total number of eligible and completed studies, with or without usable data, that could contribute to dropout and safety data for each comparison (as shown in **Table 1** and **Table 2**): 1) There were 12 studies with 626 participants for the comparison of TAAR1 agonists versus placebo over a period of 1 day to 2 weeks. 2) There were 2 studies with 100 participants for the comparison of TAAR1 agonists versus placebo over the same duration. 3) For the comparison of TAAR1 agonists versus placebo over 3-13 weeks, there were 6 studies involving 1550 participants, including also 1 study (NCT03669640) focusing predominantly on negative symptoms. 4) Finally, it should be noted that one study (NCT04115319) with 475 participants could contribute to the comparison of TAAR1 agonists versus other antipsychotics for periods exceeding 13 weeks. However, no usable data for this analysis were available from any other study. 
 
@@ -2346,6 +2325,17 @@ The results matrix for the eligible studies, which were identified in the search
 knitr::kable(results_matrix)
 ```
 **Table 2** Results matrix for the primary outcome. ✓: A study result is available for inclusion in the meta-analysis.; \~:No study result is available for inclusion in the meta-analysis, for a reason unrelated to the P value, magnitude or direction of the result.; \?: Unclear whether an eligible study result was generated or unclear reason of missing evidence. Narrative descriptions of the effects of drugs as reported in the studies are mentioned here to facilitate the judgement of regarding the reasong of missigness. \*NCT04072354 included two parts, i.e., adults (sample size 435) and adolescents (sample size unclear but it was probably 28; planned 90). It should be noted that all of the other studies included adult populations. na: not applicable for this outcome (e.g., efficacy outcomes in healthy volunteers or after a single dose in stable patients).
+
+
+### Funnel plots and examination of small-study effects
+
+There were insufficient data for the primary outcome but also other outcomes (i.e., fewer than 10 studies) to examine small-study effects with funnel plots. Thus, we cannot explore the pattern of missing evidence or conduct sensitivity analysis to explore the potential impact of the missing evidence. Thus, we replied the following signalling questions as ROB-ME-4.7: "probably no" and ROB-ME-4.8: "probably no".  
+
+### Coverage of the search strategy
+
+We conducted a comprehensive search for both published and unpublished studies in multiple electronic databases, supplemented by manual searches of the reference lists of included studies and previous reviews. Screening was carried out by at least two independent reviewers. All studies identified in the search were conducted by the pharmaceutical industry. Although we contacted them, we have not received additional data for the first iteration. Considering that all eligible studies are experimental and were conducted recently, it is expected that most, if not all, have been registered, thus facilitating their detection during searches in clinical trial registries. Nonetheless, it's possible that small phase I studies focusing on pharmacokinetics may not have been registered and could therefore have been overlooked. Consequently, we do not anticipate that our search has missed any major or significant studies (ROB-ME-3.1: "no", ROB-ME-3.2: "probably yes", ROB-ME-3.3:"probably yes", ROB-ME-4.5: "no").
+
+### ROB-ME evaluation
 
 Data were available for all eligible studies concerning the primary outcome, i.e., answers to the ROB-ME signalling question 4.1: "no", ROB-ME-4.3: "yes" for adolescents, ROB-ME-4.4: "no", thus leading to low risk of  reporting bias - considering also the comprehensiveness of the search.
 
@@ -2371,16 +2361,17 @@ For each comparison, outcome and timepoint, we presented the summary of the evid
 
 [[[[[**Confidence in the evidence**: We assigned an overall judgment on the confidence in the estimates by considering the above domains. We started with "high" confidence as we used data from randomized controlled trials, and we downgraded the confidence by one level for "some concerns" and two for "high risk" of bias in the above domains. Moreover, we considered potential imprecision in the summary of the association, taking into consideration the 95% CI (using a cutoff of trivial effects |SMD|=0.1 and OR=1/2 and 0.83) and sample size (cutoff of 800 participants based on a power calculation with a power of 80% to find SMD=0.2), as well as potential heterogeneity, considering a visual inspection of forest plots (due to the limited number of studies to estimate tau-squared).]]]]] ---> Use GRADE????
 
+
 ### Summary of evidence tables
 
-**Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in adults with an acute episode of schizophrenia**
+#### Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in adults with an acute episode of schizophrenia
 
 ```{r echo=FALSE, fig.width=12, fig.height=8}
 knitr::kable(soe_sch_ta1_pl_eff)
 ```
 
 
-**Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in adults with an acute episode of schizophrenia**
+#### Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in adults with an acute episode of schizophrenia
 
 
 ```{r echo=FALSE, fig.width=12, fig.height=8}
@@ -2389,7 +2380,7 @@ knitr::kable(soe_sch_ta1_pl_eff)
 **Table 3** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in adults with an acute episode of schizophrenia. There were data for ulotaront and ralmitaront.
 
 
-**Summary of evidence table for the comparison of TAAR1 agonists versus antipsychotics for efficacy outcomes in adults with an acute episode of schizophrenia**
+#### Summary of evidence table for the comparison of TAAR1 agonists versus antipsychotics for efficacy outcomes in adults with an acute episode of schizophrenia
 
 
 ```{r echo=FALSE, fig.width=12, fig.height=8}
@@ -2397,7 +2388,7 @@ knitr::kable(soe_sch_ta1_apd_eff)
 ```
 **Table 3** Summary of evidence table for the comparison of TAAR1 agonists versus antipsychotics for efficacy outcomes in adults with an acute episode of schizophrenia. There were data from a single study for ralmitaront versus risperidone.
 
-**Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in Parkinson's disease psychosis**
+#### Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in Parkinson's disease psychosis
 
 
 ```{r echo=FALSE, fig.width=12, fig.height=8}
@@ -2405,7 +2396,7 @@ knitr::kable(soe_sch_ta1_apd_eff)
 ```
 **Table 4** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in Parkinson's disease psychosis. There were data from a single study for ulotaront.
 
-**Summary of evidence table for the comparison of TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers**
+#### Summary of evidence table for the comparison of TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers
 
 
 ```{r echo=FALSE, fig.width=12, fig.height=8}
@@ -2414,7 +2405,7 @@ knitr::kable(soe_all_ta1_pl_saf)
 **Table 5** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers. There were data for ulotaront and ralmitaront.
 
 
-**Summary of evidence table for the comparison of TAAR1 agonists versus antipsychotics for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers**
+#### Summary of evidence table for the comparison of TAAR1 agonists versus antipsychotics for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers
 
 
 ```{r echo=FALSE, fig.width=12, fig.height=8}
@@ -2422,3 +2413,11 @@ knitr::kable(soe_all_ta1_apd_saf)
 ```
 **Table 6** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers. There were data for ulotaront vs. amisulpride (single dose) and ralmitaront vs. risperidone (4 weeks).
 
+
+#### Summary of evidence table for the mechanistic insights of TAAR1 agonism for pscyhosis
+
+
+```{r echo=FALSE, fig.width=12, fig.height=8}
+knitr::kable(soe_mechanistic)
+```
+**Table 6** Summary of evidence table for the mechanistic insights of TAAR1 agonism for psychosis. The findings of two studies with available neurobiological measures relevant to psychosis are narratively reported. These include the double-blind randomized controlled trial of Perini et al. 2023 with the fMRI BOLD striatal responses in the anticipatory phase of the Monetary Incentive Delay (MID) task (the primary outcome of this study), and the open label single-arm study of NCT04038957 with F-DOPA PET in the striatum 
