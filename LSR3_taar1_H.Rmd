@@ -51,6 +51,14 @@ prisma<-PRISMA_data(prisma)
 
 #risk of bias data
 rob<-read_xlsx("data/rob_secondary_2024.01.24.xlsx")
+#results matrix table
+results_matrix<-read_xlsx("data/reporting_bias table_2024.01.26.xlsx")
+#SoE tables
+soe_sch_ta1_pl_eff<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 1)
+soe_sch_ta1_apd_eff<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 2)
+soe_pd_ta1_pl_eff<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 3)
+soe_all_ta1_pl_saf<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 4)
+soe_all_ta1_apd_saf<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 5)
 
 #Round off results to two digits
 options(scipen=1, digits=2)
@@ -2258,7 +2266,6 @@ No usable data available from RCT.
 
 ## Subgroup analyses and meta-regressions
 
-
 There were less than 5 studies available for the analyses of the primary outcome, precluding the exploration of potential reasons of heterogeneity with subgroup analyses and meta-regressions. 
 
 Nevertheless, we explored potential differences between ulotaront and ralmitaront in improving overall symptoms of acute schizophrenia, and potential dose-effects by plotting the effect sizes for each fixed-dose level of TAAR1 agonist compared to placebo. However, we did not conduct any formal subgroup test or dose-response meta-analysis due to the limited number of studies.
@@ -2323,7 +2330,7 @@ Reporting bias was evaluated using the ROB-ME tool, taking into account the usab
 
 ### Funnel plots and examination of small-study effects
 
-There were insufficient data for the primary outcome but also other outcomes (i.e., fewer than 10 studies) to examine small-study effects with funnel plots. Thus, we cannot examine any particular pattern of missing evidence.
+There were insufficient data for the primary outcome but also other outcomes (i.e., fewer than 10 studies) to examine small-study effects with funnel plots. Thus, we cannot explore the pattern of missing evidence or conduct sensitivity analysis to explore the potential impact of the missing evidence. Thus, we replied the following signalling questions as ROB-ME-4.7: "probably no" and ROB-ME-4.8: "probably no".  
 
 ### Coverage of the search strategy
 
@@ -2331,63 +2338,87 @@ We conducted a comprehensive search for both published and unpublished studies i
 
 ### Results matrix and ROB-ME evaluation 
 
-The results matrix of the eligible studies found in the search for the primary outcome can be found below in **Table 2**.
+We identified the total number of eligible and completed studies, with or without usable data, that could contribute to dropout and safety data for each comparison (as shown in **Table 1** and **Table 2**): 1) There were 12 studies with 626 participants for the comparison of TAAR1 agonists versus placebo over a period of 1 day to 2 weeks. 2) There were 2 studies with 100 participants for the comparison of TAAR1 agonists versus placebo over the same duration. 3) For the comparison of TAAR1 agonists versus placebo over 3-13 weeks, there were 6 studies involving 1550 participants, including also 1 study (NCT03669640) focusing predominantly on negative symptoms. 4) Finally, it should be noted that one study (NCT04115319) with 475 participants could contribute to the comparison of TAAR1 agonists versus other antipsychotics for periods exceeding 13 weeks. However, no usable data for this analysis were available from any other study. 
+
+The results matrix for the eligible studies, which were identified in the search, for all outcomes with usable data from at least one study, can be found below in **Table 2**.
 
 ```{r echo=FALSE}
-studies_primary<-studies %>% filter(Name=="NCT04512066 (2020)"  | Name=="Isaacson (2023)" | Name=="NCT04072354 (2019)" |
-                                      Name=="Koblan (2020)" |Name== "NCT04092686 (2019)" | Name== "NCT04825860 (2021)") %>%  mutate(Diagnosis=ifelse(Name=="Isaacson (2023)", "Parksinon disease psychosis", "Schizophrenia spectrum"), `Data availability`=ifelse(Name== "NCT04825860 (2021)", "~", 
-                                                                                                                                                                                                                                                                   ifelse(Name=="NCT04072354 (2019)","✓ (adult) / ?(adolescent) " , "✓"))) %>%
-  select(Name, Diagnosis, `Sample size`, `Data availability`) 
-
-knitr::kable(studies_primary[order(studies_primary$Diagnosis, studies_primary$Name),])
+knitr::kable(results_matrix)
 ```
-**Table 2** Results matrix for the primary outcome. ✓: A study result is available for inclusion in the meta-analysis.; \~:No study result is available for inclusion in the meta-analysis, for a reason unrelated to the P value, magnitude or direction of the result.; ?: Unclear whether an eligible study result was generated. \*NCT04072354 included two parts, i.e., adults (sample size 435) and adolescents (sample size unclear but it was probably 28; planned 90). It should be noted that all of the other studies included adult populations. \*\*NCT04825860 is an ongoing trial.
+**Table 2** Results matrix for the primary outcome. ✓: A study result is available for inclusion in the meta-analysis.; \~:No study result is available for inclusion in the meta-analysis, for a reason unrelated to the P value, magnitude or direction of the result.; \?: Unclear whether an eligible study result was generated or unclear reason of missing evidence. Narrative descriptions of the effects of drugs as reported in the studies are mentioned here to facilitate the judgement of regarding the reasong of missigness. \*NCT04072354 included two parts, i.e., adults (sample size 435) and adolescents (sample size unclear but it was probably 28; planned 90). It should be noted that all of the other studies included adult populations. na: not applicable for this outcome (e.g., efficacy outcomes in healthy volunteers or after a single dose in stable patients).
 
-Data were available for all eligible studies concerning the primary outcome, i.e., answers to the ROB-ME signalling question 4.1: no, ROB-ME-4.3: "yes" for adolescents, ROB-ME-4.4: "no", thus leading to low risk of  reporting bias - considering also the comprehensiveness of the search.
+Data were available for all eligible studies concerning the primary outcome, i.e., answers to the ROB-ME signalling question 4.1: "no", ROB-ME-4.3: "yes" for adolescents, ROB-ME-4.4: "no", thus leading to low risk of  reporting bias - considering also the comprehensiveness of the search.
 
-The results matrix in **Table 2** could also apply to the secondary efficacy outcomes in acute psychosis, although some studies did not have usable data for these outcomes. Specifically, the two phase III trials, NCT04092686 and NCT04072354, did not report effects on symptom domains. Consequently, these analyses would be prone to bias due to missing evidence (ROB-ME-4.1: Yes, ROB-ME-4.2: Yes, thus leading to high risk of reo ).
+The results matrix in **Table 2** could also apply to the secondary efficacy outcomes in acute psychosis, although some studies did not have usable data for these outcomes. Specifically, the two phase III trials, NCT04092686 and NCT04072354, did not report effects on symptom domains. Consequently, these analyses would be prone to bias due to missing evidence (ROB-ME-4.1: "yes", ROB-ME-4.2: "yes", thus leading to high risk of reporting bias).
 
-Additionally, we identified the total number of eligible and completed studies, with or without usable data, that could contribute to dropout and safety data for each comparison (as shown in **Table 1**): 1) There were 12 studies with 626 participants for the comparison of TAAR1 agonists versus placebo over a period of 1 day to 2 weeks. 2) There were 2 studies with 100 participants for the comparison of TAAR1 agonists versus placebo over the same duration. 3) For the comparison of TAAR1 agonists versus placebo over 3-13 weeks (as detailed in **Table 2**), there were 6 studies involving 1550 participants, including also 1 study (NCT03669640) focusing predominantly on negative symptoms. 4) Finally, it should be noted that one study (NCT04115319) with 475 participants could contribute to the comparison of TAAR1 agonists versus other antipsychotics for periods exceeding 13 weeks. However, no usable data for this analysis were available from any other study. 
+The reasons for the missingness of data for these outcomes can be unclear, but in most cases, it is due to either not being measured or not reported for reasons other than their P-values, magnitude, and direction of effects, yet this cannot be excluded. Therefore, we employed, as a general rule, the following approach in response to ROB-ME-4.1: "no" (as none was generally considered to have reported usable data for these outcomes due to their P-value, magnitude, or direction), ROB-ME-4.3: 'yes', ROB-ME-4.4: 'yes' if less than 50% of the participants had usable data, suggesting that the findings could notably change if the missing data had been added to the analysis. The cutoff of 50% of the participants was selected to balance out that in most cases, the findings were not missing due to unfavorable findings (see **Table 2**) but also to consider the possibility that the findings may be likely to change with the addition of missing evidence, given the small number of studies and participants in their estimates. In this situation, we assigned a high risk of reporting bias, but the impact of this on the magnitude and direction of the findings can be unclear. If there were data from at least 50% of the participants, we responded to ROB-ME-4.4: 'no', leading to *some concerns* given that ROB-ME-4.5: "no" see above, and patterns of missing evidence or sensitivity analyses could not be conducted.
 
+## Summary of evidence 
 
-The reasons for the missingness of data for these outcomes can be unclear, but in most cases, it is due to either not being measured or not reported for reasons other than their P-values, magnitude, and direction of effects, yet this cannot be excluded. Therefore, we employed, as a general rule, the following approach in response to ROB-ME-4.1: "no" (as none was generally considered to have reported usable data for these outcomes due to their P-value, magnitude, or direction), ROB-ME-4.3: 'yes', ROB-ME-4.4: 'yes' if less than 50% of the participants had usable data, suggesting that the findings could notably change if the missing data had been added to the analysis. The cutoff of 50% of the participants was selected to balance out that in most cases, the findings were not missing due to unfavorable findings but also to consider the possibility that the findings may be likely to change with the addition of missing evidence, given the small number of studies and participants in their estimates. In this situation, we assigned a high risk of reporting bias, but the impact of this on the magnitude and direction of the findings can be unclear. Moreover, we also considered if data were available in other forms, e.g., narrative descriptions of the findings, and these were noted in the summary of evidence tables below. If there were data from at least 50% of the participants, we responded to ROB-ME-4.4: 'no', leading to *some concerns* given that ROB-ME-4.5: "no" see above, and patterns of missing evidence or sensitivity analyses could not be conducted.
+### Approach to evaluate the confidence in the evidence
 
+For each comparison, outcome and timepoint, we presented the summary of the evidence by presenting the summary of the association, biases due to study limitations, biasesd due to reporting bias, biases due to indirectness and other biases. [[[[ We assigned "low risk", "some concerns" and "high risk" in the domains of biases and presented the potential impact on the magnitude and direction of effects. We also assigned an overall judgement in the confidence of the evidence that could be "high", "moderate", "low" or "very low".]]]--->Use GRADE
 
-## Indirectness
+**Summary of the association**: We presented the number of studies (N), participants (n) contributing to the analysis, the point estimates and 95% confidence intervals for both random- and fixed-effects models. We also made a statement about dose-effects for the primary outcome (**Figure 67**). 
 
+**Biases due to study limitations**: The majority of the studies had a low risk of bias, or at most, some concerns across domains and outcomes, except for one small study (Isaacson et al., 2023) with a high risk of bias due to missing outcome data for some of the outcomes. Thus, we assigned "low risk" except for "high risk" when findings were based on the latter single study.
 
-## Summary of the evidence on the primary outcome from the human studies
+**Biases due to reporting bias**: We used the approach mentioned above to assigned "low risk", "some concerns" or "high risk". 
 
-### Summary of the evidence tables
+**Biases due to indirectness**: We assigned "no concerns" in indirectness, as there were no issues related to population, interventions, control conditions, outcomes, or settings in the analysis of efficacy outcomes using data from clinical trials in adults with an acute episode of schizophrenia or Parkinson's disease psychosis. However, potential indirectness in terms of population characteristics may exist in the analysis of other outcomes. This is because we pooled data from diverse populations, including those with schizophrenia spectrum disorders, Parkinson's disease psychosis, narcolepsy-cataplexy, and healthy volunteers. Although the majority of adverse events might not vary across these groups, we considered "some concerns" in indirectness when the analyses included fewer than 50% of participants with schizophrenia. This is because schizophrenia is the primary population to which these findings would be applied. Nevertheless, the impact on the magnitude and direction of the effects can be unclear. 
 
-The primary outcome was efficacy in reducing overall symptoms in acutely ill patients with psychosis, i.e., available data for adults with Parkinson disease psychosis and schizophrenia spectrum (analyzed separately). There were available data for two comparisons, i.e., TAAR1 agonists (ulotaront or ralmitaront) vs. placebo, and TAAR1 agonist (ralmitaront) vs. antipsychotics (risperidone). The summary of the evidence on the primary outcome for the above mentioned populations and comparisons are reported below.
+**Other biases**: We considered additional biases, such as potential factors that could impact the magnitude and direction of the findings. Specifically, we considered "some concerns" for other biases for the primary outcome and response to treatment in adults with an acute episode of schizophrenia due to potential problems in the execution of trials during COVID-19 (NCT0407254, NCT04092686, NCT04512066). The two phase III trials of ulotaront, NCT04072354 and NCT04092686, had high placebo effects of about 14 points and 19 points reduction in PANSS total scores (compared to a mean of 6 points in other antipsychotic trials), suggesting that potential factors associated with placebo effects could have diluted effect sizes and underestimated the effects. A conference abstract at ACNP 2024 reported that pooled analyses of these two trials using participants enrolled before COVID-19 found effect sizes similar to the phase II trial (Koblan 2019). A potential explanation, among others, could be baseline inflation due to recruitment pressure during the COVID-19 pandemic. Thus, the possibility that the findings have been underestimated cannot be excluded.
 
-|                                                                                       |                                                       |                                                                                                                                                             |                                |                                                                                                                                                                                               |                                                                                                                                                                                             |
-|------------|------------|------------|------------|------------|------------|
-| **Source of evidence**                                                                | **Summary of the association**                        | **Bias due to study limitations**                                                                                                                           | **Bias due to reporting bias** | **Bias due to indirectedness**                                                                                                                                                                | **Bias due to other reasons**                                                                                                                                                               |
-| TAAR1 agonist. vs placebo in adults with Parkinson disease psychosis                  | n=1, k=37, SMD= -0.28, 95%CI: -0.95, 0.38             | 100% of the studies had an overall high risk of bias (due to missing outcome data, unclear direction and impact on the findings)                            | Low risk of reporting bias     | Data available only for ulotaront. No other clear indication of indirectness in terms of population, interventions and outcomes                                                               | No clear indication of other biases                                                                                                                                                         |
-| TAAR1 agonist. vs placebo in adults with schizophrenia spectrum disorder              | n=4, k=1291, SMD=0.15, 95%CI: -0.05, 0.34, tau2=0.024 | All studies had an overall low risk of bias (some concerns due to missing outcome data, unclear direction and impact on the findings - potentially minimal) | Low risk of reporting bias     | Data available only for ulotaront (3 studies) and ralmitaront (1 study).No other clear indication of indirectness in terms of population, interventions and outcomes                          | The phase III ulotaront trials conducted during COVID-19, which could be associated with factors assocaited with increased placebo effects and smaller effect sizes. No clear dose-effects. |
-| TAAR1 agonist. vs other antipsychotics in adults with schizophrenia spectrum disorder | n=1, k=156, SMD=-0.53, 95%CI: -0.86, -0.20            | One study with an overall low risk of bias (some concerns due to missing outcome data, unclear direction and impact on the findings - potentially minimal)  | Low risk of reporting bias     | Data available only for ralmitaront (no data for ulotaront) and risperidone (no data for other antipsychotics). No other clear indication of indirectness in terms of population and outcomes | No clear indication of other biases                                                                                                                                                         |
+[[[[[**Confidence in the evidence**: We assigned an overall judgment on the confidence in the estimates by considering the above domains. We started with "high" confidence as we used data from randomized controlled trials, and we downgraded the confidence by one level for "some concerns" and two for "high risk" of bias in the above domains. Moreover, we considered potential imprecision in the summary of the association, taking into consideration the 95% CI (using a cutoff of trivial effects |SMD|=0.1 and OR=1/2 and 0.83) and sample size (cutoff of 800 participants based on a power calculation with a power of 80% to find SMD=0.2), as well as potential heterogeneity, considering a visual inspection of forest plots (due to the limited number of studies to estimate tau-squared).]]]]] ---> Use GRADE????
 
-k: number of studies, n: number of participants, I2: I-squared, SMD\>0 indicates a favourable effect for the TAAR1 agonist. It should be noted that there is low confidence evidence that studies with high risk of bias in misisng outocme data may underestimate the effects (PMID: 37939743).
+### Summary of evidence tables
 
-### GRADE approach in evaluating the confidence in the evidence
+**Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in adults with an acute episode of schizophrenia**
 
-#### What are the effects of TAAR1 agonists versus placebo on overall symptoms in adults with acute schizophrenia spectrm disorder?
-
-TAAR1 agonists may have little to no effect compared to placebo on overall symptoms in acutely ill adults with schizophrenia spectrum disorder (SMD=0.15, 95%CI: -0.05, 0.34). Specifically, the confidence in the evidence was *low* due to some concerns in imprecision (95%CI crossed line of no differences and 0.1) and some concerns in heterogeneity (although could not be well estimated due to the small number of studies).
-
-#### What are the effects of TAAR1 agonists versus antipsychotics on overall symptoms in adults with acute schizophrenia spectrm disorder?
-
-TAAR1 agonists may be less efficacious with a medium effect size compared to other antipsychotics in improving overall symptoms in acutely ill adults with schizophrenia spectrum disorder (SMD=-0.53, 95%CI: -0.86, -0.20). The confidence in the evidence was *low* due to some concerns in imprecision (although 95%CI did not cross the range of equivalence, the sample size was small \<800 participants) and some concerns in indirectness (no data ulotaront and other antipsychotics).
-
-#### What are the effects of TAAR1 agonists versus placebo on overall symptoms in adults with Parkinson disease psychosis?
-
-TAAR1 agonists may have little to no effect compared to placebo on overall symptoms in acutely ill adults with Parkinson disease psychosis (SMD=-0.28, 95%CI: -0.95, 0.38) and the evidence is very uncertain. Specifically, the confidence in the evidence was *very low* due to major concerns in imprecision (95%CI crossed beyond SMD -0.1 and 0.1, and the sample size was very small \<800 participants), and some concerns in the risk of bias (study with a high risk of bias).
-
-## Summary of the evidence tables for all outcomes
-
-```{r echo=FALSE}
-#knitr::kable(meta_outcome_soe[, 1:8])
+```{r echo=FALSE, fig.width=12, fig.height=8}
+knitr::kable(soe_sch_ta1_pl_eff)
 ```
+
+
+**Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in adults with an acute episode of schizophrenia**
+
+
+```{r echo=FALSE, fig.width=12, fig.height=8}
+knitr::kable(soe_sch_ta1_pl_eff)
+```
+**Table 3** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in adults with an acute episode of schizophrenia. There were data for ulotaront and ralmitaront.
+
+
+**Summary of evidence table for the comparison of TAAR1 agonists versus antipsychotics for efficacy outcomes in adults with an acute episode of schizophrenia**
+
+
+```{r echo=FALSE, fig.width=12, fig.height=8}
+knitr::kable(soe_sch_ta1_apd_eff)
+```
+**Table 3** Summary of evidence table for the comparison of TAAR1 agonists versus antipsychotics for efficacy outcomes in adults with an acute episode of schizophrenia. There were data from a single study for ralmitaront versus risperidone.
+
+**Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in Parkinson's disease psychosis**
+
+
+```{r echo=FALSE, fig.width=12, fig.height=8}
+knitr::kable(soe_sch_ta1_apd_eff)
+```
+**Table 4** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in Parkinson's disease psychosis. There were data from a single study for ulotaront.
+
+**Summary of evidence table for the comparison of TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers**
+
+
+```{r echo=FALSE, fig.width=12, fig.height=8}
+knitr::kable(soe_all_ta1_pl_saf)
+```
+**Table 5** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers. There were data for ulotaront and ralmitaront.
+
+
+**Summary of evidence table for the comparison of TAAR1 agonists versus antipsychotics for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers**
+
+
+```{r echo=FALSE, fig.width=12, fig.height=8}
+knitr::kable(soe_all_ta1_apd_saf)
+```
+**Table 6** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers. There were data for ulotaront vs. amisulpride (single dose) and ralmitaront vs. risperidone (4 weeks).
 

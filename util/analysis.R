@@ -402,12 +402,12 @@ meta_outcome_soe<-meta_outcome %>%
                            ifelse(timepoint=="1 day-2 weeks" & comparison=="taar1_vs_placebo", 626,
                                   ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_placebo" & outcome_type=="efficacy" & population=="Schizophrenia spectrum", 1383,
                                          ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_placebo" & outcome_type=="efficacy" & population=="Parkinson Disease Psychosis", 39,
-                                                ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_antipsychotic" & outcome_type=="efficacy" & population=="Schizophrenia spectrum", 128,1550)))))) %>% #Added the negative symptom study too
+                                                ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_antipsychotic" & population=="Schizophrenia spectrum", 128,1550)))))) %>% #Added the negative symptom study too
   mutate(k_possible=ifelse(timepoint=="1 day-2 weeks" & comparison=="taar1_vs_antipsychotic", 2,
                            ifelse(timepoint=="1 day-2 weeks" & comparison=="taar1_vs_placebo", 12,
                                   ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_placebo" & outcome_type=="efficacy" & population=="Schizophrenia spectrum", 4,
                                          ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_placebo" & outcome_type=="efficacy" & population=="Parkinson Disease Psychosis", 1,
-                                                ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_antipsychotic" & outcome_type=="efficacy" & population=="Schizophrenia spectrum", 1,6)))))) %>%
+                                                ifelse(timepoint=="3-13 weeks" & comparison=="taar1_vs_antipsychotic" & population=="Schizophrenia spectrum", 1,6)))))) %>%
   mutate(k_prop=k/k_possible, 
          n_prop=ifelse(k_prop==1, 1, n/n_possible),
          k_schiz_prop=k_schiz/k, n_schiz_prop=n_schiz/n,
