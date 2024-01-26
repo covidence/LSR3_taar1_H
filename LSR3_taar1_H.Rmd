@@ -58,7 +58,7 @@ options(scipen=1, digits=2)
 ```
 # Description of the methodological approach
 
-1. We analyzed usable data from all randomized controlled studies examining any TAAR1 agonist in comparison to placebo or current antipsychotics in people with psychosis, other mental health conditions, or healthy volunteers.
+1. We searched for all controlled and uncontrolled studies examining TAAR1 agonists. In this first iteration of the review, we analyzed usable data from all randomized controlled studies comparing any TAAR1 agonist to placebo or current antipsychotics in people with psychosis, other mental health conditions, or healthy volunteers.
 
 2. We examined efficacy outcomes, including overall symptoms of psychosis (primary) and symptom domains, dropouts due to any reason, and adverse events. Safety outcomes included death, serious adverse events, and specific adverse events. We also sought mechanistic outcomes, specifically neurobiological measures of dopaminergic, glutamatergic, and serotonergic signaling. We examined these outcomes at three time points: immediately after a single dose up to 2 weeks of treatment, 3-13 weeks of treatment (preferably at 6 weeks), and longer-term outcomes.
 
@@ -75,7 +75,6 @@ options(scipen=1, digits=2)
 8. Sensitivity analysis of the primary outcome included using fixed-effect methods (post-hoc due to the small number of studies), restricting the analysis to studies with an overall low risk of bias, and excluding studies with imputed values.
 
 9. Subgroup analyses and meta-regressions were not conducted due to the paucity of data. However, we explored potential dose-effects for the primary outcome by plotting the effect sizes for different fixed doses of TAAR1 agonists compared to placebo (while correcting for the use of common comparators).
-
 
 10. Summary of evidence tables were constructed for all outcomes, including a summary of the association, biases due to study limitations, biases due to reporting bias, biases due to indirectness, and other biases. We adapted the GRADE approach. We used the ROB-ME approach for evaluating biases in missing evidence for the primary outcomes and considered the percentage of missing studies and participants for secondary outcomes. Indirectness was considered especially relevant for non-efficacy outcomes, where we pooled data across diagnoses and subgroups, and considered the percentage of studies and participants with schizophrenia, the main group for which this evidence would be applicable.
 
@@ -765,8 +764,6 @@ No usable data available from RCT.
 
 ## Secondary outcome: QTc prolongation
 
-Terms that were considered as reported in the trials: QTc prolongation above ≥450 msec or an increase of ≥60 msec (any threshold was eligible)
-
 ### Timepoint 1: *1 day - 2 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
@@ -1008,9 +1005,7 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_eps_symptoms`,
 
 
 ```
-**Figure 31** Forest plot for extrapyrmidal side-effects (use of antiparkinsonian medication as proxy) for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). No data were available from the two unpublished ulotaront trials (i.e., NCT04072354, NCT04092686), the study on Parkinson disease psychosis (Isaacson 2023), and the unpublisshed study on ralmitaront (NCT04512066).
-
-Furthermore, data presented in a conference abstract at the ACNP 2023 regarding NCT04072354 and NCT04092686 describe that ulotaront did not differ in experimental side-effect compared to placebo.
+**Figure 31**  Forest plot for extrapyramidal side effects (use of antiparkinsonian medication as a proxy) for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). Furthermore, narratively described findings in a conference abstract at ACNP 2023 regarding NCT04072354 and NCT04092686 mention that ulotaront did not differ in experimental side effects compared to placebo. Moreover, ulotaront was reported not to deteriorate movement symptoms in participants with Parkinson's disease psychosis as measured with the Unified Parkinson Disease Rating Scale Part III.
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -1103,7 +1098,8 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_headache`,
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
        label.c="placebo",      
-       leftcols = c("studlab",  "effect", "ci"),  
+       leftcols = c("studlab",  "effect", "ci"),     
+        rightcols = c("Overall"), rightlabs = c("Risk of bias"),  
                  label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_headache`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
@@ -1149,11 +1145,12 @@ Terms that were considered as reported in the trials: fatigue, sedation, somnole
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_sedation`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
-       label.c="placebo",      
+       label.c="placebo",         
+        rightcols = c("Overall"), rightlabs = c("Risk of bias"),  
        leftcols = c("studlab",  "effect", "ci"),   
                  label.e = unique(`meta_comp_taar1_vs_placebo_1 day-2 weeks_sedation`$data$treat1_new), 
                  subgroup.hetstat = TRUE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
-                 overall = FALSE, prediction.subgroup = FALSE, prediction=FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE, prediction=FALSE,
                  subgroup = TRUE, fixed=TRUE, random=TRUE,
                  label.left = "TAAR1 better", label.right="Placebo better")
 
@@ -1208,7 +1205,7 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_insomnia`,
 
 ```
 
-**Figure 38** Forest plot for insomnia for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint). Potential differences between ulotaront and ralmitaront could be explained by their differnet pharmacological profile.
+**Figure 38** Forest plot for insomnia for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint).
 
 ### Timepoint 3: *\> 13 weeks*
 
@@ -2330,7 +2327,7 @@ There were insufficient data for the primary outcome but also other outcomes (i.
 
 ### Coverage of the search strategy
 
-We conducted a comprehensive search for both published and unpublished studies in multiple electronic databases, supplemented by manual searches of the reference lists of included studies and previous reviews. Screening was carried out by at least two independent reviewers. All studies identified in the search were conducted by the pharmaceutical industry. Although we contacted them, we have not received additional data for the first iteration. Considering that all eligible studies are experimental and were conducted recently, it is expected that most, if not all, have been registered, thus facilitating their detection during searches in clinical trial registries. Nonetheless, it's possible that small phase I studies focusing on pharmacokinetics may not have been registered and could therefore have been overlooked. Consequently, we do not anticipate that our search has missed any major or significant studies (ROB-ME-3.1: No, ROB-ME-3.2: PY, ROB-ME-3.3:PY).
+We conducted a comprehensive search for both published and unpublished studies in multiple electronic databases, supplemented by manual searches of the reference lists of included studies and previous reviews. Screening was carried out by at least two independent reviewers. All studies identified in the search were conducted by the pharmaceutical industry. Although we contacted them, we have not received additional data for the first iteration. Considering that all eligible studies are experimental and were conducted recently, it is expected that most, if not all, have been registered, thus facilitating their detection during searches in clinical trial registries. Nonetheless, it's possible that small phase I studies focusing on pharmacokinetics may not have been registered and could therefore have been overlooked. Consequently, we do not anticipate that our search has missed any major or significant studies (ROB-ME-3.1: "no", ROB-ME-3.2: "probably yes", ROB-ME-3.3:"probably yes", ROB-ME-4.5: "no").
 
 ### Results matrix and ROB-ME evaluation 
 
@@ -2353,7 +2350,10 @@ The results matrix in **Table 2** could also apply to the secondary efficacy out
 Additionally, we identified the total number of eligible and completed studies, with or without usable data, that could contribute to dropout and safety data for each comparison (as shown in **Table 1**): 1) There were 12 studies with 626 participants for the comparison of TAAR1 agonists versus placebo over a period of 1 day to 2 weeks. 2) There were 2 studies with 100 participants for the comparison of TAAR1 agonists versus placebo over the same duration. 3) For the comparison of TAAR1 agonists versus placebo over 3-13 weeks (as detailed in **Table 2**), there were 6 studies involving 1550 participants, including also 1 study (NCT03669640) focusing predominantly on negative symptoms. 4) Finally, it should be noted that one study (NCT04115319) with 475 participants could contribute to the comparison of TAAR1 agonists versus other antipsychotics for periods exceeding 13 weeks. However, no usable data for this analysis were available from any other study. 
 
 
-The reasons for the missingness of data for these outcomes can be unclear, either due to them not being measured or not reported because of unfavorable findings. As a general rule, we employed the approach responding to ROB-ME-4.3: 'yes', ROB-ME-4.3: 'yes', ROB-ME-4.2: 'yes' if less than 50% of the studies or participants had usable data (balancing the fact that additional data in this small number of studies and participants could impact the findings, but the missingness may not be related to the findings of these outcomes but rather to other factors), and 'no information' otherwise. Thus, if there were usable data for fewer than 50% of the eligible studies or participants, we judged there to be a high risk of reporting bias. Otherwise, considering ROB-ME-4.5: 'no' and ROB-ME-4.7 and ROBM-4.8: 'no' (due to insufficient data to identify patterns of missing evidence and to conduct sensitivity analysis), we assigned some concerns. We also considered potential narrative descriptions of these outcomes or other factors in order to optimize the judgments, and we mention them in the summary of evidence tables below.
+The reasons for the missingness of data for these outcomes can be unclear, but in most cases, it is due to either not being measured or not reported for reasons other than their P-values, magnitude, and direction of effects, yet this cannot be excluded. Therefore, we employed, as a general rule, the following approach in response to ROB-ME-4.1: "no" (as none was generally considered to have reported usable data for these outcomes due to their P-value, magnitude, or direction), ROB-ME-4.3: 'yes', ROB-ME-4.4: 'yes' if less than 50% of the participants had usable data, suggesting that the findings could notably change if the missing data had been added to the analysis. The cutoff of 50% of the participants was selected to balance out that in most cases, the findings were not missing due to unfavorable findings but also to consider the possibility that the findings may be likely to change with the addition of missing evidence, given the small number of studies and participants in their estimates. In this situation, we assigned a high risk of reporting bias, but the impact of this on the magnitude and direction of the findings can be unclear. Moreover, we also considered if data were available in other forms, e.g., narrative descriptions of the findings, and these were noted in the summary of evidence tables below. If there were data from at least 50% of the participants, we responded to ROB-ME-4.4: 'no', leading to *some concerns* given that ROB-ME-4.5: "no" see above, and patterns of missing evidence or sensitivity analyses could not be conducted.
+
+
+## Indirectness
 
 
 ## Summary of the evidence on the primary outcome from the human studies
