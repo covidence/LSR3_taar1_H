@@ -2301,7 +2301,7 @@ ggplot(data=data_doses, aes(x=dose,
 
 **Figure 67** Effect sizes for each dose level of ulotaront and ralmitaront compared to placebo in improving overall symptoms of acute schizophrenia at 4-6 weeks are presented separately. The findings of each study are presented separately, and the effect sizes were corrected for using the same control condition in each study. It should be noted that Koblan 2020 was a two-arm flexible dose study, and its effect size is placed in the middle of the range of the administered dose (50mg/d to 75mg/d)
 
-In the fixed-dosing studies, higher doses (i.e., ulotaront 100mg/d and ralmitaront 100mg/d) may be associated with more improvement compared to smaller doses. However, the effect sizes at these high doses still appear to be small, with a standardized mean difference (SMD) of approximately 0.2. In the flexible dosing study by Koblan et al. 2020, which utilized doses of ulotaront up to 75mg/d, small-to-medium effect sizes were observed. Importantly, the available data are limited. Therefore, the findings are inconclusive.
+In the fixed-dosing studies, higher doses (i.e., ulotaront 100mg/d and ralmitaront 150mg/d) may be associated with more improvement compared to smaller doses. However, the effect sizes at these high doses still appear to be small, with a standardized mean difference (SMD) of approximately 0.2. In the flexible dosing study by Koblan et al. 2020, which utilized doses of ulotaront up to 75mg/d, small-to-medium effect sizes were observed. Importantly, the available data are limited. Therefore, the findings are inconclusive.
 
 
 ## Sensitivity analyses
