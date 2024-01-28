@@ -3,8 +3,6 @@ library(readxl)
 library(writexl)
 library(meta)
 library(netmeta)
-library(dosresmeta)
-library(rms)
 library(robvis)
 
 
@@ -536,21 +534,6 @@ master_dose<-master_drug %>% filter(study_name!="Koblan (2020)") %>% mutate(dose
     mutate(standardized_dose=ifelse(drug_name=="ulotaront", log((dose/75000)/(183.072*0.14*(10^(-6)))), #From Malcolm's animal HTML
                                    ifelse(drug_name=="ralmitaront",log((dose/75000)/(314.39*0.059*(10^(-6)))), 0))) #From Malcolm's animal HTML
 master_dose<-master_dose[order(master_dose$study_name, master_dose$drug_name, master_dose$dose),] 
-
-##Dose-response meta-analysis for ulotaront 
-knots <- quantile(master_dose$standardized_dose, c(0.25, 0.5, 0.75))
-
-dosres_model <- dosresmeta(formula = -1*overall_mean ~ rcs(standardized_dose, knots), #knot points here are not important since are not used in the estimation of var/covar
-                                id =study_name, 
-                                sd=overall_sd,n=overall_n, 
-                                covariance = 'smd', method.smd = "hedges",
-                                data = master_dose,
-                                proc = "1stage")
-
-pred<-predict(object=dosres_model, newdata=data.frame(standardized_dose = seq(0, max(master_dose$standardized_dose), 0.1)), xref=0,
-                   expo = FALSE)
-
-pred<-pred  %>% rename(dose= `rcs(standardized_dose, knots)standardized_dose`) %>% select( dose, pred, ci.lb, ci.ub)
 
 
 #Overall risk of bias of the studies using the highest across outcomes
