@@ -1,6 +1,6 @@
 ---
 title: "Trace amine-associated receptor 1 (TAAR1) agonists for psychosis - Results from the human studies <span style='font-size:25px'></style>"
-author: "First drafted by Spyridon Siafis, commented by Virginia Chiocchia, Charlotte Austin, Claire Friedrich, Robert McCutcheon, Stefan Leucht, Georgia Salanti <span style='font-size: 15px'></style>"
+author: "First draft by Spyridon Siafis, commented by Virginia Chiocchia, Charlotte Austin, Claire Friedrich, Georgia Salanti <span style='font-size: 15px'></style>"
 date: "`r format(Sys.Date(), '%e %b %Y')`"
 output:
   html_document:
