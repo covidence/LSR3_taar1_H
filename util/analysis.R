@@ -14,7 +14,6 @@ rob<-read_xlsx("data/rob_secondary_2024.01.24.xlsx") #RoB assessments for all ou
 
 outcome_names<-read_xlsx("data/outcome_names.xlsx") #Refined outcome names usesd later for refining the SoE table
 outcome_names<-outcome_names %>% mutate(id_outcome_population=paste0(outcome, population)) 
-#rob <- master %>% select(study_name, Overall) %>% rename(rob=Overall) %>% unique()
 
 
 continuous_outcomes_smd<-c("overall", "positive", "negative", "functioning", "cognition", "depression")
@@ -526,16 +525,100 @@ pairwise_drug<-pairwise(data=master_pooled_drug, studlab = study_name_drug, trea
                       studlab = study_name_drug, prediction = FALSE, subgroup = drug, 
                       prediction.subgroup = FALSE)
   
-#Dose-response analysis 
-master_dose<-master_drug %>% filter(study_name!="Koblan (2020)") %>% mutate(dose=as.integer(dose)) %>% 
-#  mutate(standardized_dose=ifelse(drug_name=="ulotaront", 101.3*(3*dose*10^(-6))/((3*dose*10^(-6))+(183.072*0.14*(10^(-6)))), #From Gallupi 2021 pharmacokineetics where they have plot for the concentration 
- #                                 ifelse(drug_name=="ralmitaront",42*(dose/75000)/((dose/75000)+(314.39*0.059*(10^(-6)))), 0))) #Michaelis Menten
   
-    mutate(standardized_dose=ifelse(drug_name=="ulotaront", log((dose/75000)/(183.072*0.14*(10^(-6)))), #From Malcolm's animal HTML
-                                   ifelse(drug_name=="ralmitaront",log((dose/75000)/(314.39*0.059*(10^(-6)))), 0))) #From Malcolm's animal HTML
-master_dose<-master_dose[order(master_dose$study_name, master_dose$drug_name, master_dose$dose),] 
+#Meta-analysis of the efficacy outcomes for acute schizophenia and Parkinson's disease psyschosis in order to present them in separate forest plots
+  master_separate<- master %>% 
+    filter(timepoint=="3-13 weeks") %>%  
+    filter(!is.na(overall_mean)) %>% 
+    select(study_name, study_name_drug, crossover_periods, population, duration_weeks,drug_new, 
+           overall_mean, overall_sd, overall_n,
+           positive_mean, positive_sd, positive_n,
+           response_e, randomized_n) %>%  
+    filter(drug_new=="TAAR1 agonist" | drug_new=="placebo")  
+  
+  master_pooled_separate <-master_separate %>%  
+    group_by(study_name, study_name_drug, drug_new, population, duration_weeks)%>%
+    summarise(n_an=sum(randomized_n), 
+              response_an=sum(as.integer(response_e)),
+      n_ov_an=sum(overall_n),
+              mean_ov_an=weighted.mean(overall_mean,overall_n), 
+              sd_ov_an=sqrt(((sum((overall_n - 1) * overall_sd^2 + overall_n * overall_mean^2)) - sum(overall_n) * mean_ov_an^2)/(sum(overall_n) -  1)),
+      n_pos_an=sum(positive_n),
+      mean_pos_an=weighted.mean(positive_mean,positive_n), 
+      sd_pos_an=sqrt(((sum((positive_n - 1) * positive_sd^2 + positive_n * positive_mean^2)) - sum(positive_n) * mean_pos_an^2)/(sum(positive_n) -  1)))
+  
+  pairwise_separate<-pairwise(data=master_pooled_separate, studlab = study_name_drug, treat=drug_new,
+                          mean=mean_ov_an, sd=sd_ov_an, n=n_ov_an, sm="SMD")
+  
+  pairwise_separate<-as.data.frame(pairwise_separate) %>% 
+    mutate(treat1_new=ifelse(treat1!="placebo" , treat1, treat2),
+           treat2_new=ifelse(treat1!="placebo" , treat2, treat1),
+           overall_mean1_new=ifelse(treat1!="placebo" , -1*mean1, -1*mean2),
+           overall_mean2_new=ifelse(treat1!="placebo" , -1*mean2, -1*mean1),
+           overall_sd1_new=ifelse(treat1!="placebo" , sd1, sd2),
+           overall_sd2_new=ifelse(treat1!="placebo" , sd2, sd1),
+           overall_n1_new=ifelse(treat1!="placebo" ,n1, n2),
+          overall_n2_new=ifelse(treat1!="placebo" , n2, n1), 
+           positive_mean1_new=ifelse(treat1!="placebo" , -1*mean_pos_an1, -1*mean_pos_an2),
+          positive_mean2_new=ifelse(treat1!="placebo" , -1*mean_pos_an2, -1*mean_pos_an1),
+          positive_sd1_new=ifelse(treat1!="placebo" , sd_pos_an1, sd_pos_an2),
+          positive_sd2_new=ifelse(treat1!="placebo" , sd_pos_an2, sd_pos_an1),
+          positive_n1_new=ifelse(treat1!="placebo" ,n_pos_an1, n_pos_an2),
+          positive_n2_new=ifelse(treat1!="placebo" , n_pos_an2, n_pos_an1), 
+          response1=ifelse(treat1!="placebo" ,response_an1, response_an2),
+          response2=ifelse(treat1!="placebo" ,response_an2, response_an2),
+            random1=ifelse(treat1!="placebo" ,n_an1, n_an2),
+            random2=ifelse(treat1!="placebo" ,n_an2, n_an1)) %>%
+    mutate(comp=paste0(treat1_new," vs. ", treat2_new)) %>%
+    select(study_name, study_name_drug, duration_weeks,
+           comp, population, treat1_new, treat2_new,
+           overall_mean1_new,  overall_sd1_new,  overall_n1_new,  overall_mean2_new,  overall_sd2_new,  overall_n2_new,
+           positive_mean1_new, positive_sd1_new, positive_n1_new, positive_mean2_new,  positive_sd2_new, positive_n2_new,
+           response1, random1, response2, random2) %>% 
+    unique()
+  
+  pairwise_separate_overall<-pairwise_separate  
+  
+  rob_overall<-rob %>% filter(outcome=="overall" & timepoint=="3-13 weeks")  %>% select(study_name, Overall) %>% rename(Overall_overall=Overall)
+  rob_positive<-rob %>% filter(outcome=="positive" & timepoint=="3-13 weeks")  %>% select(study_name, Overall)%>% rename(Overall_positive=Overall)
+  rob_resopnse<-rob %>% filter(outcome=="response" & timepoint=="3-13 weeks")  %>% select(study_name, Overall)%>% rename(Overall_response=Overall)
+  
+  pairwise_separate<-pairwise_separate %>% left_join(rob_overall) %>% left_join(rob_positive) %>% left_join(rob_resopnse) 
+  
+  meta_comp_overall_sch<-metacont(data=pairwise_separate[pairwise_separate$population=="Schizophrenia spectrum",],  
+                           mean.e = overall_mean1_new, sd.e=overall_sd1_new, n.e=overall_n1_new, mean.c = overall_mean2_new, sd.c=overall_sd2_new, n.c=overall_n2_new,
+                           sm="SMD", random=TRUE, fixed=TRUE,    
+                           studlab = study_name_drug, prediction = FALSE, subgroup = population, 
+                           prediction.subgroup = FALSE)
+  meta_comp_overall_pdp<-metacont(data=pairwise_separate[pairwise_separate$population=="Parkinson Disease Psychosis",],  
+                                  mean.e = overall_mean1_new, sd.e=overall_sd1_new, n.e=overall_n1_new, mean.c = overall_mean2_new, sd.c=overall_sd2_new, n.c=overall_n2_new,
+                                  sm="SMD", random=TRUE, fixed=TRUE,    
+                                  studlab = study_name_drug, prediction = FALSE, subgroup = population, 
+                                  prediction.subgroup = FALSE)
+  
+  meta_comp_positive_sch<-metacont(data=pairwise_separate[pairwise_separate$population=="Schizophrenia spectrum" & !is.na(pairwise_separate$positive_mean1_new),],  
+                                  mean.e = positive_mean1_new, sd.e=positive_sd1_new, n.e=positive_n1_new, mean.c = positive_mean2_new, sd.c=positive_sd2_new, n.c=positive_n2_new,
+                                  sm="SMD", random=TRUE, fixed=TRUE,    
+                                  studlab = study_name_drug, prediction = FALSE, subgroup = population, 
+                                  prediction.subgroup = FALSE)
+  meta_comp_positive_pdp<-metacont(data=pairwise_separate[pairwise_separate$population=="Parkinson Disease Psychosis",],  
+                                  mean.e = positive_mean1_new, sd.e=positive_sd1_new, n.e=positive_n1_new, mean.c = positive_mean2_new, sd.c=positive_sd2_new, n.c=positive_n2_new,
+                                  sm="SMD", random=TRUE, fixed=TRUE,    
+                                  studlab = study_name_drug, prediction = FALSE, subgroup = population, 
+                                  prediction.subgroup = FALSE)
 
-
+  meta_comp_response_sch<-metabin(data=pairwise_separate[pairwise_separate$population=="Schizophrenia spectrum",],  
+                     event.e = response1, n.e=random1, event.c = response2, n.c=random2,
+                     sm="OR", random=TRUE, fixed=TRUE,    
+                     studlab = study_name_drug, prediction = FALSE, subgroup = population, 
+                     prediction.subgroup = FALSE)
+  
+  meta_comp_response_pdp<-metabin(data=pairwise_separate[pairwise_separate$population=="Parkinson Disease Psychosis",],  
+                                  event.e = response1, n.e=random1, event.c = response2, n.c=random2,
+                                  sm="OR", random=TRUE, fixed=TRUE,    
+                                  studlab = study_name_drug, prediction = FALSE, subgroup = population, 
+                                  prediction.subgroup = FALSE)
+  
 #Overall risk of bias of the studies using the highest across outcomes
 rob_all<-rob %>% select(study_name, D1, D2, D3, D4, D5, DS, Overall)
 rob_all[rob_all=="Low"]<-"0"

@@ -1,6 +1,6 @@
 ---
 title: "Trace amine-associated receptor 1 (TAAR1) agonists for psychosis - Results from the human studies <span style='font-size:25px'></style>"
-author: "Drafted by Spyridon Siafis, commented by Virginia Chiocchia, Charlotte Austin, Georgia Salanti <span style='font-size: 15px'></style>"
+author: "First drafted by Spyridon Siafis, commented by Virginia Chiocchia, Charlotte Austin, Claire Friedrich, Robert McCutcheon, Georgia Salanti <span style='font-size: 15px'></style>"
 date: "`r format(Sys.Date(), '%e %b %Y')`"
 output:
   html_document:
@@ -54,12 +54,12 @@ rob<-read_xlsx("data/rob_secondary_2024.01.24.xlsx")
 #results matrix table
 results_matrix<-read_xlsx("data/reporting_bias table_2024.01.26.xlsx")
 #SoE tables
-soe_sch_ta1_pl_eff<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 1)
-soe_sch_ta1_apd_eff<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 2)
-soe_pd_ta1_pl_eff<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 3)
-soe_all_ta1_pl_saf<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 4)
-soe_all_ta1_apd_saf<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 5)
-soe_mechanistic<-read_xlsx("data/soe_tables_2024.01.26.xlsx", sheet = 6)
+soe_sch_ta1_pl_eff<-read_xlsx("data/soe_tables_2024.01.29.xlsx", sheet = 1)
+soe_sch_ta1_apd_eff<-read_xlsx("data/soe_tables_2024.01.29.xlsx", sheet = 2)
+soe_pd_ta1_pl_eff<-read_xlsx("data/soe_tables_2024.01.29.xlsx", sheet = 3)
+soe_all_ta1_pl_saf<-read_xlsx("data/soe_tables_2024.01.29.xlsx", sheet = 4)
+soe_all_ta1_apd_saf<-read_xlsx("data/soe_tables_2024.01.29.xlsx", sheet = 5)
+soe_mechanistic<-read_xlsx("data/soe_tables_2024.01.29.xlsx", sheet = 6)
 
 #Round off results to two digits
 options(scipen=1, digits=2)
@@ -120,18 +120,18 @@ There were 25 eligible studies, which characteristics can be found in **Table 1*
 
 The usable studies compared single or multiple doses of two TAAR1 agonists (i.e., ulotaront or ralmitaront) with placebo or current antipsychotics (i.e., risperidone or amisulpride) in people with schizophrenia, Parkinson's disease psyschosis, other mental health conditions (narcolepsy/cateplexy as sleep disorder) and healthy volunteers.
 *Five studies* used a parallel design to examine the efficacy and safety of multiple doses of TAAR1 agonists in psychosis within 3-13 weeks
-*Four studies* examining daily doses of TAAR1 agonists in *adults with an acute episode of schizophrenia* spectrum conditions for 4-6 weeks, 3 examined ulotaront (Koblan et al. 2020, NCT04072354 and NCT04092686) and 1 examined ralmitaront (NCT04512066). These studies used placebo as control group, and the 1 study on ralmitaront used also the antipsychotic risperidone as active comparator. *One study* comparing daily doses of ulotaront in *Parkinson's dissease psychosis* to placebo for 4 weeks (Isaacson et al. 2023).
-*Four studies* examined the pharmacokinetics, safety and/or neuroimaging of single doses of TAAR1 agonists or multiple doses for up to 2 weeks: *One study* examining the effects of a single dose of 150mg ulotaront in *clinically stable adults with schizophrenia** on QTc interval within a day (Tsukada et al 2023). The study utilized a three-period crossover period comparing ulotaront with placebo and moxifloxacin (an antibiotic used as active comparator, not relevant for our analysis). *Two studies* examined the effects of single doses of ulotaront in *healthy volunteers* on sleep parameters (Hopkins et al 2021) or fMRI tasks (Perini et al 2023). Hopkins et al 2021 included two cohorts of crossover studies comparing two single doses of ulotaront with placebo. Perini et al 2023 was a parallel trial comparing ulotaront to placebo or the antipsychotic amisulpride on fMRI tasks relevant to reward, working memory and emotion processing in volunteers with high or low schizotypy traits. *One study* examined two single doses of ulotaront in *adults with narcolepsy-cateplyxy* compared to placebo using a three-period crossover design.
+*Four studies* examining daily doses of TAAR1 agonists in adults with an acute episode of schizophrenia spectrum conditions for 4-6 weeks, 3 examined ulotaront (Koblan et al. 2020, NCT04072354 and NCT04092686) and 1 examined ralmitaront (NCT04512066). These studies used placebo as control group, and the 1 study on ralmitaront used also the antipsychotic risperidone as active comparator. *One study* comparing daily doses of ulotaront in Parkinson's dissease psychosis to placebo for 4 weeks (Isaacson et al. 2023).
+*Four studies* examined the pharmacokinetics, safety and/or neuroimaging of single doses of TAAR1 agonists or multiple doses for up to 2 weeks: *One study* examining the effects of a single dose of 150mg ulotaront in clinically stable adults with schizophrenia on QTc interval within a day (Tsukada et al 2023). The study utilized a three-period crossover period comparing ulotaront with placebo and moxifloxacin (an antibiotic used as active comparator, not relevant for our analysis). *Two studies* examined the effects of single doses of ulotaront in healthy volunteers on sleep parameters (Hopkins et al 2021) or fMRI tasks (Perini et al 2023). Hopkins et al 2021 included two cohorts of crossover studies comparing two single doses of ulotaront with placebo. Perini et al 2023 was a parallel trial comparing ulotaront to placebo or the antipsychotic amisulpride on fMRI tasks relevant to reward, working memory and emotion processing in volunteers with high or low schizotypy traits. *One study* examined two single doses of ulotaront in adults with narcolepsy-cateplyxy compared to placebo using a three-period crossover design.
 
 The following studies were unavailable:
-*One study* examined the efficacy and safety of ulotaront in comparison to placebo in *adolescents with an acute episode schizophrenia* (NCT04072354). This study had two parts with adults and adolescents. This study has been recently completed, and although some usable data in the adult population are available (see above), these are not available for the adolsecents.
-*One study* examined the long-term efficacy and safety of ulotaront in comparisong to the antispychotic quetiapine in *adults with clinically stable schizophrenia* (NCT04115319). The study should have been completed in 12.2022, and there are currently no usable data available.
-*One study* examined monotherapy or add-on treamtent with ralmitaront in comparison to placebo in *adults with schizophrenia or schizoaffective disorder and predominant negative symptoms* (NCT03669640). The study has been recently completed in 05.2023, and it has been reported to be failed, yet no usable data were available.
-*Nine studies* examined pharmacokinetics and safety of single or few multiple doses of ulotaront or ralmitaront in **healthy volunteers** (Fowler 2015, JapicCTI-194581, NCT02699372, SEP361-101, DA801002, NCT01940159, Koblan 2016, NCT04325737, NCT04865835).
+*One study* examined the efficacy and safety of ulotaront in comparison to placebo in adolescents with an acute episode schizophrenia (NCT04072354). This study had two parts with adults and adolescents. This study has been recently completed, and although some usable data in the adult population are available (see above), these are not available for the adolsecents.
+*One study* examined the long-term efficacy and safety of ulotaront in comparisong to the antispychotic quetiapine in adults with clinically stable schizophrenia (NCT04115319). The study should have been completed in 12.2022, and there are currently no usable data available.
+*One study* examined monotherapy or add-on treamtent with ralmitaront in comparison to placebo in adults with schizophrenia or schizoaffective disorder and predominant negative symptoms (NCT03669640). The study has been recently completed in 05.2023, and it has been reported to be failed, yet no usable data were available.
+*Nine studies* examined pharmacokinetics and safety of single or few multiple doses of ulotaront or ralmitaront in healthy volunteers (Fowler 2015, JapicCTI-194581, NCT02699372, SEP361-101, DA801002, NCT01940159, Koblan 2016, NCT04325737, NCT04865835).
 
 The following studies are ongoing:
-- *One study* is examining the efficacy and safety of two ulotaront doses of 50mg/d and 75mg/d in comparison to placebo in *adults with an acute episode of schizophrenia* (NCT04825860). The study is expected to be completed in 06.2025.
-- *Two studies* are examining the efficacy and safety of ulotaront compared to placebo in other mental health conditions, i.e., adults with *major depression* (NCT05593029) and *generalized anxiety disorder* (NCT05729373). These trials are expected to be completed in 2025, and their safety data are relevant for this review.
+- *One study* is examining the efficacy and safety of two ulotaront doses of 50mg/d and 75mg/d in comparison to placebo in adults with an acute episode of schizophrenia (NCT04825860). The study is expected to be completed in 06.2025.
+- *Two studies* are examining the efficacy and safety of ulotaront compared to placebo in other mental health conditions, i.e., adults with major depression (NCT05593029) and generalized anxiety disorder (NCT05729373). These trials are expected to be completed in 2025, and their safety data are relevant for this review.
 
 
 The studies used to describe mechanistic insights are provided in the relevant section below.
@@ -160,21 +160,38 @@ No usable data available from RCT.
 #### Timepoint 2: *3 weeks - 13 weeks* (primary timepoint)
 
 ```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4}
-forest(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`, 
+forest(meta_comp_overall_sch, 
        col.diamond = "royalblue4",
        col.square =   "royalblue1",
-                 rightcols = c("effect", "ci","Overall"), 
+                 rightcols = c("effect", "ci","Overall_overall"), 
                  rightlabs = c("SMD", "95%-CI", "Risk of bias"),  
        xlim=c(-0.8,0.8),
-                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`$data$treat1_new), 
-       label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_overall`$data$treat2_new),
-                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
-                 overall = FALSE, prediction.subgroup = FALSE,
-                 subgroup = TRUE, fixed=TRUE,
+                 label.e = unique(meta_comp_overall_sch$data$treat1_new), 
+       label.c=unique(meta_comp_overall_sch$data$treat2_new),
+                 subgroup.hetstat = FALSE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = TRUE, prediction.subgroup = FALSE,
+                 subgroup = FALSE, fixed=TRUE,
                  label.left = "Placebo better", label.right="TAAR1 better")
 ```
 
-**Figure 3** Forest plot for overall symptoms (primary outcome) for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
+**Figure 3a** Forest plot for overall symptoms (primary outcome) for the comparison of TAAR1 agonist vs. placebo in people with acute episode of schizophrenia at 3-13 weeks (primary timepoint)
+
+
+```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4}
+forest(meta_comp_overall_pdp, 
+       col.diamond = "royalblue4",
+       col.square =   "royalblue1",
+                 rightcols = c("effect", "ci","Overall_overall"), 
+                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  
+       xlim=c(-0.8,0.8),
+                 label.e = unique(meta_comp_overall_pdp$data$treat1_new), 
+       label.c=unique(meta_comp_overall_pdp$data$treat2_new),
+                 subgroup.hetstat = FALSE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = FALSE, fixed=TRUE,
+                 label.left = "Placebo better", label.right="TAAR1 better")
+```
+**Figure 3b** Forest plot for overall symptoms (primary outcome) for the comparison of TAAR1 agonist vs. placebo in people with Parkinson's disease psychosis at 3-13 weeks (primary timepoint)
 
 #### Timepoint 3: *\> 13 weeks*
 
@@ -189,20 +206,38 @@ No usable data available from RCT.
 #### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`, 
+forest(meta_comp_positive_sch, 
        col.diamond = "royalblue4",
        col.square =   "royalblue1",
-                 rightcols = c("effect", "ci", "Overall"), 
+                 rightcols = c("effect", "ci", "Overall_positive"), 
                  rightlabs = c("SMD", "95%-CI", "Risk of bias"),  xlim=c(-0.8,0.8),
-                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`$data$treat1_new),
-       label.c=unique(`meta_comp_taar1_vs_placebo_3-13 weeks_positive`$data$treat2_new),
+                 label.e = unique(meta_comp_positive_sch$data$treat1_new),
+       label.c=unique(meta_comp_positive_sch$data$treat2_new),
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = TRUE, fixed=TRUE,
                  label.left = "Placebo better", label.right="TAAR1 better")
 ```
 
-**Figure 4** Forest plot for positive symptoms for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
+**Figure 4a** Forest plot for positive symptoms for the comparison of TAAR1 agonist vs. placebo in people with acute episode of schizophrenia at 3-13 weeks (primary timepoint)
+
+
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest(meta_comp_positive_pdp, 
+       col.diamond = "royalblue4",
+       col.square =   "royalblue1",
+                 rightcols = c("effect", "ci", "Overall_positive"), 
+                 rightlabs = c("SMD", "95%-CI", "Risk of bias"),  xlim=c(-0.8,0.8),
+                 label.e = unique(meta_comp_positive_pdp$data$treat1_new),
+       label.c=unique(meta_comp_positive_pdp$data$treat2_new),
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Placebo better", label.right="TAAR1 better")
+```
+
+**Figure 4b** Forest plot for positive symptoms for the comparison of TAAR1 agonist vs. placebo in people with Parkinson's disease psychosis at 3-13 weeks (primary timepoint)
+
 
 #### Timepoint 3: *\> 13 weeks*
 
@@ -334,12 +369,12 @@ No usable data available from RCT.
 #### Timepoint 2: *3 weeks - 13 weeks*
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
-forest(`meta_comp_taar1_vs_placebo_3-13 weeks_response`, 
+forest(meta_comp_response_sch, 
        col.diamond = "royalblue4",
        col.square =   "royalblue1",
-                 rightcols = c("effect", "ci", "Overall"), 
+                 rightcols = c("effect", "ci", "Overall_response"), 
                  rightlabs = c("OR", "95%-CI", "Risk of bias"),  xlim=c(0.2,5),
-                 label.e = unique(`meta_comp_taar1_vs_placebo_3-13 weeks_response`$data$treat1_new),
+                 label.e = unique(meta_comp_response_sch$data$treat1_new),
        label.c="placebo",
                  subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
@@ -348,8 +383,25 @@ forest(`meta_comp_taar1_vs_placebo_3-13 weeks_response`,
 
 ```
 
+**Figure 8a** Forest plot for response (>50% or 20% symptom reduction from baseline) for the comparison of TAAR1 agonist vs. placebo in people with acute episode of schizophrenia at 3-13 weeks (primary timepoint)
 
-**Figure 8** Forest plot for response (>50% or 20% symptom reduction from baseline) for the comparison of TAAR1 agonist vs. placebo at 3-13 weeks (primary timepoint)
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+forest(meta_comp_response_pdp, 
+       col.diamond = "royalblue4",
+       col.square =   "royalblue1",
+                 rightcols = c("effect", "ci", "Overall_response"), 
+                 rightlabs = c("OR", "95%-CI", "Risk of bias"),  xlim=c(0.2,5),
+                 label.e = unique(meta_comp_response_pdp$data$treat1_new),
+       label.c="placebo",
+                 subgroup.hetstat = TRUE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
+                 overall = FALSE, prediction.subgroup = FALSE,
+                 subgroup = TRUE, fixed=TRUE,
+                 label.left = "Placebo better", label.right="TAAR1 better")
+
+```
+
+**Figure 8b** Forest plot for response (>50% symptom reduction from baseline) for the comparison of TAAR1 agonist vs. placebo in people with Parkinson's disease psychosis at 3-13 weeks (primary timepoint)
+
 
 #### Timepoint 3: *\> 13 weeks*
 
@@ -2246,9 +2298,9 @@ Therefore, to be able to provide additional insights into the mechanism of TAAR1
 
 There were some available neuroimaging data from two studies, one RCTs (Perini et al 2023) and one single-arm study (NCT04038957). 
 
-Perini et al 2023 was double-blind, three-arm parallel RCT examining the effects of a single dose of ulotaront compared to placebo and amisulpride on fMRI blood oxygen level-dependent (BOLD) striatal responses to reward processing, as measured during the anticipation phase of the Monetary Incentive Delay (MID) task. The interventions were administered 2 hours before the fMRI. BOLD striatal responses to reward during the anticipatory phase of MID were selected as the primary outcome due to their potential relation to increased dopamine release. The study enrolled 96 healthy volunteers, 51 with low schizotypy traits and 45 with high, as measured with the Schizotypal Personality Questionnaire (scores <10 indicate low schizotypy traits, >=40 high schizotypy traits) to examine interactions due to the potential shared increased striatal activity between positive symptoms and schizotypal traits. Moreover, the study measured responses to other brain regions, the outcome phase of MID, BOLD responses to the N-back task for working memory, responses to an emotional test battery, resting state connectivity, and arterial spin labeling. The findings of the primary outcome of this study are reported here as they were deemed most relevant to dopaminergic signaling. Ulotaront appeared to be associated with smaller BOLD striatal responses compared to placebo (left striatum: -0.13%, p=0.03; right striatum: -0.12%, p=0.06) but not to amisulpride (left: -0.07%, p=0.38; right: -0.03%, p=0.66) in the anticipation of loss, and did not differ from both placebo (left: -0.07%, p=0.30; right: -0.07%, p=0.27) and amisulpride (left: -0.03%, p=0.65; right: -0.02%, p=0.74) in the anticipation of win in the MID task. There were also no differences in BOLD right and left insular responses, but ulotaront seemed to increase BOLD responses in the medial orbital frontal cortex in anticipation of loss compared to placebo (left: 0.19%, p=0.07; right: 0.17%, p=0.10) and amisulpride (left: 0.25%, p=0.03; right: 0.22%, p=0.05) and in anticipation of win compared to placebo (left: 0.25%, p=0.01; right: 0.24%, p=0.01), but not clearly to amisulpride (left: 0.10%, p=0.30; right: 0.11%, p=0.19). Interactions with schizotypy traits were not reported for the primary outcome, but ulotaront was reported to reverse in comparison to placebo the aberrant increased BOLD response in the right insula observed in participants with high schizotypy traits but not in those with low schizotypy traits. However, it is unclear if the primary outcome was selected a priori or a posteriori, as no primary outcome was reported in the registration of the study on clinicaltrials.gov, thus biases due to seletected reported outcomes cannot be excluded. There were also differences between the interventions in some of the other measures, with ulotaront being reported as associated with the modification of signals in brain regions associated with cognitive symptoms in schizophrenia. Moreover, ulotaront was associated with sedation in 60% of the participants, more frequently than placebo (see **Figure 36**) and amisulpride (see **Figure 63**) that impaired reaction times in the tasks but was not correlated with BOLD responses. Nevertheless, the impact of this sedative effect on these findings is unclear. In conclusion, this study suggests that ulotaront might be able to reduce dopamine release in situations that are increased, like the anticipatory phase of MID, and potentially in psychosis.
+Perini et al 2023 was double-blind, three-arm parallel RCT examining the effects of a single dose of ulotaront 50mg compared to placebo and amisulpride 400mg on fMRI blood oxygen level-dependent (BOLD) striatal responses to reward processing, as measured during the anticipation phase of the Monetary Incentive Delay (MID) task. The interventions were administered 2 hours before the fMRI. BOLD striatal responses to reward during the anticipatory phase of MID were selected as the primary outcome due to their potential relation to increased dopamine release. The study enrolled 96 healthy volunteers, 51 with low schizotypy traits and 45 with high, as measured with the Schizotypal Personality Questionnaire (scores <10 indicate low schizotypy traits, >=40 high schizotypy traits) to examine interactions due to the potential shared increased striatal activity between positive symptoms and schizotypal traits. Moreover, the study measured responses to other brain regions, the outcome phase of MID, BOLD responses to the N-back task for working memory, responses to an emotional test battery, resting state connectivity, and arterial spin labeling. The findings of the primary outcome of this study are reported here as they were deemed most relevant to dopaminergic signaling. Ulotaront appeared to be associated with smaller BOLD striatal responses compared to placebo (left striatum: -0.13%, p=0.03; right striatum: -0.12%, p=0.06) but not to amisulpride (left: -0.07%, p=0.38; right: -0.03%, p=0.66) in the anticipation of loss, and did not differ from both placebo (left: -0.07%, p=0.30; right: -0.07%, p=0.27) and amisulpride (left: -0.03%, p=0.65; right: -0.02%, p=0.74) in the anticipation of win in the MID task. There were also no differences in BOLD insular responses (anticipation of loss - ulotaront vs. placebo left 0.00%, p=0.99 and right -0.10%, p=0.16, ulotaront vs. amisulpride left 0.01%, p=0.94 and right -0.08%, p=0.42; anticipation of win - ulotaront vs. placebo left: 0.08%, p=0.18 and right -0.01%, p=0.90, ulotaront vs. amisulpride left 0.02%, p=0.84 and right 0.03%, p=0.72), but ulotaront seemed to increase BOLD responses in the medial orbital frontal cortex in anticipation of loss compared to placebo (left: 0.19%, p=0.07; right: 0.17%, p=0.10) and amisulpride (left: 0.25%, p=0.03; right: 0.22%, p=0.05) and in anticipation of win compared to placebo (left: 0.25%, p=0.01; right: 0.24%, p=0.01), but not clearly to amisulpride (left: 0.10%, p=0.30; right: 0.11%, p=0.19). Interactions with schizotypy traits were not reported for the primary outcome, but ulotaront was reported to reverse in comparison to placebo the aberrant increased BOLD response in the right insula observed in participants with high schizotypy traits but not in those with low schizotypy traits. However, it is unclear if the primary outcome was selected a priori or a posteriori, as no primary outcome was reported in the registration of the study on clinicaltrials.gov, thus biases due to seletected reported outcomes cannot be excluded. There were also differences between the interventions in some of the other measures, with ulotaront being reported as associated with the modification of signals in brain regions associated with cognitive symptoms in schizophrenia. Moreover, ulotaront was associated with sedation in 60% of the participants, more frequently than placebo (see **Figure 36**) and amisulpride (see **Figure 63**) that impaired reaction times in the tasks but was not correlated with BOLD responses. Nevertheless, the impact of this sedative effect on these findings is unclear. In conclusion, this study suggests that ulotaront might be able to reduce dopamine release in situations that are increased, like the anticipatory phase of MID, and potentially in psychosis.
 
-NCT04038957 was an open-label single-arm trial examining the effects of a 2-week treatment with ulotaront as an add-on to antipsychotic treatment on dopamine synthesis capacity in clinically stable patients with schizophrenia (an uncontrolled study that was not included in this meta-analysis, with available data from a conference abstract in ACNP 2024). This study included 14 men and 5 women (aged 18-45 years, mean age 32.9 years) with clinically stable schizophrenia (DSM-5) on a stable dose of antipsychotics for at least 3 weeks before screening. Three additional patients were enrolled but did not complete the baseline scan, so they were excluded from the study. The patients underwent an F-DOPA PET scan both at baseline and after 2 weeks of treatment with ulotaront (50-75mg/d) as an add-on to antipsychotic treatment. At baseline, the patients had a mean PANSS total score of 79.3 (SD=7.3), PANSS positive subscale of 19.2 (SD=4.6), PANSS Marder positive factor of 24.3 (SD=4.6), and CGI-S of 4.2 (SD=0.6), indicating that the patients had on average symptoms of moderate severity. Moreover, patients had an increased dopamine synthesis capacity at baseline compared to that observed in healthy controls, as indicated by the F-DOPA PET scan. After 2 weeks of treatment with add-on ulotaront, there was a decrease in dopamine synthesis capacity in the striatum as indicated by the F-DOPA PET scan by 3.98% from baseline (95% CI: -8.68%, 0.72%), with the 95% CI not excluding the null effect, and the striatal subregions ranging from -3.38% in the associative striatum, -3.89% in the sensorimotor striatum, to -5.79% in the limbic striatum. This reduction was considered to be clinically meaningful, and although it was not correlated with the relative reduction in PANSS total scores (r=0.19, p>0.05), it was correlated with improvements in the PANSS Marder positive factor (r=0.49, p<0.05). The study can be considered to have a high risk of bias due to the single-arm design, lack of control conditions, and the absence of blinding, yet the measurement of the outcome can be cosnidered objective. In conclusion, this study suggests that ulotaront may be able to reduce the dopamine synthesis capacity in clinically stable, but still symptomatic, people with schizophrenia, and the decrease in dopamine synthesis could be associated with the improvement of symptoms.
+NCT04038957 was an open-label single-arm trial examining the effects of a 2-week treatment with ulotaront (50-75mg/d) as an add-on to antipsychotic treatment on dopamine synthesis capacity in clinically stable patients with schizophrenia (an uncontrolled study that was not included in this meta-analysis, with available data from a conference abstract in ACNP 2024). This study included 14 men and 5 women (aged 18-45 years, mean age 32.9 years) with clinically stable schizophrenia (DSM-5) on a stable dose of antipsychotics for at least 3 weeks before screening. Three additional patients were enrolled but did not complete the baseline scan, so they were excluded from the study. The patients underwent an F-DOPA PET scan both at baseline and after 2 weeks of treatment with ulotaront (50-75mg/d) as an add-on to antipsychotic treatment. At baseline, the patients had a mean PANSS total score of 79.3 (SD=7.3), PANSS positive subscale of 19.2 (SD=4.6), PANSS Marder positive factor of 24.3 (SD=4.6), and CGI-S of 4.2 (SD=0.6), indicating that the patients had on average symptoms of moderate severity. After 2 weeks of treatment with add-on ulotaront, there was a decrease in dopamine synthesis capacity in the striatum as indicated by the F-DOPA PET scan by -3.98% from baseline (95% CI: -8.68%, 0.72%), with the 95% CI not excluding the null effect, and the striatal subregions ranging from -3.38% in the associative striatum, -3.89% in the sensorimotor striatum, to -5.79% in the limbic striatum. This reduction was considered to be clinically meaningful, and although it was not correlated with the relative reduction in PANSS total scores (r=0.19, p>0.05), it was correlated with improvements in the PANSS Marder positive factor (r=0.49, p<0.05). The study can be considered to have a high risk of bias due to the single-arm design, lack of control conditions, and the absence of blinding, yet the measurement of the outcome can be cosnidered objective. In conclusion, this study suggests that ulotaront may be able to reduce the dopamine synthesis capacity in clinically stable, but still symptomatic, people with schizophrenia, and the decrease in dopamine synthesis could be associated with the improvement of symptoms.
 
 No other controlled or uncontrolled study (see *included and excluded studies* in the supplementary files of the review) reported any neurobiological measure. It should be noted that another study, i.e., NCT02699372, consisting of double-blind trials examining single and multiple ascending doses of ralmitaront compared to placebo in healthy volunteers (see *Table 1*), utilized neuropsychological tasks but did not couple them with neuroimaging or other neurobiological measures to provide further insights. There were no usable data for this study for any of the outcomes; only brief and narrative descriptions of the findings of these tasks were available in the study protocol of NCT04512066. These findings describe that ralmitaront improved reward-related behavioral tasks compared to placebo but lacked additional information.
 
@@ -2343,23 +2395,23 @@ The results matrix in **Table 2** could also apply to the secondary efficacy out
 
 The reasons for the missingness of data for these outcomes can be unclear, but in most cases, it is due to either not being measured or not reported for reasons other than their P-values, magnitude, and direction of effects, yet this cannot be excluded. Therefore, we employed, as a general rule, the following approach in response to ROB-ME-4.1: "no" (as none was generally considered to have reported usable data for these outcomes due to their P-value, magnitude, or direction), ROB-ME-4.3: 'yes', ROB-ME-4.4: 'yes' if less than 50% of the participants had usable data, suggesting that the findings could notably change if the missing data had been added to the analysis. The cutoff of 50% of the participants was selected to balance out that in most cases, the findings were not missing due to unfavorable findings (see **Table 2**) but also to consider the possibility that the findings may be likely to change with the addition of missing evidence, given the small number of studies and participants in their estimates. In this situation, we assigned a high risk of reporting bias, but the impact of this on the magnitude and direction of the findings can be unclear. If there were data from at least 50% of the participants, we responded to ROB-ME-4.4: 'no', leading to *some concerns* given that ROB-ME-4.5: "no" see above, and patterns of missing evidence or sensitivity analyses could not be conducted.
 
+Finally, low risk of reporting bias was judged for the outcomes used to provide mechanistic insights for the same reasons described above. The search was comprehensive and no other study was found to measure neurobiological outcomes.
+
 ## Summary of evidence 
 
 ### Approach to evaluate the confidence in the evidence
 
-For each comparison, outcome and timepoint, we presented the summary of the evidence by presenting the summary of the association, biases due to study limitations, biasesd due to reporting bias, biases due to indirectness and other biases. [[[[ We assigned "low risk", "some concerns" and "high risk" in the domains of biases and presented the potential impact on the magnitude and direction of effects. We also assigned an overall judgement in the confidence of the evidence that could be "high", "moderate", "low" or "very low".]]]--->Use GRADE
+For each comparison, outcome and timepoint, we presented the summary of the evidence by presenting the summary of the association, biases due to study limitations, biasesd due to reporting bias, biases due to indirectness and other biases.
 
 **Summary of the association**: We presented the number of studies (N), participants (n) contributing to the analysis, the point estimates and 95% confidence intervals for both random- and fixed-effects models. We also made a statement about dose-effects for the primary outcome (**Figure 67**). 
 
-**Within-study biases**: This is referring to the study limitations measured with the risk of bias assessemnets using RoB2. The majority of the studies had a low risk of bias, or at most, some concerns across domains and outcomes, except for one small study (Isaacson et al., 2023) with a high risk of bias due to missing outcome data for some of the outcomes. Thus, we assigned "low risk" except for "high risk" when findings were based on the latter single study.
+**Within-study biases**: This refers to the study limitations measured with the risk of bias assessments using RoB2. The majority of the studies had a low risk of bias, or at most, some concerns across domains (mainly in missing outcome data, and also in the randomization process, period, and carry-over effects in Tsukada et al., 2023) and outcomes, except for one small study (Isaacson et al., 2023) with a high risk of bias due to missing outcome data for the efficacy outcomes. Thus, we assigned "high risk" for within-study biases when the efficacy outcomes were solely based on Isaacson et al., 2023. On other occasions where studies had a low risk or at most some concerns, mainly in the domain of missing outcome data, we assigned "low risk" of within-study biases when no more than 50% of the studies were rated with some concerns, and "some concerns" otherwise. In most cases, some concerns were raised due to missing outcome data. A recent meta-epidemiological study suggested that biases due to missing outcome data might underestimate the effects (PMID: 37939743). In schizophrenia trials, there is evidence that participants who dropped out may have worse prognosis compared to those who stayed in the trial (PMID: 18212325). In the included trials, TAAR1 agonists might generally be associated with higher dropout rates compared to the control conditions (**Figure 11**). Therefore, biases due to missing outcome data, which may be more frequent in the group of TAAR1 agonists, may potentially overestimate the efficacy of TAAR1 agonists compared to control conditions while underestimating the effects on adverse events, due to a shorter duration of treatment and observation; however, the magnitude is unclear.
 
 **Across-study bias**: This is referring to reporting bias, and we used the approach mentioned above to assign "low risk", "some concerns" or "high risk". 
 
-**Indirectness**: We assigned "no concerns" in indirectness, as there were no issues related to population, interventions, control conditions, outcomes, or settings in the analysis of efficacy outcomes using data from clinical trials in adults with an acute episode of schizophrenia or Parkinson's disease psychosis. However, potential indirectness in terms of population characteristics may exist in the analysis of other outcomes. This is because we pooled data from diverse populations, including those with schizophrenia spectrum disorders, Parkinson's disease psychosis, narcolepsy-cataplexy, and healthy volunteers. Although the majority of adverse events might not vary across these groups, we considered "some concerns" in indirectness when the analyses included fewer than 50% of participants with schizophrenia. This is because schizophrenia is the primary population to which these findings would be applied. Nevertheless, the impact on the magnitude and direction of the effects can be unclear. 
+**Indirectness**: We assigned "no concerns" regarding indirectness for the efficacy outcomes, as there were no issues related to population, interventions, control conditions, outcomes, or settings in the clinical trials involving adults with an acute episode of schizophrenia or Parkinson's disease psychosis. However, potential indirectness in terms of population characteristics may exist in the analysis of other outcomes. This is because we pooled data from diverse populations, including those with schizophrenia spectrum disorders, Parkinson's disease psychosis, narcolepsy-cataplexy, and healthy volunteers. Although the majority of adverse events might not vary significantly across these groups, we considered "some concerns" regarding indirectness when the analyses included fewer than 50% of participants with schizophrenia. This is because schizophrenia can be considered the primary population to which these findings would be applied. Nevertheless, the impact on the magnitude and direction of the effects remains unclear.
 
-**Other biases**: We considered additional biases, such as potential factors that could impact the magnitude and direction of the findings. Specifically, we considered "some concerns" for other biases for the primary outcome and response to treatment in adults with an acute episode of schizophrenia due to potential problems in the execution of trials during COVID-19 (NCT0407254, NCT04092686, NCT04512066). The two phase III trials of ulotaront, NCT04072354 and NCT04092686, had high placebo effects of about 14 points and 19 points reduction in PANSS total scores (compared to a mean of 6 points in other antipsychotic trials), suggesting that potential factors associated with placebo effects could have diluted effect sizes and underestimated the effects. A conference abstract at ACNP 2024 reported that pooled analyses of these two trials using participants enrolled before COVID-19 found effect sizes similar to the phase II trial (Koblan 2019). A potential explanation, among others, could be baseline inflation due to recruitment pressure during the COVID-19 pandemic. Thus, the possibility that the findings have been underestimated cannot be excluded.
-
-[[[[[**Confidence in the evidence**: We assigned an overall judgment on the confidence in the estimates by considering the above domains. We started with "high" confidence as we used data from randomized controlled trials, and we downgraded the confidence by one level for "some concerns" and two for "high risk" of bias in the above domains. Moreover, we considered potential imprecision in the summary of the association, taking into consideration the 95% CI (using a cutoff of trivial effects |SMD|=0.1 and OR=1/2 and 0.83) and sample size (cutoff of 800 participants based on a power calculation with a power of 80% to find SMD=0.2), as well as potential heterogeneity, considering a visual inspection of forest plots (due to the limited number of studies to estimate tau-squared).]]]]] ---> Use GRADE????
+**Other biases**: We considered additional biases, such as potential factors that could impact the magnitude and direction of the findings. Specifically, we regarded "some concerns" for other biases for the primary outcome and response to treatment in adults with an acute episode of schizophrenia due to potential problems in the execution of two phase III trials on ulotaront during COVID-19 (NCT0407254, NCT04092686). These trials had high placebo effects of about 14 points and 19 points reduction in PANSS total scores (compared to a mean of approximately 6 points in antipsychotic trials, PMID: 29804928), suggesting that potential factors associated with placebo effects could have diluted effect sizes and underestimated the effects. A conference abstract at ACNP 2024 reported that pooled analyses of these two trials using participants enrolled before COVID-19 found effect sizes similar to those in the phase II trial (Koblan 2019). Potential explanations, among others, could include the pressure for recruitment during the pandemic that might have led to baseline inflation and less careful recruitment, difficulties in the execution and monitoring of the trial such as protocol deviations and co-treatments, or other factors (PMID: 24185236, 31212302). It should be noted that another trial was conducted during COVID-19 (NCT04512066), but the potential impact of the pandemic on its execution has not been reported. Nonetheless, the possibility that the findings have been underestimated cannot be excluded.
 
 
 ### Summary of evidence tables
@@ -2371,7 +2423,7 @@ For each comparison, outcome and timepoint, we presented the summary of the evid
 ```{r echo=FALSE, fig.width=12, fig.height=8}
 knitr::kable(soe_sch_ta1_pl_eff)
 ```
-**Table 3** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in adults with an acute episode of schizophrenia. There were data for ulotaront and ralmitaront.
+**Table 3** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in adults with an acute episode of schizophrenia. There were data for ulotaront and ralmitaront. There were data from a single study for ralmitaront versus risperidone. There is an uncertain/unclear dose-response indication (see **Figure 67**).Across-study bias was evaluated using the ROB-ME approach.
 
 
 ##### TAAR1 agonists versus antipsychotics in adults with an acute episode of schizophrenia
@@ -2379,14 +2431,14 @@ knitr::kable(soe_sch_ta1_pl_eff)
 ```{r echo=FALSE, fig.width=12, fig.height=8}
 knitr::kable(soe_sch_ta1_apd_eff)
 ```
-**Table 4** Summary of evidence table for the comparison of TAAR1 agonists versus antipsychotics for efficacy outcomes in adults with an acute episode of schizophrenia. There were data from a single study for ralmitaront versus risperidone.
+**Table 4** Summary of evidence table for the comparison of TAAR1 agonists versus antipsychotics for efficacy outcomes in adults with an acute episode of schizophrenia. There were data for ulotaront. Across-study bias was evaluated using the ROB-ME approach.
 
 ##### TAAR1 agonists versus placebo for efficacy outcomes in Parkinson's disease psychosis
 
 ```{r echo=FALSE, fig.width=12, fig.height=8}
-knitr::kable(soe_sch_ta1_apd_eff)
+knitr::kable(soe_pd_ta1_pl_eff)
 ```
-**Table 5** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in Parkinson's disease psychosis. There were data from a single study for ulotaront.
+**Table 5** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for efficacy outcomes in Parkinson's disease psychosis. There were data from a single study for ulotaront. Across-study bias was evaluated using the ROB-ME approach.
 
 #### Summary of evidence table for dropouts and side-effecs
 
@@ -2395,7 +2447,7 @@ knitr::kable(soe_sch_ta1_apd_eff)
 ```{r echo=FALSE, fig.width=12, fig.height=8}
 knitr::kable(soe_all_ta1_pl_saf)
 ```
-**Table 6** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers. There were data for ulotaront and ralmitaront.
+**Table 6** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers. There were data for ulotaront and ralmitaront. Across-study bias was evaluated using the ROB-ME approach.
 
 
 ##### TAAR1 agonists versus antipsychotics for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers
@@ -2403,7 +2455,7 @@ knitr::kable(soe_all_ta1_pl_saf)
 ```{r echo=FALSE, fig.width=12, fig.height=8}
 knitr::kable(soe_all_ta1_apd_saf)
 ```
-**Table 7** Summary of evidence table for the comparison of TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers. There were data for ulotaront vs. amisulpride (single dose) and ralmitaront vs. risperidone (4 weeks).
+**Table 7** Summary of evidence table for the comparison of TAAR1 agonists versus antipsychotics for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers. There were data for ulotaront vs. amisulpride (single dose) and ralmitaront vs. risperidone (4 weeks).Across-study bias was evaluated using the ROB-ME approach.
 
 
 #### Summary of evidence table for the mechanistic insights of TAAR1 agonism for pscyhosis
@@ -2412,4 +2464,4 @@ knitr::kable(soe_all_ta1_apd_saf)
 ```{r echo=FALSE, fig.width=12, fig.height=8}
 knitr::kable(soe_mechanistic)
 ```
-**Table 8** Summary of evidence table for the mechanistic insights of TAAR1 agonism for psychosis. The findings of two studies with available neurobiological measures relevant to psychosis are narratively reported. These include the double-blind randomized controlled trial of Perini et al. 2023 with the fMRI BOLD striatal responses in the anticipatory phase of the Monetary Incentive Delay (MID) task (the primary outcome of this study), and the open label single-arm study of NCT04038957 with F-DOPA PET in the striatum 
+**Table 8** Summary of evidence table for the mechanistic insights of TAAR1 agonism for psychosis. The findings of two studies with available neurobiological measures relevant to psychosis are narratively reported. These include the double-blind randomized controlled trial of Perini et al. 2023 with the fMRI BOLD striatal responses in the anticipatory phase of the Monetary Incentive Delay (MID) task (the primary outcome of this study), and the open label single-arm study of NCT04038957 with F-DOPA PET in the striatum.Across-study bias was evaluated using the ROB-ME approach. 
