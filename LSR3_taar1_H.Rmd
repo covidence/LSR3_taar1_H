@@ -700,7 +700,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anticholinergic_symptom`,
 
 ```
 
-**Figure 19** Forest plot for anticholinergic side-effects (i.e., dry mouth) for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. 
+**Figure 19** Forest plot for anticholinergic side-effects (i.e., dry mouth in this study) for the comparison of TAAR1 agonist vs. placebo at 1 day - 2 weeks. 
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
@@ -712,7 +712,6 @@ No usable data available from RCT.
 
 ### Secondary outcome: Hypotension
 
-Terms that were considered as reported in the trials: hypotension or orthostatic hypotension
 
 #### Timepoint 1: *1 day - 2 weeks*
 
@@ -1844,7 +1843,6 @@ No usable data available from RCT.
 
 ### Secondary outcome: Hypotension
 
-Terms that were considered as reported in the trials: hypotension or orthostatic hypotension
 
 #### Timepoint 1: *1 day - 2 weeks*
 
