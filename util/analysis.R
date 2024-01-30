@@ -619,6 +619,8 @@ pairwise_drug<-pairwise(data=master_pooled_drug, studlab = study_name_drug, trea
                                   studlab = study_name_drug, prediction = FALSE, subgroup = population, 
                                   prediction.subgroup = FALSE)
   
+
+  
 #Overall risk of bias of the studies using the highest across outcomes
 rob_all<-rob %>% select(study_name, D1, D2, D3, D4, D5, DS, Overall)
 rob_all[rob_all=="Low"]<-"0"
