@@ -138,6 +138,7 @@ rob_traffic_light(rob_all, tool="Generic")
 All the studies were double-blind randomized controlled studies, with a low risk of bias in most cases in their respective domains of biases due to randomization, deviations from intended interventions, and outcome measurement. There were also no indications of selectively reported results; thus, the studies had a low risk of bias in their respective domains. Most of the studies had missing outcome data, but there was no clear indication that the missingness depended on the true value of the effects for most of the outcomes. Therefore, there were some concerns, except for Isaacson et al. 2023, which had a high risk of bias for efficacy outcomes but not for adverse events and other outcomes. Additionally, there were few differences in this domain across outcomes, such as a low risk for the outcome of dropouts. In terms of the three crossover studies, there was a low risk of bias in period and carry-over effects, except for some concerns in the three-period crossover study of Tsukada et al. 2023. Few differences across outcomes can be found in the overall judgment of the risk of bias for each study per outcome in the respective forest plots below.
 
 **It should be noted that odds ratios in the figures below are presented in a logarithmic scale**
+**When the forest plots present only the effect sizes, there were crossover studies in which variances were corrected assuming a correlation of 0.2**
 
 ## Comparison 1: *TAAR1 agonist* vs *placebo*
 
