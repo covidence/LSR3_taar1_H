@@ -2463,3 +2463,8 @@ knitr::kable(soe_all_ta1_apd_saf)
 knitr::kable(soe_mechanistic)
 ```
 **Table 8** Summary of evidence table for the mechanistic insights of TAAR1 agonism for psychosis. The findings of two studies with available neurobiological measures relevant to psychosis are narratively reported. These include the double-blind randomized controlled trial of Perini et al. 2023 with the fMRI BOLD striatal responses in the anticipatory phase of the Monetary Incentive Delay (MID) task (the primary outcome of this study), and the open label single-arm study of NCT04038957 with F-DOPA PET in the striatum.Across-study bias was evaluated using the ROB-ME approach. 
+
+# Version of R and packages used for the data analysis
+```{r echo=FALSE, fig.width=12, fig.height=8}
+print(session_info())
+```
