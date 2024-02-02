@@ -2478,7 +2478,7 @@ MMSE: Mini-Mental State Examination
 
 msec: Milliseconds
 
-na: Not Applicable
+na: Not applicable/available
 
 ng/ml: Nanograms per Milliliter
 
