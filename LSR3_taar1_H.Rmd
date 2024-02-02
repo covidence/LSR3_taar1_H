@@ -108,7 +108,7 @@ options(scipen=1, digits=2)
 PRISMA_flowdiagram(prisma, previous = FALSE, other=TRUE)
 ```
 
-**Figure 1** PRISMA 2020 flow diagram. \*It should be noted that due to the limited data on mechanistic insights, we also presented narratively the findings from one of the excluded uncontrolled studies, since this was the only molecular neuroimaging study [@america2023].
+**Figure 1** PRISMA 2020 flow diagram. \*It should be noted that due to the limited data on mechanistic insights, we also presented narratively the findings from one of the excluded uncontrolled studies, since this was the only molecular neuroimaging study @america2023; this study is listed along with the 26 excluded studies due to wrong study design in the PRISMA flow diagram.
 
 ## 2.2 Table of included studies
 
@@ -117,7 +117,7 @@ studies_to_plot<-studies[order(studies$Name),]
 knitr::kable(studies_to_plot[, 1:14])
 ```
 
-**Table 1** Table of included studies. SB: Single-Blind, DB: Double-Blind, RCT: Randomized controlled trial
+**Table 1** Table of included studies. \*It should be noted that due to the limited data on mechanistic insights, we also presented narratively the findings from one of the excluded uncontrolled studies, since this was the only molecular neuroimaging study [@america2023], which characteristics are also presented here as an exception along with the included RCTs. SB: Single-Blind, DB: Double-Blind, RCT: Randomized controlled trial, MDD: Major Depressive Disorder, GAD: Generalzied Anxiety Disorder, fMRI: functional neuroimaging, PET: Positron emission tomography.
 
 ## 2.3 Description of included studies
 

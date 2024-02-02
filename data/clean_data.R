@@ -64,7 +64,7 @@ studies<-studies %>% mutate(rct=ifelse(grepl("RCT", Design), 1,0),
                             state=ifelse(grepl("acute", Population),"acute",
                                          ifelse(grepl("negative", Population),"negative symptoms",
                                                 ifelse(grepl("stable", Population),"stable", NA)))) %>%
-  mutate(sample_n=as.integer(`Sample size`)) %>% filter(rct==1)
+  mutate(sample_n=as.integer(`Sample size`)) %>% filter(rct==1 | Name=="*NCT04038957")
 
 studies<-studies[order(studies$Status, studies$Sponsor, studies$rct, studies$Population, studies$state),] #Ordering for a better presentation
 
