@@ -1,9 +1,7 @@
-# LSR3_taar1
-Trace amine-associated receptor 1 (TAAR1) agonists for psychosis: Protocol for a living systematic review and meta-analysis of human and non-human studies
+# LSR3 findings from human studies - TAAR1 agonsits in psychosis
 
-Abstract
+- The /data folder includes raw and cleaned data, and the R code for cleaning the data (clean_data.R).
+- The /util folder includes the R code using for analysis (analysis.R)
+- The LSR3_taar1_H.Rmd and LSR3_taar1_H.html refer to the R markdown files to reporting the fidings. The .Rmd can be executed when the /data, /util and .bib files are also downloaded.
 
-Background: There is an urgent need to develop more effective and safer antipsychotics beyond dopamine 2 receptor antagonists. An emerging and promising approach is TAAR1 agonism. Therefore, we will conduct a living systematic review and meta-analysis to synthesize and triangulate the evidence from preclinical animal experiments and clinical studies on the efficacy, safety, and underlying mechanism of action of TAAR1 agonism for psychosis.
-Methods: Independent searches will be conducted in multiple electronic databases to identify clinical and animal experimental studies comparing TAAR1 agonists with licensed antipsychotics or other control conditions in individuals with psychosis or animal models for psychosis, respectively. The primary outcomes will be overall psychotic symptoms and their behavioural proxies in animals. Secondary outcomes will include side effects and neurobiological measures. Two independent reviewers will conduct study selection, data extraction using predefined forms, and risk of bias assessment using suitable tools based on the study design. Ontologies will be developed to facilitate study identification and data extraction. Data from clinical and animal studies will be synthesized separately using random-effects meta-analysis if appropriate, or synthesis without meta-analysis. Study characteristics will be investigated as potential sources of heterogeneity. Confidence in the evidence for each outcome and source of evidence will be evaluated, considering the summary of the association, potential concerns regarding internal and external validity, and reporting biases. When multiple sources of evidence are available for an outcome, an overall conclusion will be drawn in a triangulation meeting involving a multidisciplinary team of experts. We plan trimonthly updates of the review, and any modifications in the protocol will be documented. The review will be co-produced by multiple stakeholders aiming to produce impactful and relevant results and bridge the gap between preclinical and clinical research on psychosis.
 
-PROSPERO-ID: CRD42023451628 
