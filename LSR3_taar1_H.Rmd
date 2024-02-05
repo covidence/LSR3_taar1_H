@@ -425,7 +425,8 @@ efficacy_primary<-meta_outcome %>% left_join(outcome_categories) %>%
          lb=TE.random-1.96*seTE.random,
          ub=TE.random+1.96*seTE.random) %>% 
   unique() %>%
-  filter(comparison=="taar1_vs_placebo") 
+  filter(comparison=="taar1_vs_placebo") %>% 
+  mutate(n_text=paste0("N=", k,", n=",n))
 
 efficacy_primary$population <- factor(efficacy_primary$population, levels=unique(efficacy_primary$population))
 efficacy_primary$event_text <- factor(efficacy_primary$event_tex, levels=unique(efficacy_primary$event_tex))
@@ -434,6 +435,7 @@ level_population<-c("Schizophrenia spectrum", "Parkinson Disease Psychosis")
 
 ggplot(data=efficacy_primary, 
        aes(y=factor(event_text, level=rev(level_outcomes)), x=point))+
+  geom_text(aes(x=0.65, label=n_text), colour="black" , position=position_dodge(width = 0.9))+
   geom_point(aes(size=n), position=position_dodge(width = 0.5), colour="royalblue4")+ #Size proportional to the number of participants
   coord_cartesian(xlim=c(-0.8,0.8))+
   geom_errorbar(aes(x=point, xmin=lb, 
@@ -449,7 +451,7 @@ ggplot(data=efficacy_primary,
 
 ```
 
-**Figure 9** Summary plot for efficacy outcomes at 4-6 weeks for the comparison of TAAR1 agonists vs. placebo in the two populations of patients with an acute episode of schizophrenia and Parkinson's disease psychosis. There were only available data for the timepoint of 3-13 weeks. The size of the points are proportional to the number of participants used in the analysis. SMD\>0 correspond to more symptom improvement by TAAR1 agonists compared to placebo. SMD: Standardized mean difference, 95%CI: 95% confidence interval.
+**Figure 9** Summary plot for efficacy outcomes at 4-6 weeks for the comparison of TAAR1 agonists vs. placebo in the two populations of patients with an acute episode of schizophrenia and Parkinson's disease psychosis. There were only available data for the timepoint of 3-13 weeks. The size of the points are proportional to the number of participants used in the analysis. SMD\>0 correspond to more symptom improvement by TAAR1 agonists compared to placebo. The findings of the random-effects model are presented. SMD: Standardized mean difference, 95%CI: 95% confidence interval. N=number of studies, n=number of participants.
 
 ### 2.5.11 Secondary outcome: Dropouts due to any reason
 
@@ -1274,7 +1276,8 @@ safety_primary<-meta_outcome %>% left_join(ae_categories) %>%  #I need to change
   mutate(point=TE.random,
          lb=TE.random-1.96*seTE.random,
          ub=TE.random+1.96*seTE.random) %>% unique() %>%
-  filter(comparison=="taar1_vs_placebo")
+  filter(comparison=="taar1_vs_placebo") %>% 
+  mutate(n_text=paste0("N=", k,", n=",n))
 
 safety_primary_plot <-safety_primary
 
@@ -1290,6 +1293,7 @@ safety_primary_plot<-safety_primary_plot %>% mutate(type_outcome=ifelse(outcome=
 
 ggplot(data=safety_primary_plot, 
        aes(y=factor(event_text, level=rev(level_order)), x=exp(point),colour=type_outcome, shape=timepoint))+
+  geom_text(aes(x=0.03, label=n_text), colour="black" , position=position_dodge(width = 0.9))+
   geom_point(aes(size=n), position=position_dodge(width = 0.5))+
   geom_errorbar(aes(x=exp(point), xmin=exp(TE.random-1.96*seTE.random), 
                     xmax=exp(TE.random+1.96*seTE.random), colour=type_outcome,shape=timepoint),
@@ -1307,7 +1311,7 @@ ggplot(data=safety_primary_plot,
 
 ```
 
-**Figure 39** Summary forest plot for dropouts and side-effects for the comparison of TAAR1 agonists compared to placebo and for the two timepoints with usable data. It should be noted that different populations have been pooled in the analysis of dropouts and adverse events including schizophrenia, Parkinson's disease psychosis, narcolepsy-cateplexy and healthy volunteers. The size is proportional to the number of participants in the analysis. OR\>1 corresponds to more events with TAAR1 agonists compared to placebo. OR: Odds ratio, 95%CI: 95% confidence intervals.
+**Figure 39** Summary forest plot for dropouts and side-effects for the comparison of TAAR1 agonists compared to placebo and for the two timepoints with usable data. It should be noted that different populations have been pooled in the analysis of dropouts and adverse events including schizophrenia, Parkinson's disease psychosis, narcolepsy-cateplexy and healthy volunteers. The size is proportional to the number of participants in the analysis. The findings of the random-effects model are presented. OR\>1 corresponds to more events with TAAR1 agonists compared to placebo. OR: Odds ratio, 95%CI: 95% confidence intervals. N=number of studies, n=number of participants.
 
 ## 2.6 Comparison 2: *TAAR1 agonist* vs *antipsychotic*
 
@@ -1531,7 +1535,8 @@ efficacy_primary_2<-meta_outcome %>% left_join(outcome_categories) %>%
          lb=TE.random-1.96*seTE.random,
          ub=TE.random+1.96*seTE.random) %>% 
   unique() %>%
-  filter(comparison=="taar1_vs_antipsychotic") 
+  filter(comparison=="taar1_vs_antipsychotic") %>% 
+  mutate(n_text=paste0("N=", k,", n=",n))
 
 efficacy_primary_2$population <- factor(efficacy_primary_2$population, levels=unique(efficacy_primary_2$population))
 efficacy_primary_2$event_text <- factor(efficacy_primary_2$event_tex, levels=unique(efficacy_primary_2$event_tex))
@@ -1540,6 +1545,7 @@ level_population<-c("Schizophrenia spectrum", "Parkinson Disease Psychosis")
 
 ggplot(data=efficacy_primary_2, 
        aes(y=factor(event_text, level=rev(level_outcomes)), x=point))+
+  geom_text(aes(x=0.65, label=n_text), colour="black" , position=position_dodge(width = 0.9))+
   geom_point(size=3.4,position=position_dodge(width = 0.5), colour="royalblue4")+ #Size proportional to the number of participants
   coord_cartesian(xlim=c(-0.8,0.8))+
   geom_errorbar(aes(x=point, xmin=lb, 
@@ -1555,7 +1561,7 @@ ggplot(data=efficacy_primary_2,
 
 ```
 
-**Figure 45** Summary plot for efficacy outcomes at 4 weeks for the comparison of TAAR1 agonists versus antipscyhotcs in patients with an acute episode of schizophrenia. There were only data for the timepoint of 3-13 weeks. SMD\>0 correspond to more symptom improvement by TAAR1 agonists compared to placebo. SMD: Standardized mean difference, 95%CI: 95% confidence interval.
+**Figure 45** Summary plot for efficacy outcomes at 4 weeks for the comparison of TAAR1 agonists versus antipscyhotcs in patients with an acute episode of schizophrenia. There were only data for the timepoint of 3-13 weeks. SMD\>0 correspond to more symptom improvement by TAAR1 agonists compared to placebo. SMD: Standardized mean difference, 95%CI: 95% confidence interval. N=number of studies, n=number of participants.
 
 ### 2.6.11 Secondary outcome: Dropouts due to any reason
 
@@ -2231,7 +2237,8 @@ safety_primary_2<-meta_outcome %>% left_join(ae_categories) %>%  #I need to chan
   mutate(point=TE.random,
          lb=TE.random-1.96*seTE.random,
          ub=TE.random+1.96*seTE.random) %>% unique() %>%
-  filter(comparison=="taar1_vs_antipsychotic")
+  filter(comparison=="taar1_vs_antipsychotic") %>% 
+  mutate(n_text=paste0("N=", k,", n=",n))
 
 safety_primary_plot_2 <-safety_primary_2
 
@@ -2243,6 +2250,7 @@ safety_primary_plot_2<-safety_primary_plot_2 %>% mutate(type_outcome=ifelse(outc
 
 ggplot(data=safety_primary_plot_2, 
        aes(y=factor(event_text, level=rev(level_order_2)), x=exp(point),colour=type_outcome, shape=timepoint))+
+  geom_text(aes(x=0.01, label=n_text), colour="black" , position=position_dodge(width = 0.9))+
   geom_point(aes(size=n), position=position_dodge(width = 0.5))+
   geom_errorbar(aes(x=exp(point), xmin=exp(TE.random-1.96*seTE.random), 
                     xmax=exp(TE.random+1.96*seTE.random), colour=type_outcome,shape=timepoint),
@@ -2261,7 +2269,7 @@ ggplot(data=safety_primary_plot_2,
 
 ```
 
-**Figure 65** Summary forest plot for dropouts and side-effects for the comparison of TAAR1 agonists compared to antipsychotics and for the two timepoints with usable data. There were data for single doses of ralmitaront versus amisulpride in healthy volunteers at 1 day, and ulotaront versus risperidone in acute schizophrenia or schizoaffective disorder at 4 weeks. The size of the points is proportional tothe number of participants. OR\>1 corresponds to more events with TAAR1 agonists compared to placebo. OR: Odds ratio, 95%CI: 95% confidence interval.
+**Figure 65** Summary forest plot for dropouts and side-effects for the comparison of TAAR1 agonists compared to antipsychotics and for the two timepoints with usable data. There were data for single doses of ralmitaront versus amisulpride in healthy volunteers at 1 day, and ulotaront versus risperidone in acute schizophrenia or schizoaffective disorder at 4 weeks. The size of the points is proportional tothe number of participants. OR\>1 corresponds to more events with TAAR1 agonists compared to placebo. OR: Odds ratio, 95%CI: 95% confidence interval. N=number of studies, n=number of participants.
 
 ## 2.7 Mechanistic insights into the effects of TAAR1 agonism for psychosis
 
