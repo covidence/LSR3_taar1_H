@@ -1305,7 +1305,7 @@ ggplot(data=safety_primary_plot,
   ylab("")+
   scale_shape_manual(values=c(1,19))+
   scale_colour_manual(guide=FALSE, values=c("green4", "firebrick4"))+
-  xlab("OR 95%CI (OR>1: TAAR1 agonsits worse)")+
+  xlab("OR 95%CI (OR>1: TAAR1 agonists worse)")+
   theme_bw()
 
 
@@ -2262,7 +2262,7 @@ ggplot(data=safety_primary_plot_2,
   ylab("")+
   scale_shape_manual(values=c(1,19))+
   scale_colour_manual(guide=FALSE, values=c("green4", "firebrick4"))+
-  xlab("OR 95%CI (OR>1: TAAR1 agonsits worse)")+
+  xlab("OR 95%CI (OR>1: TAAR1 agonists worse)")+
   theme_bw()
 
 
