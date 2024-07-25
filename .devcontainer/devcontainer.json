@@ -1,0 +1,6 @@
+{
+  "image": "rocker/tidyverse:latest",
+  "extensions": [
+    "REditorSupport.r"
+  ]
+}
