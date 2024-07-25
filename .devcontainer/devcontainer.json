@@ -1,6 +1,14 @@
 {
-  "image": "rocker/tidyverse:latest",
-  "extensions": [
-    "REditorSupport.r"
-  ]
+  "build": { "dockerfile": "./Dockerfile" },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "REditorSupport.r",
+        "ms-vscode.live-server"
+      ]
+    }
+  },
+
+  "postCreateCommand": "R -e 'renv::restore()'"
 }
