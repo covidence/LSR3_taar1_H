@@ -12,7 +12,7 @@ link_citations: true
 mainfont: Arialh
 ---
 
-```{r setup,message=F,echo=F,include=F}
+```{r setup,message=F,echo=F,include=F, cache=TRUE}
 ### libraries
 library(meta)
 library(tidyverse)
@@ -104,7 +104,7 @@ options(scipen=1, digits=2)
 
 ## 2.1 Flow of study selection
 
-```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=8}
+```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=8, cache=TRUE}
 PRISMA_flowdiagram(prisma, previous = FALSE, other=TRUE)
 ```
 
@@ -112,7 +112,7 @@ PRISMA_flowdiagram(prisma, previous = FALSE, other=TRUE)
 
 ## 2.2 Table of included studies
 
-```{r echo=FALSE, fig.width=12, fig.height=8}
+```{r echo=FALSE, fig.width=12, fig.height=8, cache=TRUE}
 studies_to_plot<-studies[order(studies$Name),]
 knitr::kable(studies_to_plot[, 1:14])
 ```
@@ -139,7 +139,7 @@ The studies used to describe mechanistic insights are provided in the relevant s
 
 The risk of bias of the studies was examined using the RoB2 tool [@RN64] for parallel and crossover studies for all outcomes. Here, we present the risk of bias of using the worst judgement of a domain across outcomes. It should be noted that when there were some concerns in only one of the domains, we assigned an overall low risk of bias according to our protocol.
 
-```{r echo =F, fig.fullwidth=T, fig.width=7.2, fig.height=6}
+```{r echo =F, fig.fullwidth=T, fig.width=7.2, fig.height=6, cache=TRUE}
 rob_traffic_light(rob_all, tool="Generic")
 ```
 
@@ -159,7 +159,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks* (primary timepoint)
 
-```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4, cache=TRUE}
 forest(meta_comp_overall_sch, 
        col.diamond = "royalblue4",
        col.square =   "royalblue1",
@@ -171,12 +171,12 @@ forest(meta_comp_overall_sch,
                  subgroup.hetstat = FALSE, overall.hetstat =TRUE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = TRUE, prediction.subgroup = FALSE,
                  subgroup = FALSE, fixed=TRUE,
-                 label.left = "Placebo better", label.right="TAAR1 better")
+                 label.left = "Placebo XXXXX better", label.right="TAAR1 better")
 ```
 
 **Figure 3a** Forest plot for overall symptoms (primary outcome, measured with PANSS total) for the comparison of TAAR1 agonist vs. placebo in people with acute episode of schizophrenia at 3-13 weeks (primary timepoint). The overall risk of bias of the studies for this outcome is presented. SMD:Standardized mean difference, 95%CI: 95% confidence intervals, SD: Standard deviation.
 
-```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4, cache=TRUE}
 forest(meta_comp_overall_pdp, 
        col.diamond = "royalblue4",
        col.square =   "royalblue1",
@@ -188,7 +188,7 @@ forest(meta_comp_overall_pdp,
                  subgroup.hetstat = FALSE, overall.hetstat =FALSE, test.subgroup.random = FALSE,test.subgroup.fixed = FALSE,
                  overall = FALSE, prediction.subgroup = FALSE,
                  subgroup = FALSE, fixed=TRUE,
-                 label.left = "Placebo better", label.right="TAAR1 better")
+                 label.left = "Placebo XXXX better", label.right="TAAR1 better")
 ```
 
 **Figure 3b** Forest plot for overall symptoms (primary outcome, measured with the NPI total score) for the comparison of TAAR1 agonist vs. placebo in people with Parkinson's disease psychosis at 3-13 weeks (primary timepoint). The overall risk of bias of the studies for this outcome is presented. SMD:Standardized mean difference, 95%CI: 95% confidence intervals, SD: Standard deviation.
@@ -205,7 +205,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(meta_comp_positive_sch, 
        col.diamond = "royalblue4",
        col.square =   "royalblue1",
@@ -221,7 +221,7 @@ forest(meta_comp_positive_sch,
 
 **Figure 4a** Forest plot for positive symptoms for the comparison of TAAR1 agonist vs. placebo in people with acute episode of schizophrenia (measured with PANSS positive) at 3-13 weeks (primary timepoint). The overall risk of bias of the studies for this outcome is presented. SMD:Standardized mean difference, 95%CI: 95% confidence intervals, SD: Standard deviation.
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(meta_comp_positive_pdp, 
        col.diamond = "royalblue4",
        col.square =   "royalblue1",
@@ -249,7 +249,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_negative`, 
        col.diamond = "royalblue4",
        col.square =   "royalblue1",
@@ -279,7 +279,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_depression`, 
        col.diamond = "royalblue4",
@@ -307,7 +307,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_cognition`, 
        col.diamond = "royalblue4",
@@ -363,7 +363,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(meta_comp_response_sch, 
        col.diamond = "royalblue4",
        col.square =   "royalblue1",
@@ -380,7 +380,7 @@ forest(meta_comp_response_sch,
 
 **Figure 8a** Forest plot for response (\>50% or 20% symptom reduction in PANSS total from baseline) for the comparison of TAAR1 agonist vs. placebo in people with acute episode of schizophrenia at 3-13 weeks (primary timepoint). The overall risk of bias of the studies for this outcome is presented. OR=Odds ratio, 95%CI: 95% confidence intervals.
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(meta_comp_response_pdp, 
        col.diamond = "royalblue4",
        col.square =   "royalblue1",
@@ -417,7 +417,7 @@ No usable data available from RCT.
 
 ### 2.5.10 Summary outcome plot: Efficacy outcomes
 
-```{r echo=F, fig.fullwidth=T, fig.width=10, fig.height=5, warning=FALSE}
+```{r echo=F, fig.fullwidth=T, fig.width=10, fig.height=5, warning=FALSE, cache=TRUE}
 
 outcome_categories<-outcome_names %>% 
   select(outcome, event_text) 
@@ -461,7 +461,7 @@ ggplot(data=efficacy_primary,
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_any`, 
        col.diamond = "green4",
        col.square =   "green3",
@@ -479,7 +479,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_any`,
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=10, fig.height=5}
+```{r echo=F, fig.fullwidth=T, fig.width=10, fig.height=5, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_any`, 
        col.diamond = "green4",
        col.square =   "green3",     
@@ -504,7 +504,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_ae`, 
        col.diamond = "green4",
        col.square =   "green3",     
@@ -524,7 +524,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dropout_ae`,
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dropout_ae`, 
        col.diamond = "green4",
        col.square =   "green3",     
@@ -548,7 +548,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_serious`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -567,7 +567,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_serious`,
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_serious`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -592,7 +592,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 #forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_death`, 
  #      col.diamond = "firebrick4",
   #     col.square =   "firebrick3",     
@@ -612,7 +612,7 @@ There were available usable data from four studies (i.e., [@RN116; @RN115; @RN12
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_death`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -635,7 +635,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=5}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=5, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_adverse_event`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -654,7 +654,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_adverse_event`,
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_adverse_event`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -678,7 +678,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anticholinergic_symptom`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -711,7 +711,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_hypotension`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -735,7 +735,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dizziness`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -754,7 +754,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_dizziness`,
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_dizziness`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -778,7 +778,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_nausea_vomitting`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -797,7 +797,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_nausea_vomitting`,
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_nausea_vomitting`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -824,7 +824,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_qtc_prolongation`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -843,7 +843,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_qtc_prolongation`,
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 #forest(`meta_comp_taar1_vs_placebo_3-13 weeks_qtc_prolongation`, 
  #      col.diamond = "firebrick4",
@@ -868,7 +868,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_qtc_interval`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -900,7 +900,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_weight_increased`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -928,7 +928,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_weight`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -954,7 +954,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 #forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_hyperprolactinemia`, 
  #      col.diamond = "firebrick4",
   #     col.square =   "firebrick3",     
@@ -986,7 +986,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_prolactin`, 
        col.diamond = "firebrick4",
@@ -1017,7 +1017,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_akathisia`, 
        col.diamond = "firebrick4",
@@ -1047,7 +1047,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_eps_symptoms`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -1073,7 +1073,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 #forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_anxiety`, 
  #      col.diamond = "firebrick4",
@@ -1093,7 +1093,7 @@ There were usable data for one study [@RN115], which reported 0 events in both g
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_anxiety`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -1121,7 +1121,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_agitation`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -1146,7 +1146,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_headache`, 
        col.diamond = "firebrick4",
@@ -1165,7 +1165,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_headache`,
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_headache`, 
        col.diamond = "firebrick4",
@@ -1192,7 +1192,7 @@ Terms that were considered as reported in the trials: fatigue, sedation, somnole
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_sedation`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -1211,7 +1211,7 @@ forest(`meta_comp_taar1_vs_placebo_1 day-2 weeks_sedation`,
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_sedation`, 
        col.diamond = "firebrick4",
@@ -1240,7 +1240,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 forest(`meta_comp_taar1_vs_placebo_3-13 weeks_insomnia`, 
        col.diamond = "firebrick4",
@@ -1263,7 +1263,7 @@ No usable data available from RCT.
 
 ### 2.5.33 Summary outcome plot: Dropouts and side-effects
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=8, warning=FALSE}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=8, warning=FALSE, cache=TRUE}
 
 ae_categories<-ae_categories %>% 
   select(event_text, MedDRA_an, MedDRA_group) %>%  
@@ -1327,7 +1327,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks* (primary timepoint)
 
-```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_overall`, 
        col.diamond = "royalblue4",
        col.square =   "royalblue1",
@@ -1357,7 +1357,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_positive`, 
        col.diamond = "royalblue4",
        col.square =   "royalblue1",
@@ -1386,7 +1386,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_negative`, 
        col.diamond = "royalblue4",
        col.square =   "royalblue1",
@@ -1415,7 +1415,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_depression`, 
        col.diamond = "royalblue4",
        col.square =   "royalblue1",
@@ -1487,7 +1487,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_response`, 
        col.diamond = "royalblue4",
@@ -1527,7 +1527,7 @@ No usable data available from RCT.
 
 ### 2.6.10 Summary outcome plot: Efficacy outcomes
 
-```{r echo=F, fig.fullwidth=T, fig.width=10, fig.height=5, warning=FALSE}
+```{r echo=F, fig.fullwidth=T, fig.width=10, fig.height=5, warning=FALSE, cache=TRUE}
 
 outcome_categories<-outcome_names %>% 
   select(outcome, event_text) 
@@ -1571,7 +1571,7 @@ ggplot(data=efficacy_primary_2,
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_any`, 
        col.diamond = "green4",
        col.square =   "green3",    
@@ -1592,7 +1592,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_any`,
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`, 
        col.diamond = "green4",
        col.square =   "green3",
@@ -1619,7 +1619,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 #forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dropout_ae`, 
  #      col.diamond = "green4",
   #     col.square =   "green3",     
@@ -1638,7 +1638,7 @@ There were usable data in [@RN115], whcih reported 0 events in both groups and a
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_dropout_any`, 
        col.diamond = "green4",
@@ -1666,7 +1666,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_serious`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -1686,7 +1686,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_serious`,
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_serious`, 
        col.diamond = "firebrick4",
@@ -1714,7 +1714,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 #forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_death`, 
  #      col.diamond = "firebrick4",
   #     col.square =   "firebrick3",     
@@ -1733,7 +1733,7 @@ There were usable data in [@RN115], whcih reported 0 events in both groups and a
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 #forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_death`, 
  #      col.diamond = "firebrick4",
@@ -1759,7 +1759,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_adverse_event`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -1778,7 +1778,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_adverse_event`,
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_adverse_event`, 
        col.diamond = "firebrick4",
@@ -1805,7 +1805,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anticholinergic_symptom`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -1848,7 +1848,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_dizziness`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -1880,7 +1880,7 @@ Terms that were considered as reported in the trials: nausea, vomiting, emesis
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_nausea_vomitting`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -1899,7 +1899,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_nausea_vomitting`,
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_nausea_vomitting`, 
        col.diamond = "firebrick4",
@@ -1957,7 +1957,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_weight_increased`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",
@@ -2052,7 +2052,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anxiety`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -2071,7 +2071,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_anxiety`,
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_anxiety`, 
        col.diamond = "firebrick4",
@@ -2102,7 +2102,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_agitation`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",
@@ -2129,7 +2129,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_headache`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -2148,7 +2148,7 @@ forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_headache`,
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_headache`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",
@@ -2174,7 +2174,7 @@ No usable data available from RCT.
 
 #### Timepoint 1: *1 day - 2 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_1 day-2 weeks_sedation`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",     
@@ -2206,7 +2206,7 @@ No usable data available from RCT.
 
 #### Timepoint 2: *3 weeks - 13 weeks*
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, cache=TRUE}
 forest(`meta_comp_taar1_vs_antipsychotic_3-13 weeks_insomnia`, 
        col.diamond = "firebrick4",
        col.square =   "firebrick3",
@@ -2229,7 +2229,7 @@ No usable data available from RCT.
 
 ### 2.6.33 Summary outcome plot: Dropouts and side-effects
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=8, warning=FALSE}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=8, warning=FALSE, cache=TRUE}
 safety_primary_2<-meta_outcome %>% left_join(ae_categories) %>%  #I need to change a bit 
   mutate(event_text=ifelse(outcome=="death", "Mortality", 
                            ifelse(outcome=="serious", "Serious event", 
@@ -2309,7 +2309,7 @@ Moreover, it should be noted that we presented the effect sizes in each specific
 
 ### 2.8.1 Exploration of differences between ulotaront and ralmitaront in their effects on overall symptoms of acute schizophrenia
 
-```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4}
+```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=4, cache=TRUE}
 forest(meta_comp_drug, 
        col.diamond = "royalblue4",
        col.square =   "royalblue1",
@@ -2328,7 +2328,7 @@ forest(meta_comp_drug,
 
 ### 2.8.2 Exploration of dose-effects of ulotaront and ralmitaront on overall symptoms of acute schizophrenia
 
-```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, warning=FALSE}
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4, warning=FALSE, cache=TRUE}
 ggplot(data=data_doses, aes(x=dose,
                                  y=-yi,
                                  ymin=-yi+1.96*sqrt(vi), ymax=-yi-1.96*sqrt(vi), 
@@ -2364,7 +2364,7 @@ We identified the total number of eligible and completed studies, with or withou
 
 The results matrix for the eligible studies, which were identified in the search, for all outcomes with usable data from at least one study, can be found below in **Table 2**.
 
-```{r echo=FALSE}
+```{r echo=FALSE, cache=TRUE}
 knitr::kable(results_matrix)
 ```
 
@@ -2410,7 +2410,7 @@ For each comparison, outcome and timepoint, we presented the summary of the evid
 
 ##### TAAR1 agonists versus placebo in adults with an acute episode of schizophrenia
 
-```{r echo=FALSE, fig.width=12, fig.height=8}
+```{r echo=FALSE, fig.width=12, fig.height=8, cache=TRUE}
 knitr::kable(soe_sch_ta1_pl_eff)
 ```
 
@@ -2418,7 +2418,7 @@ knitr::kable(soe_sch_ta1_pl_eff)
 
 ##### TAAR1 agonists versus antipsychotics in adults with an acute episode of schizophrenia
 
-```{r echo=FALSE, fig.width=12, fig.height=8}
+```{r echo=FALSE, fig.width=12, fig.height=8, cache=TRUE}
 knitr::kable(soe_sch_ta1_apd_eff)
 ```
 
@@ -2426,7 +2426,7 @@ knitr::kable(soe_sch_ta1_apd_eff)
 
 ##### TAAR1 agonists versus placebo for efficacy outcomes in Parkinson's disease psychosis
 
-```{r echo=FALSE, fig.width=12, fig.height=8}
+```{r echo=FALSE, fig.width=12, fig.height=8, cache=TRUE}
 knitr::kable(soe_pd_ta1_pl_eff)
 ```
 
@@ -2436,7 +2436,7 @@ knitr::kable(soe_pd_ta1_pl_eff)
 
 ##### TAAR1 agonists versus placebo for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers
 
-```{r echo=FALSE, fig.width=12, fig.height=8}
+```{r echo=FALSE, fig.width=12, fig.height=8, cache=TRUE}
 knitr::kable(soe_all_ta1_pl_saf)
 ```
 
@@ -2444,7 +2444,7 @@ knitr::kable(soe_all_ta1_pl_saf)
 
 ##### TAAR1 agonists versus antipsychotics for dropouts and side-effects in adults with psychosis, other mental health conditions and healthy volunteers
 
-```{r echo=FALSE, fig.width=12, fig.height=8}
+```{r echo=FALSE, fig.width=12, fig.height=8, cache=TRUE}
 knitr::kable(soe_all_ta1_apd_saf)
 ```
 
@@ -2454,7 +2454,7 @@ knitr::kable(soe_all_ta1_apd_saf)
 
 Evidence from two neuroimaging studies [@RN115; @RN132] generally supports the notion that TAAR1 agonists can ameliorate the elevated striatal dopamine synthesis and release capacity that is considered central in the development of symptoms of psychosis [@howes2022]. The summary of the evidence of these studies is presented below.
 
-```{r echo=FALSE, fig.width=12, fig.height=8}
+```{r echo=FALSE, fig.width=12, fig.height=8, cache=TRUE}
 knitr::kable(soe_mechanistic)
 ```
 
@@ -2526,6 +2526,6 @@ TAAR1: Trace amine-associated receptor 1
 
 # 4. References
 
-```{r echo=FALSE}
+```{r echo=FALSE, cache=TRUE}
 grateful::cite_packages(output = "paragraph", pkgs = "Session", out.dir = ".")
 ```
