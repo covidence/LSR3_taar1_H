@@ -1,14 +1,38 @@
 {
-  "build": { "dockerfile": "./Dockerfile" },
-
+  "build": {
+    "dockerfile": "./Dockerfile"
+  },
+  "features": {
+    "ghcr.io/rocker-org/devcontainer-features/renv-cache:latest": {},
+    "ghcr.io/rocker-org/devcontainer-features/rstudio-server:latest": {},
+    "ghcr.io/rocker-org/devcontainer-features/r-rig:1": {
+      "version": "none",
+      "installJupyterlab": true
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [
         "REditorSupport.r",
         "ms-vscode.live-server"
       ]
+    },
+    "codespaces": {
+      "openFiles": [
+        "LSR3_taar1_H.Rmd"
+      ]
     }
   },
-
-  "postCreateCommand": "R -e 'renv::restore()'"
+  "forwardPorts": [
+    8787
+  ],
+  "portsAttributes": {
+    "8787": {
+      "label": "RStudio"
+    }
+  },
+  "postCreateCommand": "R -e 'renv::restore()'",
+  "postAttachCommand": {
+    "rstudio-start": "rserver --www-frame-origin=*"
+  }
 }
