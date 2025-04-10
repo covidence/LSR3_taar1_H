@@ -6,4 +6,7 @@
 - This project is licensed under the terms of the Creative Commons Attribution 4.0 International license (CC-BY 4.0) (https://creativecommons.org/licenses/by/4.0/). 
 
 
+#LSR3 updates 
 
+- The code has had to be amended slightly, and for each update the files - and folders - have a postscript '_u[n]', where 'n' is the iteration of the update.
+- Changes compared to the previous versions are reported in the first section of the R markdown files.
