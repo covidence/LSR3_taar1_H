@@ -122,7 +122,7 @@ There were the following changes compared to the previous version of the review:
 
 **We present below the results, including the PRISMA flow diagram [@page2021] , table of included studies, risk of bias assessment, and forest plots, to facilitate a better understanding of the summary of evidence tables and the manuscript. Please refer to the detailed description of the findings in the latter part of the manuscript for more information.**
 
-# 2. Flow of study selection 
+# 2. Flow of study selection
 
 **The current flow diagram presented below reflects that of the previous version of the review. It is currently being updated.**
 
